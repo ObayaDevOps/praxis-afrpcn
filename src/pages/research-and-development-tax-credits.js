@@ -14,7 +14,7 @@ import {
 
   import Navbar from '../components/Navbar';
   import Footer from '../components/Footer';
-
+  import pingDivider from '../components/pingDivider'
 
 // Define the sections data
 const sections = [
@@ -58,12 +58,12 @@ export default function RnDTaxCreditsPage() {
     color: 'teal.300', // Use a theme color
     textDecoration: 'none', // Remove underline if default link has it
     // Simple glow using boxShadow
-    boxShadow: `0 0 8px 2px teal.200`,
+    // boxShadow: `0 0 8px 2px teal.200`,
     // Apply rounded corners if desired
-    borderRadius: 'md',
+    // borderRadius: 'md',
     // Add some padding for the glow effect visual space
-    p: 2,
-    mx: -2, // Adjust margin to keep alignment consistent with padding
+    // p: 2,
+    // mx: -2, // Adjust margin to keep alignment consistent with padding
   };
 
     return (
@@ -126,6 +126,8 @@ export default function RnDTaxCreditsPage() {
               Research and Development Tax Credits
             </Text>
 
+            <pingDivider />
+
         {/* Flex row fills remaining space in container */}
         <Flex direction={['column', 'column', 'row']} gap={10} flex="1" overflow="hidden">
           {/* Left Sidebar */}
@@ -143,29 +145,74 @@ export default function RnDTaxCreditsPage() {
             // Adjust 10rem based on actual header/footer/padding heights
             maxH={['auto', 'auto', 'calc(100vh - 10rem)']}
             overflowY="auto"
+
           >
 
             <VStack align="stretch" spacing={3}>
               {sections.map((section) => (
-                <ChakraLink
-                  key={section.id}
-                  href="#" // Use # and rely on onClick handler
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevent default hash jump
-                    handleLinkClick(section.id);
-                  }}
-                  color="white"
-                  _hover={{
-                    color: 'white',
-                    textDecoration: 'underline',
-                  }}
-                  fontFamily="Poppins"
-                  // Apply active style conditionally
-                  {...(activeSection === section.id ? activeLinkStyle : { p: 2, mx: -2 })} // Apply base padding even when not active
-                  transition="all 0.2s ease-in-out" // Smooth transition for style changes
-                >
-                  {section.title}
-                </ChakraLink>
+                // Replace the outer Box with Flex for horizontal alignment
+                <Flex key={section.id} align="center" gap={3}> 
+                  {/* Dot and Line Column */}
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    // Removed mt="-2" as vertical alignment is handled by Flex parent
+                  >
+                    {/* Green Dot Container div */}
+                    <Box
+                      // w="4" 
+                      // h="4" 
+                      // bg="green.500" // Corresponds to tw-bg-green-500
+                      // borderRadius="full" // Corresponds to tw-rounded-full
+                      // position="relative" // Corresponds to tw-relative
+                      // zIndex="10" // Corresponds to tw-z-10
+                    >
+                      {/* Inner Animated Dot div */}
+                      <Box
+                        w="5" 
+                        h="5" 
+                        bg="#ADF5F7" 
+                        borderRadius="full" 
+                        position="relative" 
+                        zIndex="10"
+                      />
+                    </Box>
+
+                    {/* Vertical Line div */}
+                    <Box
+                      w="0.25rem" // Corresponds to tw-w-1 (0.25rem)
+                      h="1.5rem" // Reduced height slightly for better visual balance
+                      bg={'gray.200'} // Default light mode
+                      _dark={{
+                          bg: 'gray.500' // Override for dark mode
+                      }}
+                      borderRadius="full" // Corresponds to tw-rounded-full
+                      // Removed mt="-2"
+                    />
+                  </Box>
+                  
+                  {/* Link */}
+                  <ChakraLink
+                    href="#" // Use # and rely on onClick handler
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent default hash jump
+                      handleLinkClick(section.id);
+                    }}
+                    color="white"
+                    _hover={{
+                      color: 'white',
+                      textDecoration: 'underline',
+                    }}
+                    fontFamily="Poppins"
+                    // Apply active style conditionally
+                    // Removed mx: -2 as padding provides spacing within Flex
+                    {...(activeSection === section.id ? activeLinkStyle : { p: 2 })} 
+                    transition="all 0.2s ease-in-out" // Smooth transition for style changes
+                  >
+                    {section.title}
+                  </ChakraLink>
+                </Flex> // End Flex container for item
               ))}
             </VStack>
           </Box>
@@ -182,6 +229,13 @@ export default function RnDTaxCreditsPage() {
             overflowY="auto" // Enable vertical scroll ONLY for this box
             scrollBehavior="smooth" // Apply smooth scroll to this container
             p={6} // Add padding inside the scrollable area
+            sx={{
+              '::-webkit-scrollbar': {
+                display: 'none', // Safari and Chrome
+              },
+              'scrollbarWidth': 'none', // Firefox
+              '-ms-overflow-style': 'none', // IE and Edge
+            }}
           >
             <Text
               fontFamily='Poppins'
