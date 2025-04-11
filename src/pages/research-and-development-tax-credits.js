@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import Head from "next/head";
+// import { useTheme } from '@chakra-ui/react';
 
 import {
     Box,
@@ -14,21 +15,22 @@ import {
 
   import Navbar from '../components/Navbar';
   import Footer from '../components/Footer';
-  import pingDivider from '../components/pingDivider'
+  import VerticalStepperNav from '../components/VerticalStepperNav';
 
-// Define the sections data
+// Define the sections data based on the image
 const sections = [
-  { id: 'introduction', title: 'Introduction' },
-  { id: 'eligibility', title: 'Eligibility Criteria' },
-  { id: 'activities', title: 'Qualifying Activities' },
-  { id: 'calculation', title: 'Calculating the Credit' },
-  { id: 'how-we-help', title: 'How We Help' },
+  { id: 'introduction', title: 'Empowering Innovation & Maximising Growth' },
+  { id: 'qualifies', title: 'What Qualifies as R&D?' },
+  { id: 'maximising-claim', title: 'Maximising Your Claim: The R&D Tax Credit Report' },
+  { id: 'uk-scheme', title: 'Understanding the UK R&D Tax Credit Scheme' },
+  { id: 'loss-making', title: 'Claiming R&D credits when loss making' },
+  { id: 'partner', title: 'Why Partner with Ashton & Carrington?' },
+  { id: 'get-started', title: 'Get Started Today' },
 ];
 
 export default function RnDTaxCreditsPage() {
-  const [activeSection, setActiveSection] = useState(sections[0]?.id || ''); // Initialize with the first section id
+  const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
 
-  // Placeholder background image URL (replace with your desired stock image)
   const backgroundImageUrl = 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744286028/Graphic_waves_qtvac7.svg'; // Example image
 
   const handleLinkClick = (id) => {
@@ -52,19 +54,6 @@ export default function RnDTaxCreditsPage() {
     }
   };
 
-  // Style for the active link (glow effect)
-  const activeLinkStyle = {
-    fontWeight: 'bold',
-    color: 'teal.300', // Use a theme color
-    textDecoration: 'none', // Remove underline if default link has it
-    // Simple glow using boxShadow
-    // boxShadow: `0 0 8px 2px teal.200`,
-    // Apply rounded corners if desired
-    // borderRadius: 'md',
-    // Add some padding for the glow effect visual space
-    // p: 2,
-    // mx: -2, // Adjust margin to keep alignment consistent with padding
-  };
 
     return (
     // Set height to 100vh and use flex column layout
@@ -90,7 +79,6 @@ export default function RnDTaxCreditsPage() {
         opacity:1,
         zIndex: 1,
       }}
-      // Removed global scrollBehavior, apply it to scrollable container instead
     >
 
       <Head>
@@ -106,9 +94,9 @@ export default function RnDTaxCreditsPage() {
       </Box>
 
       {/* Container fills space, contains children, uses flex column */}
-      <Container
-        maxW="container.xl"
-        py={10}
+      <Box
+        px={'4rem'}
+        py='2rem'
         position="relative"
         zIndex={2} /* Content above overlay */
         flex="1" /* Grow vertically */
@@ -118,22 +106,27 @@ export default function RnDTaxCreditsPage() {
       >
           <Text
               fontFamily='Poppins'
-              fontSize='2rem' // 32px
+              fontSize='2.25rem' // 36px
               lineHeight='3rem' // 48px
+              fontWeight='500'
+              fontStyle='normal'
+              letterSpacing='0.72px'
               color='white'
               mb={8}
+              p={4}
             >
               Research and Development Tax Credits
             </Text>
 
-            <pingDivider />
 
         {/* Flex row fills remaining space in container */}
         <Flex direction={['column', 'column', 'row']} gap={10} flex="1" overflow="hidden">
           {/* Left Sidebar */}
           <Box
             as="nav" // Use nav for semantic sidebar
-            w={['full', 'full', '250px']} // Full width on small screens, fixed width on larger
+            // w={['full', 'full', '250px']} // Full width on small screens, fixed width on larger
+            w={['full', 'full', '18.5rem']} // Full width on small screens, fixed width on larger
+
             position={['relative', 'relative', 'sticky']} // Sticky sidebar on large screens
             top={[0, 0, '2rem']} // Adjust top position as needed
             alignSelf="flex-start" // Prevent stretching vertically
@@ -147,74 +140,12 @@ export default function RnDTaxCreditsPage() {
             overflowY="auto"
 
           >
-
-            <VStack align="stretch" spacing={3}>
-              {sections.map((section) => (
-                // Replace the outer Box with Flex for horizontal alignment
-                <Flex key={section.id} align="center" gap={3}> 
-                  {/* Dot and Line Column */}
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    // Removed mt="-2" as vertical alignment is handled by Flex parent
-                  >
-                    {/* Green Dot Container div */}
-                    <Box
-                      // w="4" 
-                      // h="4" 
-                      // bg="green.500" // Corresponds to tw-bg-green-500
-                      // borderRadius="full" // Corresponds to tw-rounded-full
-                      // position="relative" // Corresponds to tw-relative
-                      // zIndex="10" // Corresponds to tw-z-10
-                    >
-                      {/* Inner Animated Dot div */}
-                      <Box
-                        w="5" 
-                        h="5" 
-                        bg="#ADF5F7" 
-                        borderRadius="full" 
-                        position="relative" 
-                        zIndex="10"
-                      />
-                    </Box>
-
-                    {/* Vertical Line div */}
-                    <Box
-                      w="0.25rem" // Corresponds to tw-w-1 (0.25rem)
-                      h="1.5rem" // Reduced height slightly for better visual balance
-                      bg={'gray.200'} // Default light mode
-                      _dark={{
-                          bg: 'gray.500' // Override for dark mode
-                      }}
-                      borderRadius="full" // Corresponds to tw-rounded-full
-                      // Removed mt="-2"
-                    />
-                  </Box>
-                  
-                  {/* Link */}
-                  <ChakraLink
-                    href="#" // Use # and rely on onClick handler
-                    onClick={(e) => {
-                      e.preventDefault(); // Prevent default hash jump
-                      handleLinkClick(section.id);
-                    }}
-                    color="white"
-                    _hover={{
-                      color: 'white',
-                      textDecoration: 'underline',
-                    }}
-                    fontFamily="Poppins"
-                    // Apply active style conditionally
-                    // Removed mx: -2 as padding provides spacing within Flex
-                    {...(activeSection === section.id ? activeLinkStyle : { p: 2 })} 
-                    transition="all 0.2s ease-in-out" // Smooth transition for style changes
-                  >
-                    {section.title}
-                  </ChakraLink>
-                </Flex> // End Flex container for item
-              ))}
-            </VStack>
+            {/* Use the new VerticalStepperNav component */}
+            <VerticalStepperNav
+              sections={sections}
+              activeSection={activeSection}
+              onLinkClick={handleLinkClick} // Pass the existing handler
+            />
           </Box>
 
           {/* Right Content Area: Scrolls internally */}
@@ -230,7 +161,7 @@ export default function RnDTaxCreditsPage() {
             scrollBehavior="smooth" // Apply smooth scroll to this container
             p={6} // Add padding inside the scrollable area
             sx={{
-              '::-webkit-scrollbar': {
+              '&::-webkit-scrollbar': {
                 display: 'none', // Safari and Chrome
               },
               'scrollbarWidth': 'none', // Firefox
@@ -239,11 +170,13 @@ export default function RnDTaxCreditsPage() {
           >
             <Text
               fontFamily='Poppins'
-              fontSize='2rem' // 32px
-              lineHeight='3rem' // 48px
+              fontSize='1.75rem' // 28px
+              fontWeight='500'
+              lineHeight='normal' 
+              letterSpacing='2.24px'
               color='white'
               textTransform='uppercase'
-              mb={6}
+              mb='3.75rem' //60px
             >
               Strategic Research & Development Tax Solutions for For Forward-Thinking Businesses
             </Text>
@@ -255,7 +188,7 @@ export default function RnDTaxCreditsPage() {
                   key={section.id}
                   id={section.id}
                   scrollMarginTop="8rem" // CSS scroll margin anchor positioning
-                  mb={8} // Keep margin between sections
+                  mb='3.75rem' //60px // Keep margin between sections
               >
                 <Heading size="xl" mb={4} color="white" fontFamily='Poppins'>
                   {section.title}
@@ -276,7 +209,7 @@ export default function RnDTaxCreditsPage() {
             ))}
           </Box>
         </Flex>
-      </Container>
+      </Box>
 
       {/* Keep Footer above overlay */}
       <Box position="relative" zIndex={2}>
