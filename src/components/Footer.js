@@ -20,7 +20,7 @@ const Footer = () => {
 
   return (
     <Box  color="white" py={{ base: 8, md: 10 }} fontFamily={poppins.style.fontFamily}>
-      <Container maxW="container.xl">
+       <Box px={'5.5rem'} py={'1rem'}>
         <Flex
           direction={{ base: 'column', md: 'row' }}
           justify="space-between"
@@ -73,7 +73,7 @@ const Footer = () => {
             </Text>
           </VStack>
         </Flex>
-      </Container>
+      </Box>
     </Box>
   );
 };

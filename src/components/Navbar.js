@@ -48,7 +48,7 @@ export default function Navbar() {
 
 
   return (
-    <Box px={4} py={3} position="sticky" top={0} zIndex="sticky">
+    <Box px={'5.5rem'} py={'1rem'} position="sticky" top={0} zIndex="sticky">
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="container.xl" mx="auto">
 
         {/* Logo - Using Image component like in index.js */}
@@ -65,13 +65,13 @@ export default function Navbar() {
         {isDesktop ? (
           <>
             {/* Desktop Navigation Links */}
-            <HStack spacing={8} alignItems={'left'}>
-              <HStack as={'nav'} spacing={6}>
+            <HStack spacing={'1.5rem'} alignItems={'left'}>
+              <HStack as={'nav'} spacing={'1.5rem'}>
                 {navItems.map((item) => (
                   <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
                 ))}
               </HStack>
-            </HStack>
+
 
             {/* Desktop Get in Touch Button */}
             <Button
@@ -81,9 +81,17 @@ export default function Navbar() {
               _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
               fontFamily="Poppins"
               fontWeight={500}
+              fontSize='0.875rem'
+              lineHeight='1.25rem'
+              px='1rem'
+              py='0.625rem'
+              justify-content='center'
+              align-items='center'
+              rounded='xs'
             >
               Get in Touch
             </Button>
+            </HStack>
           </>
         ) : (
           <>
