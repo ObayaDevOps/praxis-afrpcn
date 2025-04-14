@@ -86,13 +86,13 @@ const VerticalStepperNav = ({ sections, activeSection, onLinkClick }) => {
                                 onLinkClick(section.id); // Call the passed handler
                             }}
                             color={isActive ? "#D2FAFB" : "gray.400"} // Active teal, inactive grey text
-                            fontWeight={isActive ? "semibold" : "normal"}
+                            fontWeight={isActive ? "semibold" : "500"}
                             _hover={{
                                 color: 'teal.200', // Lighter teal on hover
                             }}
                             fontFamily="Poppins"
                             fontSize="1rem" // Adjust font size as needed
-                            fontWeight='500'
+                            // fontWeight='500'
                             lineHeight='1.875rem' //"24px" // Match dot container height
                             // pt="1px" // Removed fine-tuning, lineHeight should handle it
                             transition="color 0.2s ease-in-out"

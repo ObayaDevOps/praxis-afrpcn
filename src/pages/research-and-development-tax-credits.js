@@ -1,16 +1,19 @@
 import { useState, useRef } from 'react';
 import Head from "next/head";
-// import { useTheme } from '@chakra-ui/react';
+import { ChevronDown } from 'lucide-react';
 
 import {
-    Box,
+  Box,
   Flex,
   VStack,
   Link as ChakraLink,
   Heading,
   Text,
-    Container,
+  Container,
   Spacer,
+  Accordion,
+  Span,
+  Separator
   } from '@chakra-ui/react';
 
   import Navbar from '../components/Navbar';
@@ -27,6 +30,70 @@ const sections = [
   { id: 'partner', title: 'Why Partner with Ashton & Carrington?' },
   { id: 'get-started', title: 'Get Started Today' },
 ];
+
+const accordionItems = [
+  { value: "a", title: "Financial year ending 1st April 2024 – 31st March 2025", text: "Rate of enhanced expenditure is 186% which translates to if a business has £100,000 of qualifying R&D expenditure, it could claim a tax deduction worth £186,000. If the company is not loss-making, this will usually reduce the company’s taxable profit and therefore the corporation tax payable, meaning a 19%-25% (£35,340-£46,500 on £100,000 of qualifying R&D spend) benefit, depending on the company’s corporation tax rate. If the company is sufficiently loss-making and R&D intensive (above 30% of total expenditure is qualifying R&D expenditure), the deduction can be claimed at 14.5% as a tax credit (£26,970 on £100,000 of qualifying R&D spend), usually received in cash. If the company is sufficiently loss-making but not R&D intensive, the deduction can be claimed at 10% as a tax credit (£18,600 on £100,000 of qualifying R&D spend), usually received in cash." },
+  { value: "b", title: "Second Item", text: "Some value 2..." },
+  { value: "c", title: "Third Item", text: "Some value 3..." },
+]
+
+
+const AccordionComponent = () => {
+  return (
+    <Accordion.Root collapsible defaultValue={["b"]}>
+      {accordionItems.map((item, index) => (
+        <Accordion.Item key={index} value={item.value}
+          my={'0.75rem'}
+          borderRadius={'0.25rem'}
+          borderColor={'#1A2130'}
+          borderWidth={'1px'}
+          bgGradient="to-r"
+          gradientFrom='#000819'
+          gradientTo='#1A2130'
+          boxShadow={`0px 3px 3px 0px rgba(0,8,25,0.4)`}
+
+
+        >
+          <Accordion.ItemTrigger p={'0.5rem'}>
+            <ChevronDown/>
+            <Span flex="1">
+              <Text               
+                fontFamily='Poppins'
+                fontSize='1rem' // 30px
+                lineHeight='1.875rem' // 30px
+                fontWeight='500'
+                fontStyle='normal'
+                color='white'
+              >
+                {item.title}
+              </Text>
+            </Span>
+            {/* <Accordion.ItemIndicator /> */}
+          </Accordion.ItemTrigger>
+
+          <Accordion.ItemContent>
+          <Separator borderColor={'#1A2130'} mx={'1rem'} />
+
+            <Accordion.ItemBody p={'1rem'}>
+              <Text
+                fontFamily='Poppins'
+                fontSize='1rem' // 16px
+                lineHeight='1.875rem' // 30px
+                fontWeight='400'
+                fontStyle='normal'
+                color='white'
+                mx={'1.5rem'}
+              >
+                {item.text}
+              </Text>
+            </Accordion.ItemBody>
+          </Accordion.ItemContent>
+        </Accordion.Item>
+      ))}
+    </Accordion.Root>
+  )
+}
+
 
 export default function RnDTaxCreditsPage() {
   const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
@@ -193,6 +260,9 @@ export default function RnDTaxCreditsPage() {
                 <Heading size="xl" mb={4} color="white" fontFamily='Poppins'>
                   {section.title}
                 </Heading>
+
+                <AccordionComponent />
+
                 <Text color="white" lineHeight="tall">
                   {/* Placeholder Text - Replace with your actual content */}
                   This is the placeholder content for the "{section.title}" section.
@@ -205,6 +275,7 @@ export default function RnDTaxCreditsPage() {
                   You can add more paragraphs, lists, images, or other components here as needed for each specific section of the R&D Tax Credits information.
                   Ensure the content is long enough to demonstrate the scrolling behavior effectively.
                 </Text>
+                
               </Box>
             ))}
           </Box>

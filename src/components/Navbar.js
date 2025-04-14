@@ -10,9 +10,201 @@ import {
   Stack,
   Drawer,
   VStack,
-  Image, // Using Image for the logo based on index.js
+  Image,
+  Dialog,
+  Text,
+  Portal,
+  Fieldset,
+  Field,
+  For,
+  Input,
+  NativeSelect,
+
+
+  
 } from '@chakra-ui/react';
 import { Menu, X } from 'lucide-react'; // Import the hamburger and close icons
+import { useState } from 'react';
+
+
+const SignUpForm = () => {
+  return (
+    <Fieldset.Root size="md" maxW="md">
+      <Stack>
+        <Fieldset.Legend>Contact details</Fieldset.Legend>
+        {/* <Fieldset.HelperText>
+          Please provide your contact details below.
+        </Fieldset.HelperText> */}
+      </Stack>
+
+      <Fieldset.Content>
+        <Field.Root>
+          <Field.Label>
+          <Text               
+            fontFamily='Poppins'
+            fontSize='0.75rem' // 30px
+            lineHeight='normal' // 30px
+            fontWeight='400'
+            fontStyle='normal'
+            color='#CCCED1'
+          >            
+            Name
+          </Text>
+            </Field.Label>
+          <Input name="name" placeholder='John Appleseed' fontFamily='Poppins' fontSize={'0.875rem'} />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label>
+          <Text               
+            fontFamily='Poppins'
+            fontSize='0.75rem' // 30px
+            lineHeight='normal' // 30px
+            fontWeight='400'
+            fontStyle='normal'
+            color='#CCCED1'
+          >            
+            Email
+          </Text>
+
+          </Field.Label>
+          <Input name="email" type="email" placeholder='john.appleseed@ac.co.uk' fontFamily='Poppins' fontSize={'0.875rem'} />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label>
+          <Text               
+            fontFamily='Poppins'
+            fontSize='0.75rem' // 30px
+            lineHeight='normal' // 30px
+            fontWeight='400'
+            fontStyle='normal'
+            color='#CCCED1'
+          >            
+            Phone Number
+          </Text>
+
+          </Field.Label>
+          <Input name="phoneNumber" placeholder='447123456789' fontFamily='Poppins' fontSize={'0.875rem'} />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label>
+          <Text               
+            fontFamily='Poppins'
+            fontSize='0.75rem' // 30px
+            lineHeight='normal' // 30px
+            fontWeight='400'
+            fontStyle='normal'
+            color='#CCCED1'
+          >            
+            Message
+          </Text>
+
+          </Field.Label>
+          <Input name="message" placeholder='Leave your message here...' fontFamily='Poppins' fontSize={'0.875rem'}/>
+        </Field.Root>
+
+      </Fieldset.Content>
+
+      {/* <Button type="submit" alignSelf="flex-start">
+        Submit
+      </Button> */}
+    </Fieldset.Root>
+  )
+}
+
+const ContactModal = () => {
+  return (
+    <Dialog.Root placement={'center'} >
+      <Dialog.Trigger asChild>
+        <Button
+        variant={'outline'}
+        color={'#00DEE3'}
+        borderColor={'#00DEE3'}
+        _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+        fontFamily="Poppins"        
+        fontWeight={500}
+        >          
+          Get in Touch
+        </Button>
+      </Dialog.Trigger>
+      <Portal>
+        <Dialog.Backdrop  />
+        <Dialog.Positioner >
+          <Dialog.Content 
+            bg='#000819'
+            borderWidth={'2px'}
+            borderRadiud={'12px'}
+            borderColor='#00E2E5'
+            p={'0.5rem'}
+          >
+            <Dialog.Header>
+              <Dialog.Title>
+                <Text
+                  fontFamily='Poppins'
+                  fontSize={'1.25rem'}
+                  lineHeight='normal' // 30px
+                  fontWeight='500'
+                  letterSpacing={'0.025rem'}
+                  fontStyle='normal'
+                  color='white'
+                >
+                Contact Us
+                </Text>
+              </Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <Text
+                fontFamily='Poppins'
+                fontSize='0.875rem' // 30px
+                lineHeight='1.875rem' // 30px
+                fontWeight='500'
+                fontStyle='normal'
+                color='#FFF'
+              >
+              Want to reach out? Enter your details below and provide a message to Ashton & Carrington and we’ll respond as soon as we can.
+              </Text>
+
+              <Box mt={-4}>
+                <SignUpForm />
+              </Box>
+
+
+          
+            </Dialog.Body>
+            <Dialog.Footer mt={'3.5rem'}>
+              <Dialog.ActionTrigger asChild>
+                <Button
+                  variant={'solid'}
+                  color={'#00E2E5'}
+                  borderColor={'#00DEE3'}
+                  _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+                  fontFamily="Poppins"
+                  fontWeight={500}
+                >
+                  Close
+                </Button>
+              </Dialog.ActionTrigger>
+              {/* <Button>Save</Button> */}
+              <Button
+                variant={'outline'}
+                bgColor={'#00DEE3'}
+                borderColor={'#00DEE3'}
+                _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+                fontFamily="Poppins"
+                fontWeight={500}
+                >
+                  Send Message
+                </Button>
+
+            </Dialog.Footer>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
+  )
+}
 
 const NavLink = ({ children, href }) => (
   <Link
@@ -72,9 +264,11 @@ export default function Navbar() {
                 ))}
               </HStack>
 
+              <ContactModal />
 
             {/* Desktop Get in Touch Button */}
-            <Button
+            {/* <Button
+              
               variant={'outline'}
               color={'#00DEE3'}
               borderColor={'#00DEE3'}
@@ -90,7 +284,7 @@ export default function Navbar() {
               rounded='xs'
             >
               Get in Touch
-            </Button>
+            </Button> */}
             </HStack>
           </>
         ) : (
