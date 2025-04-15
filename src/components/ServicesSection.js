@@ -1,5 +1,5 @@
 import { Box, Container, Heading, SimpleGrid, Text, VStack, Link, Icon, Flex } from '@chakra-ui/react';
-import { HandCoins, Building, Files, ArrowRight } from 'lucide-react'; // Import required icons
+import { HandCoins, Building, Files, ArrowRight, House, Folder } from 'lucide-react'; // Import required icons
 
 const services = [
   {
@@ -7,23 +7,23 @@ const services = [
     title: 'R&D Tax Credits',
     description:
       'R&D (Research & Development) tax credits are government incentives designed to reward businesses investing in innovation. Ashton & Carrington helps start ups navigate and maximise these credits, providing expert and tailored solutions that unlock hidden savings and support growth.',
-    imageUrl: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80', // Example stock image
+    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713628/Horizontal_Graphic_oxspzu.svg',
     link: '#rd-tax-credits',
   },
   {
-    icon: Building,
+    icon: House,
     title: 'Capital Allowances',
     description:
       'Capital Allowances allow businesses to reduce their taxable profits by claiming tax relief on investments in assets like property, equipment, and renovations. Eligible businesses can offset these costs against their tax bill, freeing up funds for future growth. Ashton & Carrington specialises in identifying and maximising these allowances, ensuring businesses unlock their full savings potential.',
-    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80', // Example stock image
+    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713675/Horizontal_Graphic_1_hgplqw.svg', 
     link: '#capital-allowances',
   },
   {
-    icon: Files,
+    icon: Folder,
     title: 'Accounts & Filing',
     description:
       'Ashton & Carrington can also provide additional services such as accounts and tax filings in order to streamline the process of claiming Capital Allowances or R&D credits.',
-    imageUrl: 'https://images.unsplash.com/photo-1605976313109-1a03519a8cbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80', // Example stock image
+    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713684/Horizontal_Graphic_2_t3u7gw.svg', 
     link: '#accounts-filing',
   },
 ];
@@ -35,7 +35,8 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
       bgSize="cover"
       bgPosition="center"
       borderRadius="xl"
-      p={8}
+      p={'2rem'}
+      m={2}
       position="relative"
       overflow="hidden"
       color="white"
@@ -46,30 +47,59 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        bg: 'linear-gradient(to bottom, rgba(0, 8, 25, 0.85), rgba(0, 8, 25, 0.95))', // Dark overlay gradient
+        bg: 'linear-gradient(to bottom, rgba(0, 8, 25, 0.40), rgba(0, 8, 25, 0.80))', // Dark overlay gradient
         zIndex: 1,
       }}
-      boxShadow="lg"
+      boxShadow={`0px 0px 20px 3px rgba(0,4,14,1)`}
+
       minH={{ base: "auto", md: "450px" }} // Ensure consistent height on larger screens
+      // h={'500px'}
+      // w={'460px'}
+
+
       display="flex" // Use flexbox for vertical alignment
       flexDirection="column" // Stack items vertically
       justifyContent="space-between" // Push link to bottom
     >
       <VStack spacing={4} align="start" zIndex={2} position="relative" flexGrow={1}>
-        <Icon as={icon} boxSize={10} color="#00DEE3" mb={2} />
-        <Heading as="h3" size="lg" fontFamily="Poppins" fontWeight={600}>
+        <Icon 
+          as={icon} 
+          // boxSize={10} 
+          color="white" 
+          mb={2}
+          strokeWidth={'0.75px'}
+          h={'72px'}
+          w={'72px'}
+         />
+        <Heading
+        //  as="h3" 
+        fontSize="1.25rem" 
+         fontFamily="Poppins" 
+         fontWeight={500}
+         fontStyle={'normal'}
+         letterSpacing={'0.025rem'}
+         lineHeight="normal"
+          pb={2}
+        >
           {title}
         </Heading>
-        <Text fontSize="md" fontFamily="Poppins" fontWeight={400} lineHeight="1.6">
+        <Text 
+          fontSize="1rem" 
+          fontFamily="Poppins"
+          fontStyle={'normal'} 
+          fontWeight={400} 
+          lineHeight="1.875rem"
+        >
           {description}
         </Text>
       </VStack>
       <Link
         href={link}
         mt={6} // Add margin top to push from description
-        color="#00DEE3"
+        color="#00E2E5"
         fontWeight={500}
         fontFamily="Poppins"
+        lineHeight='1.25rem'
         display="inline-flex"
         alignItems="center"
         zIndex={2}
@@ -86,18 +116,19 @@ const ServicesSection = () => {
   return (
     <Container maxW="container.xl" py={16} px={{ base: 4, md: 8 }}>
       <Heading
-        as="h2"
-        size="xl"
-        mb={10}
+        fontSize="1.75rem"
         fontFamily="Poppins"
-        fontWeight={700}
+        fontStyle='normal'
+        fontWeight={500}
         color="white"
-        letterSpacing="wider"
+        lineHeight={'normal'}
+        letterSpacing="0.14rem" //2.24px
         textAlign={{ base: 'center', md: 'left' }}
+        pb={'1.5rem'}
       >
         OUR SERVICES
       </Heading>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} >
         {services.map((service, index) => (
           <ServiceCard
             key={index}

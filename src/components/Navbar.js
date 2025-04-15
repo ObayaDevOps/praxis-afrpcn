@@ -240,7 +240,18 @@ export default function Navbar() {
 
 
   return (
-    <Box px={'5.5rem'} py={'1rem'} position="sticky" top={0} zIndex="sticky">
+    <Box 
+    px={'5.5rem'} 
+    py={'1rem'} 
+    position="sticky" 
+    top={0} 
+    zIndex="sticky"
+    bgGradient="to-b"
+    gradientFrom='#000819'
+    gradientTo='blackAlpha.100'
+    
+    
+    >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="container.xl" mx="auto">
 
         {/* Logo - Using Image component like in index.js */}

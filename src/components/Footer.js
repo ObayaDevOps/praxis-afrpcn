@@ -19,7 +19,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box  color="white" py={{ base: 8, md: 10 }} fontFamily={poppins.style.fontFamily}>
+    <Box  color="white" pt={{ base: 8, md: 20 }}  px={0} fontFamily={poppins.style.fontFamily}>
        <Box px={'5.5rem'} py={'1rem'}>
         <Flex
           direction={{ base: 'column', md: 'row' }}
@@ -28,13 +28,17 @@ const Footer = () => {
           gap={{ base: 8, md: 4 }} // Add gap between columns/rows
         >
           {/* Left Section */}
-          <VStack align={{ base: 'center', md: 'flex-start' }} spacing={4}>
-            <Image
-              src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} // Replace with your actual logo URL if different
-              alt="Ashton & Carrington Logo"
-              height={{ base: '30px', md: '40px' }} // Adjust size as needed
-              objectFit="contain"
-            />
+          <HStack align={{ base: 'center', md: 'flex-start' }} spacing={4}>
+            <HStack>
+            <Box>
+              <Image
+                src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} // Replace with your actual logo URL if different
+                alt="Ashton & Carrington Logo"
+                height={{ base: '30px', md: '80px' }} // Adjust size as needed
+                objectFit="contain"
+              />
+            </Box>
+            <Box>
             <HStack spacing={3}>
               <Link href="https://linkedin.com" isExternal aria-label="LinkedIn">
                 <Icon as={FaLinkedin} boxSize={6} color="white" bg="#202020" p={1} borderRadius="md" />
@@ -45,6 +49,7 @@ const Footer = () => {
               </Link>
               <Button
                 size="sm"
+                href='https://www.dralegawebops.com/'
                 variant="outline"
                 colorScheme="whiteAlpha"
                 borderColor="gray.600"
@@ -55,20 +60,45 @@ const Footer = () => {
                 Built by DWO
               </Button>
             </HStack>
-            <Text fontSize="sm" color="white">
+            <Text 
+            fontSize="0.875rem"
+            fontFamily="Poppins"
+            fontStyle='normal'
+            fontWeight={500}
+            color="white"
+            lineHeight={'1.5rem'}
+            pt={2}
+            >
               © {currentYear} Ashton & Carrington. All rights reserved
             </Text>
-          </VStack>
+            </Box>
+            </HStack>
+          </HStack>
 
           {/* Spacer for Medium+ screens */}
           <Spacer display={{ base: 'none', md: 'block' }} />
 
           {/* Right Section */}
           <VStack align={{ base: 'center', md: 'flex-end' }} spacing={1} textAlign={{ base: 'center', md: 'right' }}>
-            <Link color={'white'} href="mailto:contact@ashtonandcarrington.co.uk" fontSize="sm" _hover={{ textDecoration: 'underline' }}>
+            <Link color={'white'} 
+              href="mailto:contact@ashtonandcarrington.co.uk" 
+              fontSize="0.875rem"
+              fontFamily="Poppins"
+              fontStyle='normal'
+              fontWeight={500}
+              lineHeight={'1.5rem'}
+          
+              _hover={{ textDecoration: 'underline' }}>
               contact@ashtonandcarrington.co.uk
             </Link>
-            <Text fontSize="sm">
+            <Text
+              fontSize="0.875rem"
+              fontFamily="Poppins"
+              fontStyle='normal'
+              fontWeight={500}
+              color="white"
+              lineHeight={'1.5rem'}
+            >
               Trinity Offices, 114 Northenden Rd, Sale, M33 3HD
             </Text>
           </VStack>

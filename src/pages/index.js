@@ -53,7 +53,7 @@ export default function Home() {
                   blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
                 />
           </Center>
-          <Center mt={8} px={4}>
+          <Center px={4}>
             <Heading
               as="h1"
               fontFamily="Poppins"
