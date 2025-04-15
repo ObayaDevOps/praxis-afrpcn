@@ -25,94 +25,116 @@ import {
 } from '@chakra-ui/react';
 import { Menu, X } from 'lucide-react'; // Import the hamburger and close icons
 import { useState } from 'react';
+import { Toaster, toaster } from "@/components/ui/toaster"
+import Form from '@/components/Form'
 
 
-const SignUpForm = () => {
-  return (
-    <Fieldset.Root size="md" maxW="md">
-      <Stack>
-        <Fieldset.Legend>Contact details</Fieldset.Legend>
-        {/* <Fieldset.HelperText>
-          Please provide your contact details below.
-        </Fieldset.HelperText> */}
-      </Stack>
 
-      <Fieldset.Content>
-        <Field.Root>
-          <Field.Label>
-          <Text               
-            fontFamily='Poppins'
-            fontSize='0.75rem' // 30px
-            lineHeight='normal' // 30px
-            fontWeight='400'
-            fontStyle='normal'
-            color='#CCCED1'
-          >            
-            Name
-          </Text>
-            </Field.Label>
-          <Input name="name" placeholder='John Appleseed' fontFamily='Poppins' fontSize={'0.875rem'} />
-        </Field.Root>
+// const SignUpForm = () => {
+//   return (
+//     <Fieldset.Root size="md" maxW="md"
+//     >
+//       <Stack>
+//         {/* <Fieldset.Legend>Contact details</Fieldset.Legend> */}
+//         {/* <Fieldset.HelperText>
+//           Please provide your contact details below.
+//         </Fieldset.HelperText> */}
+//       </Stack>
 
-        <Field.Root>
-          <Field.Label>
-          <Text               
-            fontFamily='Poppins'
-            fontSize='0.75rem' // 30px
-            lineHeight='normal' // 30px
-            fontWeight='400'
-            fontStyle='normal'
-            color='#CCCED1'
-          >            
-            Email
-          </Text>
+//       <Fieldset.Content>
+//         <Field.Root>
+//           <Field.Label>
+//           <Text               
+//             fontFamily='Poppins'
+//             fontSize='0.75rem' // 30px
+//             lineHeight='normal' // 30px
+//             fontWeight='400'
+//             fontStyle='normal'
+//             color='#CCCED1'
+//           >            
+//             Name
+//           </Text>
+//             </Field.Label>
+//           <Input name="name" 
+//             placeholder='John Appleseed' 
+//             fontFamily='Poppins' 
+//             fontSize={'0.875rem'}
+//             color='white'
+//            />
+//         </Field.Root>
 
-          </Field.Label>
-          <Input name="email" type="email" placeholder='john.appleseed@ac.co.uk' fontFamily='Poppins' fontSize={'0.875rem'} />
-        </Field.Root>
+//         <Field.Root>
+//           <Field.Label>
+//           <Text               
+//             fontFamily='Poppins'
+//             fontSize='0.75rem' // 30px
+//             lineHeight='normal' // 30px
+//             fontWeight='400'
+//             fontStyle='normal'
+//             color='#CCCED1'
+//           >            
+//             Email
+//           </Text>
 
-        <Field.Root>
-          <Field.Label>
-          <Text               
-            fontFamily='Poppins'
-            fontSize='0.75rem' // 30px
-            lineHeight='normal' // 30px
-            fontWeight='400'
-            fontStyle='normal'
-            color='#CCCED1'
-          >            
-            Phone Number
-          </Text>
+//           </Field.Label>
+//           <Input name="email"  color='white' type="email" placeholder='john.appleseed@ac.co.uk' fontFamily='Poppins' fontSize={'0.875rem'} />
+//         </Field.Root>
 
-          </Field.Label>
-          <Input name="phoneNumber" placeholder='447123456789' fontFamily='Poppins' fontSize={'0.875rem'} />
-        </Field.Root>
+//         <Field.Root>
+//           <Field.Label>
+//           <Text               
+//             fontFamily='Poppins'
+//             fontSize='0.75rem' // 30px
+//             lineHeight='normal' // 30px
+//             fontWeight='400'
+//             fontStyle='normal'
+//             color='#CCCED1'
+//           >            
+//             Phone Number
+//           </Text>
 
-        <Field.Root>
-          <Field.Label>
-          <Text               
-            fontFamily='Poppins'
-            fontSize='0.75rem' // 30px
-            lineHeight='normal' // 30px
-            fontWeight='400'
-            fontStyle='normal'
-            color='#CCCED1'
-          >            
-            Message
-          </Text>
+//           </Field.Label>
+//           <Input name="phoneNumber"  color='white' placeholder='447123456789' fontFamily='Poppins' fontSize={'0.875rem'} />
+//         </Field.Root>
 
-          </Field.Label>
-          <Input name="message" placeholder='Leave your message here...' fontFamily='Poppins' fontSize={'0.875rem'}/>
-        </Field.Root>
+//         <Field.Root>
+//           <Field.Label>
+//           <Text               
+//             fontFamily='Poppins'
+//             fontSize='0.75rem' // 30px
+//             lineHeight='normal' // 30px
+//             fontWeight='400'
+//             fontStyle='normal'
+//             color='#CCCED1'
+//           >            
+//             Message
+//           </Text>
 
-      </Fieldset.Content>
+//           </Field.Label>
+//           <Input 
+//           name="message" 
+//           placeholder='Leave your message here...' 
+//           ontFamily='Poppins' 
+//           fontSize={'0.875rem'}
+//           color='white'
+//           />
+//         </Field.Root>
 
-      {/* <Button type="submit" alignSelf="flex-start">
-        Submit
-      </Button> */}
-    </Fieldset.Root>
-  )
-}
+//       </Fieldset.Content>
+
+//       <Button type="submit" 
+//         variant={'outline'}
+//         bgColor={'#00DEE3'}
+//         borderColor={'#00DEE3'}
+//         _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+//         fontFamily="Poppins"
+//         fontWeight={500}
+//       >
+//         Submit
+//       </Button>
+//     </Fieldset.Root>
+//   )
+// }
 
 const ContactModal = () => {
   return (
@@ -121,7 +143,7 @@ const ContactModal = () => {
         <Button
         variant={'outline'}
         color={'#00DEE3'}
-        borderColor={'#00DEE3'}
+        borderColor={'#00E2E5'}
         _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
         fontFamily="Poppins"        
         fontWeight={500}
@@ -159,15 +181,19 @@ const ContactModal = () => {
                 fontFamily='Poppins'
                 fontSize='0.875rem' // 30px
                 lineHeight='1.875rem' // 30px
-                fontWeight='500'
+                fontWeight='400'
                 fontStyle='normal'
                 color='#FFF'
               >
-              Want to reach out? Enter your details below and provide a message to Ashton & Carrington and we’ll respond as soon as we can.
+              Want to reach out? 
+              Enter your details below and provide a 
+              message to Ashton & Carrington 
+              and we’ll respond as soon as we can.
               </Text>
 
-              <Box mt={-4}>
-                <SignUpForm />
+              <Box>
+                {/* <SignUpForm /> */}
+                <Form />
               </Box>
 
 
@@ -182,22 +208,16 @@ const ContactModal = () => {
                   _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
                   fontFamily="Poppins"
                   fontWeight={500}
+
+                  position='absolute'
+                  right={0}
+                  bottom={0}
+                  mb={'1.5rem'}
+                  mr={'12rem'}
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-              {/* <Button>Save</Button> */}
-              <Button
-                variant={'outline'}
-                bgColor={'#00DEE3'}
-                borderColor={'#00DEE3'}
-                _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-                fontFamily="Poppins"
-                fontWeight={500}
-                >
-                  Send Message
-                </Button>
-
             </Dialog.Footer>
           </Dialog.Content>
         </Dialog.Positioner>
