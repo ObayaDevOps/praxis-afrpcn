@@ -161,9 +161,9 @@ export default function Navbar() {
     position="sticky" 
     top={0} 
     zIndex="sticky"
-    bgGradient="to-b"
-    gradientFrom='#000819'
-    gradientTo='blackAlpha.100'
+    bgGradient={{base:"to-b", lg: 'none'}}
+    gradientFrom={{base:'#000819',lg: 'none'}}
+    gradientTo={{base:'blackAlpha.900', lg: 'none'}}
     >
       <Flex 
       h={16} 

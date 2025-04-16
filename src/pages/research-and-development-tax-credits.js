@@ -158,7 +158,13 @@ export default function RnDTaxCreditsPage() {
       </Head>
       
       {/* Keep Navbar above overlay */}
-      <Box position="relative" zIndex={2}>
+      <Box 
+      // position="relative"
+        position="sticky"
+        top={0}
+        // bg={'red'}
+      zIndex={3}
+      >
         <Navbar />
       </Box>
 
@@ -166,14 +172,28 @@ export default function RnDTaxCreditsPage() {
       <Box
         px={{base: '1rem', lg: '4rem'}}
         py='2rem'
-        position={{base: 'sticky', lg: "relative"}}
+        position={{base: 'relative', lg: "relative"}}
         zIndex={2} /* Content above overlay */
         flex="1" /* Grow vertically */
-        overflow="hidden" /* Prevent container scroll */
+        overflow={{base: 'none', lg: "hidden"}} /* Prevent container scroll */
         display="flex" /* Use flex for children */
         flexDirection="column" /* Stack title and flex row */
       >
 
+        <Box
+          position="sticky"
+          top={'6rem'}
+          bg={'#000819'}
+          // bgGradient={{base: "to-b", lg: 'none'}}
+          // gradientFrom={{base:'#000819', lg: 'none'}}
+          // gradientTo={{base: 'blackAlpha.900', lg: 'none'}}
+          // style={{
+          //   '-webkit-mask-image': 'linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0)), linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))',
+          //   '-webkit-mask-size': '100% 50%',
+          //   '-webkit-mask-repeat': 'no-repeat',
+          //   '-webkit-mask-position': 'top bottom, top bottom',
+          // }}
+        >
           <Text
               fontFamily='Poppins'
               fontSize='2.25rem' // 36px
@@ -182,14 +202,13 @@ export default function RnDTaxCreditsPage() {
               fontStyle='normal'
               letterSpacing='0.72px'
               color='white'
-              mb={8}
+              // mb={8}
               p={4}
               // position='fixed'
-              // position="absolute" 
-
             >
               Research and Development Tax Credits
             </Text>
+          </Box>
 
 
         {/* Flex row fills remaining space in container */}
