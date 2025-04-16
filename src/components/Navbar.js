@@ -30,112 +30,6 @@ import Form from '@/components/Form'
 
 
 
-// const SignUpForm = () => {
-//   return (
-//     <Fieldset.Root size="md" maxW="md"
-//     >
-//       <Stack>
-//         {/* <Fieldset.Legend>Contact details</Fieldset.Legend> */}
-//         {/* <Fieldset.HelperText>
-//           Please provide your contact details below.
-//         </Fieldset.HelperText> */}
-//       </Stack>
-
-//       <Fieldset.Content>
-//         <Field.Root>
-//           <Field.Label>
-//           <Text               
-//             fontFamily='Poppins'
-//             fontSize='0.75rem' // 30px
-//             lineHeight='normal' // 30px
-//             fontWeight='400'
-//             fontStyle='normal'
-//             color='#CCCED1'
-//           >            
-//             Name
-//           </Text>
-//             </Field.Label>
-//           <Input name="name" 
-//             placeholder='John Appleseed' 
-//             fontFamily='Poppins' 
-//             fontSize={'0.875rem'}
-//             color='white'
-//            />
-//         </Field.Root>
-
-//         <Field.Root>
-//           <Field.Label>
-//           <Text               
-//             fontFamily='Poppins'
-//             fontSize='0.75rem' // 30px
-//             lineHeight='normal' // 30px
-//             fontWeight='400'
-//             fontStyle='normal'
-//             color='#CCCED1'
-//           >            
-//             Email
-//           </Text>
-
-//           </Field.Label>
-//           <Input name="email"  color='white' type="email" placeholder='john.appleseed@ac.co.uk' fontFamily='Poppins' fontSize={'0.875rem'} />
-//         </Field.Root>
-
-//         <Field.Root>
-//           <Field.Label>
-//           <Text               
-//             fontFamily='Poppins'
-//             fontSize='0.75rem' // 30px
-//             lineHeight='normal' // 30px
-//             fontWeight='400'
-//             fontStyle='normal'
-//             color='#CCCED1'
-//           >            
-//             Phone Number
-//           </Text>
-
-//           </Field.Label>
-//           <Input name="phoneNumber"  color='white' placeholder='447123456789' fontFamily='Poppins' fontSize={'0.875rem'} />
-//         </Field.Root>
-
-//         <Field.Root>
-//           <Field.Label>
-//           <Text               
-//             fontFamily='Poppins'
-//             fontSize='0.75rem' // 30px
-//             lineHeight='normal' // 30px
-//             fontWeight='400'
-//             fontStyle='normal'
-//             color='#CCCED1'
-//           >            
-//             Message
-//           </Text>
-
-//           </Field.Label>
-//           <Input 
-//           name="message" 
-//           placeholder='Leave your message here...' 
-//           ontFamily='Poppins' 
-//           fontSize={'0.875rem'}
-//           color='white'
-//           />
-//         </Field.Root>
-
-//       </Fieldset.Content>
-
-//       <Button type="submit" 
-//         variant={'outline'}
-//         bgColor={'#00DEE3'}
-//         borderColor={'#00DEE3'}
-//         _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-//         fontFamily="Poppins"
-//         fontWeight={500}
-//       >
-//         Submit
-//       </Button>
-//     </Fieldset.Root>
-//   )
-// }
-
 const ContactModal = () => {
   return (
     <Dialog.Root placement={'center'} >
@@ -269,11 +163,15 @@ export default function Navbar() {
     bgGradient="to-b"
     gradientFrom='#000819'
     gradientTo='blackAlpha.100'
-    
-    
     >
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="container.xl" mx="auto">
-
+      <Flex 
+      h={16} 
+      alignItems={'center'} 
+      justifyContent={'space-between'} 
+      maxW="container.xl" 
+      mx="auto"
+      display={{base: 'none', lg: 'flex'}}
+      >
         {/* Logo - Using Image component like in index.js */}
         <Link href="/" _hover={{ textDecoration: 'none' }}>
              <Image
@@ -285,8 +183,8 @@ export default function Navbar() {
              />
         </Link>
 
-        {isDesktop ? (
-          <>
+
+          <Flex display={{base: 'none', lg: 'flex'}}>
             {/* Desktop Navigation Links */}
             <HStack spacing={'1.5rem'} alignItems={'left'}>
               <HStack as={'nav'} spacing={'1.5rem'}>
@@ -295,74 +193,66 @@ export default function Navbar() {
                 ))}
               </HStack>
 
-              <ContactModal />
+              <Box ml={4}>
+                <ContactModal />
+              </Box>
 
             </HStack>
-          </>
-        ) : (
-          <>
-            {/* Spacer to push IconButton to the right */}
-             <Box flex={1} />
-            {/* Mobile Navigation - Hamburger Icon */}
-            <IconButton
-              size={'md'}
-              icon={<Menu color="#00DEE3"/>} // Cyan color
-              aria-label={'Open Menu'}
-              display={{ lg: 'none' }}
-              onClick={onOpen}
-              variant="ghost"
-             _hover={{ bg: 'rgba(0, 222, 227, 0.1)' }}
-            />
-          </>
-        )}
+          </Flex>
+
       </Flex>
 
       {/* Mobile Drawer */}
-      {!isDesktop && (
+      <Flex display={{base: 'flex', lg: 'none'}}>
+        <Box ml={-10} mt={4}>
+          <Link href="/" _hover={{ textDecoration: 'none' }}>
+                <Image
+                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744279814/Vector_rdxjfp.svg'}
+                    alt="Ashton & Carrington Logo"
+                    height={'40px'} // Adjust height as needed
+                    width={'auto'} // Maintain aspect ratio
+                    // ml={'64px'}
+                />
+            </Link>
+          </Box>
+
+
         <Drawer.Root isOpen={isOpen} onClose={onClose} placement="left" size="full">
-          <Drawer.Backdrop />
-          <Drawer.Positioner>
-            <Drawer.Content bg="#000819" color="#00DEE3"> {/* Styles moved here */}
-              <Drawer.CloseTrigger asChild> {/* Use asChild to wrap the IconButton */}
-                 <IconButton
-                    aria-label="Close menu"
-                    icon={<X color="#00DEE3" />}
-                    // onClick is handled by Drawer.CloseTrigger
-                    variant="ghost"
-                    size="lg" // Adjust size as needed
-                    position="absolute" // Keep positioning
-                    right="8px"
-                    top="8px"
-                    _hover={{ bg: 'rgba(0, 222, 227, 0.1)' }} // Consistent hover effect
-                  />
-              </Drawer.CloseTrigger>
-              <Drawer.Header borderBottomWidth="1px" borderColor="rgba(0, 222, 227, 0.2)">
-                <Drawer.Title>Navigation</Drawer.Title> {/* Title added */}
-              </Drawer.Header>
-              <Drawer.Body>
-                <VStack spacing={6} align="stretch" pt={5}>
-                  {navItems.map((item) => (
-                    <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
-                  ))}
-                  <Button
-                    mt={4}
-                    variant={'outline'}
-                    color={'#00DEE3'}
-                    borderColor={'#00DEE3'}
-                    _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-                    fontFamily="Poppins"
-                    fontWeight={500}
-                    w="full"
-                  >
-                    Get in Touch
-                  </Button>
-                </VStack>
-              </Drawer.Body>
-              <Drawer.Footer /> {/* Added empty footer as per structure */}
-            </Drawer.Content>
-          </Drawer.Positioner>
+          <Drawer.Trigger asChild>
+            <Menu color='white' />
+          </Drawer.Trigger>
+
+            <Portal>
+              <Drawer.Backdrop />
+              <Drawer.Positioner>
+                <Drawer.Content bg="#000819" color="#00DEE3"> {/* Styles moved here */}
+                  <Drawer.CloseTrigger > {/* Use asChild to wrap the IconButton */}
+                      <X color='white' />
+                  </Drawer.CloseTrigger>
+                  <Drawer.Body>
+                    <VStack spacing={6} align="stretch" pt={5}>
+                      {navItems.map((item) => (
+                        <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
+                      ))}
+                      <Button
+                        mt={4}
+                        variant={'outline'}
+                        color={'#00DEE3'}
+                        borderColor={'#00DEE3'}
+                        _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+                        fontFamily="Poppins"
+                        fontWeight={500}
+                        w="full"
+                      >
+                        Get in Touch
+                      </Button>
+                    </VStack>
+                  </Drawer.Body>
+                </Drawer.Content>
+              </Drawer.Positioner>
+            </Portal>
         </Drawer.Root>
-      )}
+      </Flex>
     </Box>
   );
 } 
