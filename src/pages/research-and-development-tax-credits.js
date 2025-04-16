@@ -125,10 +125,12 @@ export default function RnDTaxCreditsPage() {
     return (
     // Set height to 100vh and use flex column layout
     <Box
-      h={{base: '200vh', md: "100vh"}} // Exact viewport height
+      minH={{base: '100vh', md: "100vh"}} // Exact viewport height
+      h={{lg: '100vh'}}
       display="flex"
       flexDirection="column"
-      bgImage={`url('${backgroundImageUrl}')`}
+      bgImage={{base: 'none', lg: `url('${backgroundImageUrl}')`}}
+      bg={{base:'#000819'}}
       bgSize="cover"
       bgPosition="center"
       bgAttachment="fixed" // Keeps the background fixed
@@ -162,15 +164,16 @@ export default function RnDTaxCreditsPage() {
 
       {/* Container fills space, contains children, uses flex column */}
       <Box
-        px={'4rem'}
+        px={{base: '1rem', lg: '4rem'}}
         py='2rem'
-        position="relative"
+        position={{base: 'sticky', lg: "relative"}}
         zIndex={2} /* Content above overlay */
         flex="1" /* Grow vertically */
         overflow="hidden" /* Prevent container scroll */
         display="flex" /* Use flex for children */
         flexDirection="column" /* Stack title and flex row */
       >
+
           <Text
               fontFamily='Poppins'
               fontSize='2.25rem' // 36px
@@ -181,6 +184,9 @@ export default function RnDTaxCreditsPage() {
               color='white'
               mb={8}
               p={4}
+              // position='fixed'
+              // position="absolute" 
+
             >
               Research and Development Tax Credits
             </Text>
@@ -193,7 +199,7 @@ export default function RnDTaxCreditsPage() {
             as="nav" // Use nav for semantic sidebar
             // w={['full', 'full', '250px']} // Full width on small screens, fixed width on larger
             w={['full', 'full', '18.5rem']} // Full width on small screens, fixed width on larger
-
+            display={{base: 'none', lg: 'flex'}}
             position={['relative', 'relative', 'sticky']} // Sticky sidebar on large screens
             top={[0, 0, '2rem']} // Adjust top position as needed
             alignSelf="flex-start" // Prevent stretching vertically
@@ -227,6 +233,7 @@ export default function RnDTaxCreditsPage() {
             overflowY="auto" // Enable vertical scroll ONLY for this box
             scrollBehavior="smooth" // Apply smooth scroll to this container
             p={6} // Add padding inside the scrollable area
+            // mt={{base:'10rem', lg: 0 }}
             sx={{
               '&::-webkit-scrollbar': {
                 display: 'none', // Safari and Chrome

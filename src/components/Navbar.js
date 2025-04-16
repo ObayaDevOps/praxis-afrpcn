@@ -204,7 +204,18 @@ export default function Navbar() {
       </Flex>
 
       {/* Mobile Drawer */}
-      <Flex display={{base: 'flex', lg: 'none'}}>
+      <Box
+          position="sticky" 
+          top={0} 
+          zIndex="sticky"
+          bgGradient="to-b"
+          gradientFrom='#000819'
+          gradientTo='blackAlpha.100'
+      >
+      <Flex display={{base: 'flex', lg: 'none'}}
+
+
+      >
         <Drawer.Root isOpen={isOpen} onClose={onClose} 
         placement="left" 
         size="full">
@@ -296,6 +307,7 @@ export default function Navbar() {
           </Box>
 
       </Flex>
+      </Box>
     </Box>
   );
 } 
