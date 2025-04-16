@@ -146,6 +146,7 @@ export default function Navbar() {
   console.log('isDesktop', isDesktop)
 
   const navItems = [
+    { label: 'Home', href: '/'},
     { label: 'R&D Tax Credits', href: '/research-and-development-tax-credits' },
     { label: 'Capital Allowance', href: '/capital-allowance' },
     { label: 'Accounts & Filling', href: '/accounts-filing' },
@@ -155,8 +156,8 @@ export default function Navbar() {
 
   return (
     <Box 
-    px={'5.5rem'} 
-    py={'1rem'} 
+    px={{base: '2rem', lg: '5.5rem'}} 
+    py={{base: '2rem', lg: '1rem'}} 
     position="sticky" 
     top={0} 
     zIndex="sticky"
@@ -204,7 +205,85 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <Flex display={{base: 'flex', lg: 'none'}}>
-        <Box ml={-10} mt={4}>
+        <Drawer.Root isOpen={isOpen} onClose={onClose} 
+        placement="left" 
+        size="full">
+          <Drawer.Trigger asChild>
+            <Menu color='#00C6CB' size={'2.75rem'} 
+            mr={-10}
+            />
+          </Drawer.Trigger>
+
+            <Portal>
+              <Drawer.Backdrop />
+              <Drawer.Positioner>
+                <Drawer.Content bg='#1A2130' color="#00DEE3"> {/* Styles moved here */}
+                  <Drawer.CloseTrigger > {/* Use asChild to wrap the IconButton */}
+                    
+                    <Box m={6}>
+                      <X 
+                      color="#00E2E5"
+                      size={'2.75rem'}
+                      
+                       />
+                       </Box>
+
+
+                  </Drawer.CloseTrigger>
+                  <Drawer.Body>
+                    <VStack spacing={12} align="stretch" pt={'6rem'}>
+                      {navItems.map((item) => (
+                        <NavLink key={item.label} href={item.href}>
+                          <Text
+                            fontSize={"1.75rem"}
+                            fontFamily="Poppins"
+                            fontStyle='normal'
+                            fontWeight={500}
+                            color="#00E2E5"
+                            lineHeight={'normal'}
+                            letterSpacing="0.14rem" //2.24px
+                            textTransform={'uppercase'}
+                            mb={4}
+                          >
+                            {item.label}
+                          </Text>
+                          </NavLink>
+                      ))}
+                      <Button
+                        mt={2}
+                        px={'0.625rem'}
+                        py={'1.25rem'}
+                        variant={'outline'}
+                        bgColor={'#000819'}
+                        borderColor={'#00DEE3'}
+                        borderWidth={'2px'}
+                        borderRadius={'2px'}
+                        _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+                        fontFamily="Poppins"
+                        fontWeight={500}
+                        w="full"
+                      >
+                          <Text
+                            fontSize={"1.75rem"}
+                            fontFamily="Poppins"
+                            fontStyle='normal'
+                            fontWeight={500}
+                            color="#00E2E5"
+                            lineHeight={'normal'}
+                            letterSpacing="0.14rem" //2.24px
+                            textTransform={'uppercase'}
+                          >
+                        Get in Touch
+                        </Text>
+                      </Button>
+                    </VStack>
+                  </Drawer.Body>
+                </Drawer.Content>
+              </Drawer.Positioner>
+            </Portal>
+        </Drawer.Root>
+
+        <Box pl={4} >
           <Link href="/" _hover={{ textDecoration: 'none' }}>
                 <Image
                     src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744279814/Vector_rdxjfp.svg'}
@@ -216,42 +295,6 @@ export default function Navbar() {
             </Link>
           </Box>
 
-
-        <Drawer.Root isOpen={isOpen} onClose={onClose} placement="left" size="full">
-          <Drawer.Trigger asChild>
-            <Menu color='white' />
-          </Drawer.Trigger>
-
-            <Portal>
-              <Drawer.Backdrop />
-              <Drawer.Positioner>
-                <Drawer.Content bg="#000819" color="#00DEE3"> {/* Styles moved here */}
-                  <Drawer.CloseTrigger > {/* Use asChild to wrap the IconButton */}
-                      <X color='white' />
-                  </Drawer.CloseTrigger>
-                  <Drawer.Body>
-                    <VStack spacing={6} align="stretch" pt={5}>
-                      {navItems.map((item) => (
-                        <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
-                      ))}
-                      <Button
-                        mt={4}
-                        variant={'outline'}
-                        color={'#00DEE3'}
-                        borderColor={'#00DEE3'}
-                        _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-                        fontFamily="Poppins"
-                        fontWeight={500}
-                        w="full"
-                      >
-                        Get in Touch
-                      </Button>
-                    </VStack>
-                  </Drawer.Body>
-                </Drawer.Content>
-              </Drawer.Positioner>
-            </Portal>
-        </Drawer.Root>
       </Flex>
     </Box>
   );
