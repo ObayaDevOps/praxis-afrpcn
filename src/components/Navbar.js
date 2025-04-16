@@ -297,25 +297,6 @@ export default function Navbar() {
 
               <ContactModal />
 
-            {/* Desktop Get in Touch Button */}
-            {/* <Button
-              
-              variant={'outline'}
-              color={'#00DEE3'}
-              borderColor={'#00DEE3'}
-              _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-              fontFamily="Poppins"
-              fontWeight={500}
-              fontSize='0.875rem'
-              lineHeight='1.25rem'
-              px='1rem'
-              py='0.625rem'
-              justify-content='center'
-              align-items='center'
-              rounded='xs'
-            >
-              Get in Touch
-            </Button> */}
             </HStack>
           </>
         ) : (

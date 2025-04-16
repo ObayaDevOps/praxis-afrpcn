@@ -37,6 +37,7 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
       borderRadius="xl"
       p={'2rem'}
       m={2}
+      mb={'2rem'}
       position="relative"
       overflow="hidden"
       color="white"

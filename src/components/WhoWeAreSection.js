@@ -74,10 +74,10 @@ const WhoWeAreSection = () => {
 
 
   return (
-    <Box bg={bgColor} py={16} color={textColor}>
+    <Box bg={bgColor} py={{base: 20, md: 16}} px={2} color={textColor}>
       <Container maxW="container.xl">
         <Heading
-        fontSize="1.75rem"
+        fontSize={"1.75rem"}
         fontFamily="Poppins"
         fontStyle='normal'
         fontWeight={500}
@@ -85,7 +85,7 @@ const WhoWeAreSection = () => {
         lineHeight={'normal'}
         letterSpacing="0.14rem" //2.24px
         textAlign={{ base: 'center', md: 'left' }}
-        pb={'1.5rem'}
+        pb={{base: '2rem', md:  '1.5rem'}}
         >
           Who We Are
         </Heading>
@@ -100,7 +100,7 @@ const WhoWeAreSection = () => {
             flex={1}
             // bgGradient={tabletBgGradient}
             borderRadius='0.75rem' // Rounded corners like a tablet
-            p={{ base: 6, md: '2rem' }}
+            p={{ base: '2.5rem', md: '2rem' }}
             // boxShadow="lg" // Add subtle shadow if desired
             boxShadow={`0px 0px 20px 3px rgba(0,4,14,1)`}
 
