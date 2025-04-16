@@ -181,9 +181,9 @@ export default function RnDTaxCreditsPage() {
       >
 
         <Box
-          position="sticky"
-          top={'6rem'}
-          bg={'#000819'}
+          position={{base:"sticky", lg: 'none'}}
+          top={{base:'6rem', lg: '0'}}
+          bg={{base:'#000819', lg: 'none'}}
           // bgGradient={{base: "to-b", lg: 'none'}}
           // gradientFrom={{base:'#000819', lg: 'none'}}
           // gradientTo={{base: 'blackAlpha.900', lg: 'none'}}
