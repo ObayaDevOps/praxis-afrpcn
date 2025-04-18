@@ -69,6 +69,7 @@ const Footer = () => {
             color="white"
             lineHeight={'1.5rem'}
             pt={2}
+            display={{base:'none', lg:'flex'}}
             >
               © {currentYear} Ashton & Carrington. All rights reserved
             </Text>
@@ -81,6 +82,8 @@ const Footer = () => {
 
           {/* Right Section */}
           <VStack align={{ base: 'center', md: 'flex-end' }} spacing={1} textAlign={{ base: 'center', md: 'right' }}>
+
+            
             <Link color={'white'} 
               href="mailto:contact@ashtonandcarrington.co.uk" 
               fontSize="0.875rem"
@@ -101,6 +104,19 @@ const Footer = () => {
               lineHeight={'1.5rem'}
             >
               Trinity Offices, 114 Northenden Rd, Sale, M33 3HD
+            </Text>
+
+            <Text 
+            fontSize="0.875rem"
+            fontFamily="Poppins"
+            fontStyle='normal'
+            fontWeight={500}
+            color="white"
+            lineHeight={'1.5rem'}
+            pt={2}
+            display={{base:'flex', lg:'none'}}
+            >
+              © {currentYear} Ashton & Carrington. All rights reserved
             </Text>
           </VStack>
         </Flex>

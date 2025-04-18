@@ -19,7 +19,7 @@ const FeatureCard = ({ icon, title, imageLink, children }) => {
   const iconColor = 'teal.300';
 
   return (
-    <VStack align="start" p={6}>
+    <VStack align="start" p={{base: 4, lg: 6} }>
       {/* <Flex align="center" gap={3}> */}
         {/* <Icon as={icon} boxSize={8} color={iconColor} strokeWidth={1.5} /> */}
       <HStack>
@@ -100,7 +100,7 @@ const WhoWeAreSection = () => {
             flex={1}
             // bgGradient={tabletBgGradient}
             borderRadius='0.75rem' // Rounded corners like a tablet
-            p={{ base: '2.5rem', md: '2rem' }}
+            p={{ base: '1.5rem', md: '2rem' }}
             // boxShadow="lg" // Add subtle shadow if desired
             boxShadow={`0px 0px 20px 3px rgba(0,4,14,1)`}
 

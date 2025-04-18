@@ -35,7 +35,7 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
       bgSize="cover"
       bgPosition="center"
       borderRadius="xl"
-      p={'2rem'}
+      p={{base: '1.5rem', lg: '2rem'}}
       m={2}
       mb={'2rem'}
       position="relative"
@@ -96,7 +96,7 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
       </VStack>
       <Link
         href={link}
-        mt={6} // Add margin top to push from description
+        my={6} // Add margin top to push from description
         color="#00E2E5"
         fontWeight={500}
         fontFamily="Poppins"

@@ -45,9 +45,9 @@ export default function Home() {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
         >
-        <Box py={16}>
+        <Box py={{base: 10, lg: 16}}>
 
             <Center>
                   <Image
@@ -61,7 +61,7 @@ export default function Home() {
                   />
             </Center>
 
-            <Center px={8}>
+            <Center px={{base: 6, lg: 8}}>
               <Heading
                 as="h1"
                 fontFamily="Poppins"
