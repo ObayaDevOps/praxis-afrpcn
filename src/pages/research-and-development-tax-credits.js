@@ -198,9 +198,9 @@ export default function RnDTaxCreditsPage({ pageData }) {
         right: 0,
         bottom: 0,
         left: 0,        
-        bgGradient:"to-b",
-        gradientFrom:'blackAlpha.500',
-        gradientTo:'#000819',
+        // bgGradient:"to-b",
+        // gradientFrom:'blackAlpha.500',
+        // gradientTo:'#000819',
         opacity:1,
         zIndex: 1,
       }}
