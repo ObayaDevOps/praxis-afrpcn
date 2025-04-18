@@ -3,30 +3,19 @@ import {
   Flex,
   HStack,
   Link,
-  IconButton,
   Button,
   useDisclosure,
   useBreakpointValue,
-  Stack,
-  Drawer,
   VStack,
   Image,
   Dialog,
   Text,
   Portal,
-  Fieldset,
-  Field,
-  For,
-  Input,
-  NativeSelect,
-
-
-  
 } from '@chakra-ui/react';
 import { Menu, X } from 'lucide-react'; // Import the hamburger and close icons
 import { useState } from 'react';
-import { Toaster, toaster } from "@/components/ui/toaster"
 import Form from '@/components/Form'
+import MobileDrawer from './MobileDrawer'; // Import the new component
 
 
 
@@ -86,7 +75,6 @@ const ContactModal = () => {
               </Text>
 
               <Box>
-                {/* <SignUpForm /> */}
                 <Form />
               </Box>
 
@@ -143,7 +131,6 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Use 'lg' breakpoint to switch between desktop and mobile nav
   const isDesktop = useBreakpointValue({ base: false, lg: true });
-  console.log('isDesktop', isDesktop)
 
   const navItems = [
     { label: 'Home', href: '/'},
@@ -212,87 +199,27 @@ export default function Navbar() {
           gradientFrom='#000819'
           gradientTo='blackAlpha.100'
       >
-      <Flex display={{base: 'flex', lg: 'none'}}
+      <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="space-between">
+          <MobileDrawer
+            isOpen={isOpen}
+            onClose={onClose}
+            navItems={navItems}
+            getInTouchText="Get in Touch!"
+          />
 
-
-      >
-        <Drawer.Root isOpen={isOpen} onClose={onClose} 
-        placement="left" 
-        size="full">
-          <Drawer.Trigger asChild>
-            <Menu color='#00C6CB' size={'2.75rem'} 
+        {/* Hamburger Menu Trigger - Outside Drawer.Root but triggers it */}
+        {/* <IconButton
+          icon={<Menu color='#00C6CB' size={'2.75rem'} />}
+          aria-label="Open Menu"
+          variant="ghost"
+          onClick={onOpen}
+          _hover={{ bg: 'transparent' }}
+          _active={{ bg: 'transparent' }}
+        /> */}
+                    {/* <Menu color='#00C6CB' size={'2.75rem'} 
             mr={-10}
-            />
-          </Drawer.Trigger>
+            /> */}
 
-            <Portal>
-              <Drawer.Backdrop />
-              <Drawer.Positioner>
-                <Drawer.Content bg='#1A2130' color="#00DEE3"> {/* Styles moved here */}
-                  <Drawer.CloseTrigger > {/* Use asChild to wrap the IconButton */}
-                    
-                    <Box m={6}>
-                      <X 
-                      color="#00E2E5"
-                      size={'2.75rem'}
-                      
-                       />
-                       </Box>
-
-
-                  </Drawer.CloseTrigger>
-                  <Drawer.Body>
-                    <VStack spacing={12} align="stretch" pt={'6rem'}>
-                      {navItems.map((item) => (
-                        <NavLink key={item.label} href={item.href}>
-                          <Text
-                            fontSize={"1.75rem"}
-                            fontFamily="Poppins"
-                            fontStyle='normal'
-                            fontWeight={500}
-                            color="#00E2E5"
-                            lineHeight={'normal'}
-                            letterSpacing="0.14rem" //2.24px
-                            textTransform={'uppercase'}
-                            mb={4}
-                          >
-                            {item.label}
-                          </Text>
-                          </NavLink>
-                      ))}
-                      <Button
-                        mt={2}
-                        px={'0.625rem'}
-                        py={'1.25rem'}
-                        variant={'outline'}
-                        bgColor={'#000819'}
-                        borderColor={'#00DEE3'}
-                        borderWidth={'2px'}
-                        borderRadius={'2px'}
-                        _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-                        fontFamily="Poppins"
-                        fontWeight={500}
-                        w="full"
-                      >
-                          <Text
-                            fontSize={"1.75rem"}
-                            fontFamily="Poppins"
-                            fontStyle='normal'
-                            fontWeight={500}
-                            color="#00E2E5"
-                            lineHeight={'normal'}
-                            letterSpacing="0.14rem" //2.24px
-                            textTransform={'uppercase'}
-                          >
-                        Get in Touch
-                        </Text>
-                      </Button>
-                    </VStack>
-                  </Drawer.Body>
-                </Drawer.Content>
-              </Drawer.Positioner>
-            </Portal>
-        </Drawer.Root>
 
         <Box pl={4} >
           <Link href="/" _hover={{ textDecoration: 'none' }}>

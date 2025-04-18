@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { geistSans, geistMono, spaceMono, poppins } from "@/styles/theme";
+import { motion } from "framer-motion";
 
 import {
   Box,
@@ -42,41 +43,67 @@ export default function Home() {
 
       <Box flex="1">
         <Box py={16}>
-          <Center>
-                <Image
-                  src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} 
-                  alt="Nekosero Brand Logo"
-                  width={611}
-                  height={250}
-                  priority
-                  placeholder="blur"
-                  blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
-                />
-          </Center>
-          <Center px={8}>
-            <Heading
-              as="h1"
-              fontFamily="Poppins"
-              fontSize={{ base: 'xl', md: '2rem' }}
-              lineHeight={{ base: '2rem', md: '3rem' }}
-              fontWeight={500}
-              letterSpacing={'0.72px'}
-              textAlign={'center'}
-              bgClip="text"
-              bgGradient="to-r"
-              gradientFrom='#00DEE3'
-              gradientTo='#5700C4'
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Center>
+                  <Image
+                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} 
+                    alt="Nekosero Brand Logo"
+                    width={611}
+                    height={250}
+                    priority
+                    placeholder="blur"
+                    blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
+                  />
+            </Center>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Center px={8}>
+              <Heading
+                as="h1"
+                fontFamily="Poppins"
+                fontSize={{ base: 'xl', md: '2rem' }}
+                lineHeight={{ base: '2rem', md: '3rem' }}
+                fontWeight={500}
+                letterSpacing={'0.72px'}
+                textAlign={'center'}
+                bgClip="text"
+                bgGradient="to-r"
+                gradientFrom='#00DEE3'
+                gradientTo='#5700C4'
 
-              maxW="container.md"
-            >
-              Empowering Innovation and Financial Growth Through Expertise
-            </Heading>
-          </Center>
+                maxW="container.md"
+              >
+                Empowering Innovation and Financial Growth Through Expertise
+              </Heading>
+            </Center>
+          </motion.div>
         </Box>
 
-        <ServicesSection />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <ServicesSection />
+        </motion.div>
 
-        <WhoWeAreSection />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <WhoWeAreSection />
+        </motion.div>
       </Box>
 
       <Footer />

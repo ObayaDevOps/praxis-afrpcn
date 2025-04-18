@@ -1,27 +1,56 @@
 import { useState, useRef } from 'react';
 import Head from "next/head";
 import { ChevronDown } from 'lucide-react';
+import client from '../../sanity/lib/client';
+import { PortableText } from '@portabletext/react';
 
 import {
   Box,
   Flex,
-  VStack,
   Link as ChakraLink,
   Heading,
   Text,
-  Container,
-  Spacer,
   Accordion,
   Span,
-  Separator
+  Separator,
+  Button
   } from '@chakra-ui/react';
 
   import Navbar from '../components/Navbar';
   import Footer from '../components/Footer';
   import VerticalStepperNav from '../components/VerticalStepperNav';
 
-// Define the sections data based on the image
-const sections = [
+// GROQ query to fetch R&D Tax Credits page data
+export async function getStaticProps() {
+  const query = `*[_type == "rndTaxCreditsPage"][0] {
+    title,
+    subtitle,
+    metaDescription,
+    "backgroundImageUrl": backgroundImage.asset->url,
+    sections[] {
+      id,
+      title,
+      content[],
+      accordionItems[] {
+        title,
+        text[]
+      },
+      postContent[]
+    }
+  }`;
+
+  const pageData = await client.fetch(query);
+  
+  return {
+    props: {
+      pageData,
+    },
+    revalidate: 60, // Revalidate the page every 60 seconds
+  };
+}
+
+// Define fallback sections data if Sanity data is not available
+const fallbackSections = [
   { id: 'introduction', title: 'Empowering Innovation & Maximising Growth' },
   { id: 'qualifies', title: 'What Qualifies as R&D?' },
   { id: 'maximising-claim', title: 'Maximising Your Claim: The R&D Tax Credit Report' },
@@ -31,18 +60,32 @@ const sections = [
   { id: 'get-started', title: 'Get Started Today' },
 ];
 
-const accordionItems = [
-  { value: "a", title: "Financial year ending 1st April 2024 – 31st March 2025", text: "Rate of enhanced expenditure is 186% which translates to if a business has £100,000 of qualifying R&D expenditure, it could claim a tax deduction worth £186,000. If the company is not loss-making, this will usually reduce the company’s taxable profit and therefore the corporation tax payable, meaning a 19%-25% (£35,340-£46,500 on £100,000 of qualifying R&D spend) benefit, depending on the company’s corporation tax rate. If the company is sufficiently loss-making and R&D intensive (above 30% of total expenditure is qualifying R&D expenditure), the deduction can be claimed at 14.5% as a tax credit (£26,970 on £100,000 of qualifying R&D spend), usually received in cash. If the company is sufficiently loss-making but not R&D intensive, the deduction can be claimed at 10% as a tax credit (£18,600 on £100,000 of qualifying R&D spend), usually received in cash." },
-  { value: "b", title: "Second Item", text: "Some value 2..." },
-  { value: "c", title: "Third Item", text: "Some value 3..." },
-]
+// Portable Text components for rendering rich text content
+const BlockTextComponents = {
+  block: {
+    normal: ({children}) => <Text color="white" lineHeight="tall" mb={4}>{children}</Text>,
+    h3: ({children}) => <Heading as="h3" size="md" color="white" mt={6} mb={4}>{children}</Heading>,
+    h4: ({children}) => <Heading as="h4" size="sm" color="white" mt={4} mb={3}>{children}</Heading>,
+  },
+  list: {
+    bullet: ({children}) => <Box as="ul" listStyleType="square" color="white" mb={4} pl={6} spacing={2}>{children}</Box>,
+    number: ({children}) => <Box as="ol" listStyleType="decimal" color="white" mb={4} pl={6} spacing={2}>{children}</Box>
+  },
+  listItem: {
+    bullet: ({children}) => <Box as="li" color="white" lineHeight="tall" mb={2}>{children}</Box>,
+    number: ({children}) => <Box as="li" color="white" lineHeight="tall" mb={2}>{children}</Box>
+  },
+  marks: {
+    strong: ({children}) => <Text as="strong" fontWeight="bold">{children}</Text>,
+    em: ({children}) => <Text as="em" fontStyle="italic">{children}</Text>,
+  }
+};
 
-
-const AccordionComponent = () => {
+const AccordionComponent = ({ items = [] }) => {
   return (
-    <Accordion.Root collapsible defaultValue={["b"]}>
-      {accordionItems.map((item, index) => (
-        <Accordion.Item key={index} value={item.value}
+    <Accordion.Root multiple defaultValue={[items[0]?.title]}>
+      {items.map((item, index) => (
+        <Accordion.Item key={index} value={item.title}
           my={'0.75rem'}
           borderRadius={'0.25rem'}
           borderColor={'#1A2130'}
@@ -51,8 +94,6 @@ const AccordionComponent = () => {
           gradientFrom='#000819'
           gradientTo='#1A2130'
           boxShadow={`0px 3px 3px 0px rgba(0,8,25,0.4)`}
-
-
         >
           <Accordion.ItemTrigger p={'0.5rem'}>
             <ChevronDown/>
@@ -68,24 +109,32 @@ const AccordionComponent = () => {
                 {item.title}
               </Text>
             </Span>
-            {/* <Accordion.ItemIndicator /> */}
           </Accordion.ItemTrigger>
 
           <Accordion.ItemContent>
           <Separator borderColor={'#1A2130'} mx={'1rem'} />
 
             <Accordion.ItemBody p={'1rem'}>
-              <Text
-                fontFamily='Poppins'
-                fontSize='1rem' // 16px
-                lineHeight='1.875rem' // 30px
-                fontWeight='400'
-                fontStyle='normal'
-                color='white'
-                mx={'1.5rem'}
-              >
-                {item.text}
-              </Text>
+              {Array.isArray(item.text) ? (
+                <Box px={'1.5rem'}>
+                  <PortableText
+                    value={item.text}
+                    components={BlockTextComponents}
+                  />
+                </Box>
+              ) : (
+                <Text
+                  fontFamily='Poppins'
+                  fontSize='1rem' // 16px
+                  lineHeight='1.875rem' // 30px
+                  fontWeight='400'
+                  fontStyle='normal'
+                  color='white'
+                  mx={'1.5rem'}
+                >
+                  {item.text}
+                </Text>
+              )}
             </Accordion.ItemBody>
           </Accordion.ItemContent>
         </Accordion.Item>
@@ -95,10 +144,17 @@ const AccordionComponent = () => {
 }
 
 
-export default function RnDTaxCreditsPage() {
+export default function RnDTaxCreditsPage({ pageData }) {
+  // Use pageData from Sanity or fallback to default values
+  const title = pageData?.title || 'Research and Development Tax Credits';
+  const subtitle = pageData?.subtitle || 'Strategic Research & Development Tax Solutions for Forward-Thinking Businesses';
+  const metaDescription = pageData?.metaDescription || 'Empowering Innovation and Financial Growth Through Expertise';
+  const sections = pageData?.sections || fallbackSections;
+  
   const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
 
-  const backgroundImageUrl = 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744286028/Graphic_waves_qtvac7.svg'; // Example image
+  // Use Sanity image URL or fallback to default
+  const backgroundImageUrl = pageData?.backgroundImageUrl || 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744286028/Graphic_waves_qtvac7.svg';
 
   const handleLinkClick = (id) => {
     setActiveSection(id);
@@ -151,18 +207,16 @@ export default function RnDTaxCreditsPage() {
     >
 
       <Head>
-        <title>Research and Development Tax Credits | Ashton & Carrington</title>
-        <meta name="description" content="Empowering Innovation and Financial Growth Through Expertise" />
+        <title>{title} | Ashton & Carrington</title>
+        <meta name="description" content={metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
       {/* Keep Navbar above overlay */}
       <Box 
-      // position="relative"
-        position="sticky"
-        top={0}
-        // bg={'red'}
+      position="sticky"
+      top={0}
       zIndex={3}
       >
         <Navbar />
@@ -184,15 +238,6 @@ export default function RnDTaxCreditsPage() {
           position={{base:"sticky", lg: 'none'}}
           top={{base:'6rem', lg: '0'}}
           bg={{base:'#000819', lg: 'none'}}
-          // bgGradient={{base: "to-b", lg: 'none'}}
-          // gradientFrom={{base:'#000819', lg: 'none'}}
-          // gradientTo={{base: 'blackAlpha.900', lg: 'none'}}
-          // style={{
-          //   '-webkit-mask-image': 'linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0)), linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))',
-          //   '-webkit-mask-size': '100% 50%',
-          //   '-webkit-mask-repeat': 'no-repeat',
-          //   '-webkit-mask-position': 'top bottom, top bottom',
-          // }}
         >
           <Text
               fontFamily='Poppins'
@@ -202,11 +247,9 @@ export default function RnDTaxCreditsPage() {
               fontStyle='normal'
               letterSpacing='0.72px'
               color='white'
-              // mb={8}
               p={4}
-              // position='fixed'
             >
-              Research and Development Tax Credits
+              {title}
             </Text>
           </Box>
 
@@ -216,21 +259,16 @@ export default function RnDTaxCreditsPage() {
           {/* Left Sidebar */}
           <Box
             as="nav" // Use nav for semantic sidebar
-            // w={['full', 'full', '250px']} // Full width on small screens, fixed width on larger
             w={['full', 'full', '18.5rem']} // Full width on small screens, fixed width on larger
             display={{base: 'none', lg: 'flex'}}
             position={['relative', 'relative', 'sticky']} // Sticky sidebar on large screens
             top={[0, 0, '2rem']} // Adjust top position as needed
             alignSelf="flex-start" // Prevent stretching vertically
             p={4}
-            // bg="rgba(26, 32, 44, 0.8)" // Slightly transparent background for sidebar
             borderRadius="md"
             fontFamily='Poppins'
-            // Add max height and vertical scroll for sidebar if its content overflows
-            // Adjust 10rem based on actual header/footer/padding heights
             maxH={['auto', 'auto', 'calc(100vh - 10rem)']}
             overflowY="auto"
-
           >
             {/* Use the new VerticalStepperNav component */}
             <VerticalStepperNav
@@ -252,7 +290,6 @@ export default function RnDTaxCreditsPage() {
             overflowY="auto" // Enable vertical scroll ONLY for this box
             scrollBehavior="smooth" // Apply smooth scroll to this container
             p={6} // Add padding inside the scrollable area
-            // mt={{base:'10rem', lg: 0 }}
             sx={{
               '&::-webkit-scrollbar': {
                 display: 'none', // Safari and Chrome
@@ -271,12 +308,10 @@ export default function RnDTaxCreditsPage() {
               textTransform='uppercase'
               mb='3.75rem' //60px
             >
-              Strategic Research & Development Tax Solutions for For Forward-Thinking Businesses
+              {subtitle}
             </Text>
 
             {sections.map((section, index) => (
-              // Add scrollMarginTop to offset fixed/sticky elements when scrolling to ID
-              // Adjust '8rem' based on the actual height above this scrollable area
               <Box
                   key={section.id}
                   id={section.id}
@@ -287,23 +322,43 @@ export default function RnDTaxCreditsPage() {
                   {section.title}
                 </Heading>
 
-                <AccordionComponent />
+                {section.content && section.content.length > 0 && (
+                  <Box mt={4}>
+                    <PortableText
+                      value={section.content}
+                      components={BlockTextComponents}
+                    />
+                  </Box>
+                )}
 
-                <Text color="white" lineHeight="tall">
-                  {/* Placeholder Text - Replace with your actual content */}
-                  This is the placeholder content for the "{section.title}" section.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Repeat this or add more relevant content for each section.
-                  <br/><br/>
-                  You can add more paragraphs, lists, images, or other components here as needed for each specific section of the R&D Tax Credits information.
-                  Ensure the content is long enough to demonstrate the scrolling behavior effectively.
-                </Text>
+                {section.accordionItems && section.accordionItems.length > 0 && (
+                  <AccordionComponent items={section.accordionItems} />
+                )}
+
+                {section.postContent && section.postContent.length > 0 && (
+                  <Box mt={6}>
+                    <PortableText
+                      value={section.postContent}
+                      components={BlockTextComponents}
+                    />
+                  </Box>
+                )}
                 
               </Box>
             ))}
+          <Button 
+            variant={'outline'}
+            bgColor={'#00DEE3'}
+            borderColor={'#00DEE3'}
+            _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
+            fontFamily="Poppins"
+            fontWeight={500} 
+            
+            mb={'1.5rem'}
+            mr={'2rem'}
+          >
+            Speak to an Expert
+            </Button>
           </Box>
         </Flex>
       </Box>
