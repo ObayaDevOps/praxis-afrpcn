@@ -4,6 +4,11 @@ import styles from "@/styles/Home.module.css";
 import { geistSans, geistMono, spaceMono, poppins } from "@/styles/theme";
 import { motion } from "framer-motion";
 
+// 1. Import Sanity client (adjust path if needed)
+import sanityClient  from '../../sanity/lib/client'; 
+// 2. Import urlFor helper (adjust path if needed)
+import { urlForImage } from '../../sanity/lib/image'; 
+
 import {
   Box,
   Center,
@@ -14,15 +19,60 @@ import {
   Container,
 } from '@chakra-ui/react';
 
-import { getCloudinaryImage, getCloudinaryImageBlur } from '../util/cloudinaryImageRetreival';
+// Removed unused cloudinary imports
 import ServicesSection from '../components/ServicesSection';
 import WhoWeAreSection from '../components/WhoWeAreSection';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+// 3. Define the GROQ query
+const landingPageQuery = `
+*[_type == "landingPage"][0] {
+  pageTitle,
+  metaDescription,
+  hero {
+    heading,
+    logo
+  },
+  servicesSection {
+    title,
+    services[] {
+      title,
+      description,
+      iconImage,
+      backgroundImage,
+      linkText,
+      linkUrl
+    }
+  },
+  whoWeAreSection {
+    title,
+    ifaAccredited {
+      title,
+      description1,
+      description2,
+      logo
+    },
+    features[] {
+      title,
+      description,
+      image
+    }
+  }
+}
+`;
 
+// 4. Update Home component to receive props
+export default function Home({ landingPageData }) {
+  // Destructure props for easier access
+  const { 
+    pageTitle, 
+    metaDescription, 
+    hero, 
+    servicesSection, 
+    whoWeAreSection 
+  } = landingPageData || {};
 
-export default function Home() {
   return (
     <Box
     // className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} ${poppins.variable}`}
@@ -33,8 +83,9 @@ export default function Home() {
     >
 
       <Head>
-        <title>Ashton & Carrington</title>
-        <meta name="description" content="Empowering Innovation and Financial Growth Through Expertise" />
+        {/* Use data from Sanity */}
+        <title>{pageTitle || 'Ashton & Carrington'}</title>
+        <meta name="description" content={metaDescription || 'Empowering Innovation and Financial Growth Through Expertise'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -49,19 +100,23 @@ export default function Home() {
         >
         <Box py={{base: 10, lg: 16}}>
 
-            <Center>
-                  <Image
-                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} 
-                    alt="Nekosero Brand Logo"
-                    width={611}
-                    height={250}
-                    priority
-                    placeholder="blur"
-                    blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
-                  />
-            </Center>
+            {hero?.logo && (
+              <Center>
+                    <Image
+                      // Use Sanity image builder
+                      src={urlForImage(hero.logo).width(611).height(250).url()}
+                      alt={hero.heading || 'Ashton & Carrington Logo'} // Use heading as alt text fallback
+                      width={611}
+                      height={250}
+                      priority
+                      placeholder="blur"
+                      // Generate blurDataURL if metadata exists
+                      blurDataURL={hero.logo.asset?.metadata?.lqip || urlForImage(hero.logo).width(20).height(10).url()} 
+                    />
+              </Center>
+            )}
 
-            <Center px={{base: 6, lg: 8}}>
+            <Center px={{base: 6, lg: 8}} pt={8}> {/* Added padding top */}
               <Heading
                 as="h1"
                 fontFamily="Poppins"
@@ -72,17 +127,18 @@ export default function Home() {
                 textAlign={'center'}
                 bgClip="text"
                 bgGradient="to-r"
-                gradientFrom='#00DEE3'
+                gradientFrom='#00DEE3' // Replaced with full definition for clarity
                 gradientTo='#5700C4'
 
                 maxW="container.md"
               >
-                Empowering Innovation and Financial Growth Through Expertise
+                {/* Use heading from Sanity */}
+                {hero?.heading || 'Empowering Innovation and Financial Growth Through Expertise'}
               </Heading>
             </Center>
         </Box>
-
-          <ServicesSection />
+          {/* Pass Sanity data as props */}
+          {servicesSection && <ServicesSection sectionData={servicesSection} />}
           </motion.div>
 
 
@@ -92,7 +148,8 @@ export default function Home() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <WhoWeAreSection />
+          {/* Pass Sanity data as props */}
+          {whoWeAreSection && <WhoWeAreSection sectionData={whoWeAreSection} />}
         </motion.div>
       </Box>
 
@@ -100,5 +157,17 @@ export default function Home() {
 
     </Box>
   );
+}
+
+// 5. Add getStaticProps function
+export async function getStaticProps() {
+  const landingPageData = await sanityClient.fetch(landingPageQuery);
+  return {
+    props: {
+      landingPageData,
+    },
+    // Optional: Revalidate the page content periodically
+    // revalidate: 60, // In seconds (e.g., every minute)
+  };
 }
 

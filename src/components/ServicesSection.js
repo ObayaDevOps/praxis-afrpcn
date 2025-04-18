@@ -1,37 +1,20 @@
 import { Box, Container, Heading, SimpleGrid, Text, VStack, Link, Icon, Flex } from '@chakra-ui/react';
-import { HandCoins, Building, Files, ArrowRight, House, Folder } from 'lucide-react'; // Import required icons
+import { ArrowRight } from 'lucide-react'; // Keep ArrowRight for the link
+import NextImage from 'next/image';
+import { urlForImage } from '../../sanity/lib/image'; 
 
-const services = [
-  {
-    icon: HandCoins,
-    title: 'R&D Tax Credits',
-    description:
-      'R&D (Research & Development) tax credits are government incentives designed to reward businesses investing in innovation. Ashton & Carrington helps start ups navigate and maximise these credits, providing expert and tailored solutions that unlock hidden savings and support growth.',
-    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713628/Horizontal_Graphic_oxspzu.svg',
-    link: '#rd-tax-credits',
-  },
-  {
-    icon: House,
-    title: 'Capital Allowances',
-    description:
-      'Capital Allowances allow businesses to reduce their taxable profits by claiming tax relief on investments in assets like property, equipment, and renovations. Eligible businesses can offset these costs against their tax bill, freeing up funds for future growth. Ashton & Carrington specialises in identifying and maximising these allowances, ensuring businesses unlock their full savings potential.',
-    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713675/Horizontal_Graphic_1_hgplqw.svg', 
-    link: '#capital-allowances',
-  },
-  {
-    icon: Folder,
-    title: 'Accounts & Filing',
-    description:
-      'Ashton & Carrington can also provide additional services such as accounts and tax filings in order to streamline the process of claiming Capital Allowances or R&D credits.',
-    imageUrl: 'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744713684/Horizontal_Graphic_2_t3u7gw.svg', 
-    link: '#accounts-filing',
-  },
-];
-
-const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
+const ServiceCard = ({ 
+  iconImageUrl,
+  title,
+  description,
+  backgroundImageUrl,
+  backgroundImageBlur, 
+  linkText, 
+  linkUrl 
+}) => {
   return (
     <Box
-      bgImage={`url(${imageUrl})`}
+      bgImage={backgroundImageUrl ? `url(${backgroundImageUrl})` : 'none'}
       bgSize="cover"
       bgPosition="center"
       borderRadius="xl"
@@ -48,33 +31,29 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        bg: 'linear-gradient(to bottom, rgba(0, 8, 25, 0.40), rgba(0, 8, 25, 0.80))', // Dark overlay gradient
+        bg: 'linear-gradient(to bottom, rgba(0, 8, 25, 0.40), rgba(0, 8, 25, 0.80))',
         zIndex: 1,
       }}
       boxShadow={`0px 0px 20px 3px rgba(0,4,14,1)`}
 
-      minH={{ base: "auto", md: "450px" }} // Ensure consistent height on larger screens
-      // h={'500px'}
-      // w={'460px'}
+      minH={{ base: "auto", md: "450px" }}
 
-
-      display="flex" // Use flexbox for vertical alignment
-      flexDirection="column" // Stack items vertically
-      justifyContent="space-between" // Push link to bottom
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
     >
       <VStack spacing={4} align="start" zIndex={2} position="relative" flexGrow={1}>
-        <Icon 
-          as={icon} 
-          // boxSize={10} 
-          color="white" 
-          mb={2}
-          strokeWidth={'0.75px'}
-          h={'72px'}
-          w={'72px'}
-         />
+        {iconImageUrl && (
+          <NextImage
+            src={iconImageUrl}
+            alt={`${title} icon`}
+            width={72}
+            height={72}
+            style={{ marginBottom: '0.5rem'}}
+          />
+        )}
         <Heading
-        //  as="h3" 
-        fontSize="1.25rem" 
+         fontSize="1.25rem" 
          fontFamily="Poppins" 
          fontWeight={500}
          fontStyle={'normal'}
@@ -94,26 +73,30 @@ const ServiceCard = ({ icon, title, description, imageUrl, link }) => {
           {description}
         </Text>
       </VStack>
-      <Link
-        href={link}
-        my={6} // Add margin top to push from description
-        color="#00E2E5"
-        fontWeight={500}
-        fontFamily="Poppins"
-        lineHeight='1.25rem'
-        display="inline-flex"
-        alignItems="center"
-        zIndex={2}
-        position="relative"
-        _hover={{ textDecoration: 'underline' }}
-      >
-        Find out more <Icon as={ArrowRight} ml={2} />
-      </Link>
+      {linkUrl && (
+        <Link
+          href={linkUrl}
+          my={6}
+          color="#00E2E5"
+          fontWeight={500}
+          fontFamily="Poppins"
+          lineHeight='1.25rem'
+          display="inline-flex"
+          alignItems="center"
+          zIndex={2}
+          position="relative"
+          _hover={{ textDecoration: 'underline' }}
+        >
+          {linkText || 'Find out more'} <Icon as={ArrowRight} ml={2} />
+        </Link>
+      )}
     </Box>
   );
 };
 
-const ServicesSection = () => {
+const ServicesSection = ({ sectionData }) => {
+  const { title, services } = sectionData || {};
+
   return (
     <Container maxW="container.xl" py={16} px={{ base: 4, md: 8 }}>
       <Heading
@@ -123,24 +106,28 @@ const ServicesSection = () => {
         fontWeight={500}
         color="white"
         lineHeight={'normal'}
-        letterSpacing="0.14rem" //2.24px
+        letterSpacing="0.14rem"
         textAlign={{ base: 'center', md: 'left' }}
         pb={'1.5rem'}
       >
-        OUR SERVICES
+        {title || 'OUR SERVICES'}
       </Heading>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} >
-        {services.map((service, index) => (
-          <ServiceCard
-            key={index}
-            icon={service.icon}
-            title={service.title}
-            description={service.description}
-            imageUrl={service.imageUrl}
-            link={service.link}
-          />
-        ))}
-      </SimpleGrid>
+      {services && services.length > 0 && (
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} >
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              iconImageUrl={service.iconImage ? urlForImage(service.iconImage).width(72).height(72).url() : ''}
+              title={service.title}
+              description={service.description}
+              backgroundImageUrl={service.backgroundImage ? urlForImage(service.backgroundImage).url() : ''}
+              backgroundImageBlur={service.backgroundImage?.asset?.metadata?.lqip}
+              linkText={service.linkText}
+              linkUrl={service.linkUrl}
+            />
+          ))}
+        </SimpleGrid>
+      )}
     </Container>
   );
 };
