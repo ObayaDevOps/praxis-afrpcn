@@ -143,14 +143,14 @@ export default function Navbar(props) {
   return (
     <Box 
     px={{base: '2rem', lg: '5.5rem'}} 
-    py={{base: '2rem', lg: '1rem'}} 
+    py={{base: '1rem', lg: '1rem'}} 
     position="sticky" 
     top={0} 
     zIndex="sticky"
     bg={props.bg}
-    bgGradient={{base:"to-b", lg: 'none'}}
-    gradientFrom={{base: props.bg ,lg: 'none'}}
-    gradientTo={{base:'transparent', lg: 'none'}}
+    // bgGradient={{base:"to-b", lg: 'none'}}
+    // gradientFrom={{base: props.bg ,lg: 'none'}}
+    // gradientTo={{base:'transparent', lg: 'none'}}
     >
       <Flex 
       h={16} 

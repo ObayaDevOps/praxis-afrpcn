@@ -235,9 +235,9 @@ export default function RnDTaxCreditsPage({ pageData }) {
       >
 
         <Box
-          position={{base:"sticky", lg: 'none'}}
-          top={{base:'6rem', lg: '0'}}
-          bg={{base:'#000819', lg: 'none'}}
+          // position={{base:"sticky", lg: 'none'}}
+          // top={{base:'6rem', lg: '0'}}
+          // bg={{base:'#000819', lg: 'none'}}
         >
           <Text
               fontFamily='Poppins'

@@ -139,6 +139,7 @@ const WhoWeAreSection = () => {
               lineHeight={'1.875rem'}
               letterSpacing={'0.025rem'}  
               mb={6} 
+
             >
               We are proud to be IFA accredited in 2025.
              </Text>

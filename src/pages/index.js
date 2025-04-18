@@ -39,7 +39,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <Navbar bg={{base: '#000819', lg: 'none'}} />
 
       <Box flex="1">
         <motion.div
