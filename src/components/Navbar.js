@@ -12,7 +12,6 @@ import {
   Text,
   Portal,
 } from '@chakra-ui/react';
-import { Menu, X } from 'lucide-react'; // Import the hamburger and close icons
 import { useState } from 'react';
 import Form from '@/components/Form'
 import MobileDrawer from './MobileDrawer'; // Import the new component
@@ -148,9 +147,9 @@ export default function Navbar() {
     position="sticky" 
     top={0} 
     zIndex="sticky"
-    bgGradient={{base:"to-b", lg: 'none'}}
-    gradientFrom={{base:'#000819',lg: 'none'}}
-    gradientTo={{base:'blackAlpha.900', lg: 'none'}}
+    // bgGradient={{base:"to-b", lg: 'none'}}
+    // gradientFrom={{base:'#000819',lg: 'none'}}
+    // gradientTo={{base:'blackAlpha.900', lg: 'none'}}
     >
       <Flex 
       h={16} 
@@ -192,12 +191,12 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <Box
-          position="sticky" 
-          top={0} 
-          zIndex="sticky"
-          bgGradient="to-b"
-          gradientFrom='#000819'
-          gradientTo='blackAlpha.100'
+          // position="sticky" 
+          // top={0} 
+          // zIndex="sticky"
+          // bgGradient="to-b"
+          // gradientFrom='#000819'
+          // gradientTo='blackAlpha.100'
       >
       <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="space-between">
           <MobileDrawer
@@ -207,18 +206,6 @@ export default function Navbar() {
             getInTouchText="Get in Touch!"
           />
 
-        {/* Hamburger Menu Trigger - Outside Drawer.Root but triggers it */}
-        {/* <IconButton
-          icon={<Menu color='#00C6CB' size={'2.75rem'} />}
-          aria-label="Open Menu"
-          variant="ghost"
-          onClick={onOpen}
-          _hover={{ bg: 'transparent' }}
-          _active={{ bg: 'transparent' }}
-        /> */}
-                    {/* <Menu color='#00C6CB' size={'2.75rem'} 
-            mr={-10}
-            /> */}
 
 
         <Box pl={4} >

@@ -34,7 +34,13 @@ import {
     return (
       <Drawer.Root isOpen={isOpen} onClose={onClose} placement="left" size="full">
         <Drawer.Trigger asChild>
-          <Menu color='#00C6CB' size={'2.75rem'} mr={-10} />
+          <Menu 
+          color='#00C6CB'
+
+        //    size={{base: '20px', md: '0.05rem'}}
+           size={'2rem'}
+
+            mr={-10} />
         </Drawer.Trigger>
   
         <Portal>

@@ -42,12 +42,13 @@ export default function Home() {
       <Navbar />
 
       <Box flex="1">
-        <Box py={16}>
-          <motion.div
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+            transition={{ duration: 0.3 }}
+        >
+        <Box py={16}>
+
             <Center>
                   <Image
                     src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} 
@@ -59,12 +60,7 @@ export default function Home() {
                     blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
                   />
             </Center>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+
             <Center px={8}>
               <Heading
                 as="h1"
@@ -84,17 +80,11 @@ export default function Home() {
                 Empowering Innovation and Financial Growth Through Expertise
               </Heading>
             </Center>
-          </motion.div>
         </Box>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
           <ServicesSection />
-        </motion.div>
+          </motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
