@@ -114,7 +114,7 @@ const AccordionComponent = ({ items = [] }) => {
           <Accordion.ItemContent>
           <Separator borderColor={'#1A2130'} mx={'1rem'} />
 
-            <Accordion.ItemBody p={'1rem'}>
+            <Accordion.ItemBody p={{base:'0.5rem', lg:'1rem'}}>
               {Array.isArray(item.text) ? (
                 <Box px={'1.5rem'}>
                   <PortableText
@@ -198,9 +198,9 @@ export default function RnDTaxCreditsPage({ pageData }) {
         right: 0,
         bottom: 0,
         left: 0,        
-        // bgGradient:"to-b",
-        // gradientFrom:'blackAlpha.500',
-        // gradientTo:'#000819',
+        bgGradient:"to-b",
+        gradientFrom:'blackAlpha.700',
+        gradientTo:'#000819',
         opacity:1,
         zIndex: 1,
       }}
@@ -290,6 +290,7 @@ export default function RnDTaxCreditsPage({ pageData }) {
             overflowY="auto" // Enable vertical scroll ONLY for this box
             scrollBehavior="smooth" // Apply smooth scroll to this container
             p={{base: 2, lg: 6}} // Add padding inside the scrollable area
+            pt={{base:'2.5rem', lg: '2.5rem'}}
             sx={{
               '&::-webkit-scrollbar': {
                 display: 'none', // Safari and Chrome
