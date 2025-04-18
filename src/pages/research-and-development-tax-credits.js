@@ -219,7 +219,7 @@ export default function RnDTaxCreditsPage({ pageData }) {
       top={0}
       zIndex={3}
       >
-        <Navbar />
+        <Navbar bg={{base: '#000819', lg: 'none'}} />
       </Box>
 
       {/* Container fills space, contains children, uses flex column */}
@@ -241,13 +241,13 @@ export default function RnDTaxCreditsPage({ pageData }) {
         >
           <Text
               fontFamily='Poppins'
-              fontSize='2.25rem' // 36px
+              fontSize={{base:'1.5rem', lg: '2.25rem' }} // 36px
               lineHeight='3rem' // 48px
               fontWeight='500'
               fontStyle='normal'
               letterSpacing='0.72px'
               color='white'
-              p={4}
+              p={2}
             >
               {title}
             </Text>
@@ -289,7 +289,7 @@ export default function RnDTaxCreditsPage({ pageData }) {
             h="100%" // Fill height of parent flex container
             overflowY="auto" // Enable vertical scroll ONLY for this box
             scrollBehavior="smooth" // Apply smooth scroll to this container
-            p={6} // Add padding inside the scrollable area
+            p={{base: 2, lg: 6}} // Add padding inside the scrollable area
             sx={{
               '&::-webkit-scrollbar': {
                 display: 'none', // Safari and Chrome
@@ -300,7 +300,7 @@ export default function RnDTaxCreditsPage({ pageData }) {
           >
             <Text
               fontFamily='Poppins'
-              fontSize='1.75rem' // 28px
+              fontSize={{base:'1.25rem', lg: '1.75rem'}} // 28px
               fontWeight='500'
               lineHeight='normal' 
               letterSpacing='2.24px'

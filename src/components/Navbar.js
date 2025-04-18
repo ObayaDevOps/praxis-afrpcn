@@ -126,7 +126,7 @@ const NavLink = ({ children, href }) => (
   </Link>
 );
 
-export default function Navbar() {
+export default function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Use 'lg' breakpoint to switch between desktop and mobile nav
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -147,9 +147,10 @@ export default function Navbar() {
     position="sticky" 
     top={0} 
     zIndex="sticky"
-    // bgGradient={{base:"to-b", lg: 'none'}}
-    // gradientFrom={{base:'#000819',lg: 'none'}}
-    // gradientTo={{base:'blackAlpha.900', lg: 'none'}}
+    bg={props.bg}
+    bgGradient={{base:"to-b", lg: 'none'}}
+    gradientFrom={{base: props.bg ,lg: 'none'}}
+    gradientTo={{base:'transparent', lg: 'none'}}
     >
       <Flex 
       h={16} 
