@@ -36,7 +36,6 @@ import {
         <Drawer.Trigger asChild>
           <Menu 
           color='#00C6CB'
-
         //    size={{base: '20px', md: '0.05rem'}}
            size={'2rem'}
 
