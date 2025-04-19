@@ -12,8 +12,32 @@ export default function Form ({ buttonPosition='absolute' }){
 
   const onSubmit = handleSubmit((data) => console.log(data))
 
+  const userData = async event => {
+    event.preventDefault()
+    // setSubmitted(true)
+
+    let userTypedData = {
+      Name: event.target.name.value,
+      Email: event.target.email.value,
+      PhoneNumber: event.target.phoneNumber.value,
+      Message: event.target.userMessage.value
+    }
+
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userTypedData)
+    })
+  }
+
   return (
-    <form onSubmit={onSubmit}>
+    <form 
+    // onSubmit={onSubmit}
+    onSubmit={(e) => userData(e)}
+    >
+      
       <Stack gap="4" align="flex-start" width="full" pt={6}>
         <Field.Root invalid={!!errors.name}>
           <Field.Label colour='white'>
@@ -98,7 +122,7 @@ export default function Form ({ buttonPosition='absolute' }){
             </Text>
             </Field.Label>
           <Input {...register("userMessage")}
-            name="message" 
+            name="userMessage" 
             placeholder='Leave your message here...' 
             fontFamily='Poppins' 
             fontSize={'0.875rem'}
