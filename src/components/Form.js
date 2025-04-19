@@ -3,7 +3,7 @@
 import { Button, Field, Input, Stack, Text } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 
-export default function Form (){
+export default function Form ({ buttonPosition='absolute' }){
   const {
     register,
     handleSubmit,
@@ -116,14 +116,19 @@ export default function Form (){
             fontFamily="Poppins"
             fontWeight={500} 
             
-            position='absolute'
+            position={buttonPosition}
             // right={6}
             // bottom={6}
 
             right={0}
             bottom={0}
             mb={'1.5rem'}
+            // mb={buttonMb}
+
             mr={'2rem'}
+            // mr={buttonMr}
+      
+
         >
             Send Message
             </Button>

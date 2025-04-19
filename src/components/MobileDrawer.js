@@ -70,6 +70,7 @@ import {
                       </Text>
                     </NavLink>
                   ))}
+                  <NavLink href='/contact'>
                   <Button
                     mt={2}
                     px={'0.625rem'}
@@ -97,6 +98,7 @@ import {
                       {getInTouchText}
                     </Text>
                   </Button>
+                  </NavLink>
                 </VStack>
               </Drawer.Body>
             </Drawer.Content>

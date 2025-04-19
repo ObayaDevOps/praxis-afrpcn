@@ -3,6 +3,8 @@ import Head from "next/head";
 import { ChevronDown } from 'lucide-react';
 import client from '../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
+import ContactModal from '../components/ContactModal';
+
 
 import {
   Box,
