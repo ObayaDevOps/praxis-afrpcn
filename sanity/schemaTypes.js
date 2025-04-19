@@ -1,11 +1,16 @@
 // Import document schemas
-import landingPageSchema from './schemas/landingPageSchema'
+import LandingPageSchema from './schemas/landingPageSchema'
 import RnDTaxCreditsPageSchema from './schemas/rndTaxCreditsPageSchema'
+import CapitalAllowancePageSchema from './schemas/capitalAllowancePageSchema'
+import AccountsnFilingPageSchema from './schemas/accountsFilingPageSchema'
 
 
 
 export const schema = {
   types: [
-    landingPageSchema, 
-    RnDTaxCreditsPageSchema],
+    LandingPageSchema, 
+    RnDTaxCreditsPageSchema,
+    CapitalAllowancePageSchema,
+    AccountsnFilingPageSchema
+  ],
 }
