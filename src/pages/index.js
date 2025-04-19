@@ -87,8 +87,8 @@ export default function Home({ landingPageData }) {
         position="absolute"
         top="0"
         left="0"
-        width="100%"
-        height="45%"
+        width={{base:"100%", md: "100%", lg: "100%"}}
+        height={{base:"10%", md: "45%", lg: "45%"}}
         backgroundImage="url('https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744124528/Graphic-2-Transparent_xw68uq.svg')"
         backgroundSize="cover"
         backgroundPosition="right"
@@ -105,7 +105,7 @@ export default function Home({ landingPageData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar bg={{base: '#000819', lg: 'none'}} />
+      <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
       <Box flex="1">
         <motion.div
