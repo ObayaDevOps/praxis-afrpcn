@@ -49,7 +49,7 @@ const Footer = () => {
                 <Icon as={FiCode} boxSize={6} color="white" bg="#202020" p={1} borderRadius="md" />
               </Link>
               <Button
-                size="sm"
+                size="xs"
                 href='https://www.dralegawebops.com/'
                 variant="outline"
                 colorScheme="whiteAlpha"
@@ -58,7 +58,10 @@ const Footer = () => {
                 _hover={{ bg: 'gray.700' }}
                 ml={2} // Add margin to space it from icons
               >
+              {/* <Link href='https://www.dralegawebops.com/' isExternal aria-label="Developer Portfolio/Website" color='white'> */}
                 Built by DWO
+              {/* </Link> */}
+                
               </Button>
             </HStack>
             <Text 

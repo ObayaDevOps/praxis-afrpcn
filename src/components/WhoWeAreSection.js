@@ -168,7 +168,7 @@ const WhoWeAreSection = ({ sectionData }) => {
           )}
 
           {features && features.length > 0 && (
-            <Box flex={2}>
+            <Box flex={2} mt={{base:'2.5rem', md: '0'}}>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={20} spacingY={16}>
                 {features.map((feature, index) => (
                   <FeatureCard

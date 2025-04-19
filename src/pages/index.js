@@ -88,7 +88,7 @@ export default function Home({ landingPageData }) {
         top="0"
         left="0"
         width={{base:"100%", md: "100%", lg: "100%"}}
-        height={{base:"10%", md: "45%", lg: "45%"}}
+        height={{base:"10%", md: "20%", lg: "45%"}}
         backgroundImage="url('https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744124528/Graphic-2-Transparent_xw68uq.svg')"
         backgroundSize="cover"
         backgroundPosition="right"
@@ -158,7 +158,7 @@ export default function Home({ landingPageData }) {
 
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
