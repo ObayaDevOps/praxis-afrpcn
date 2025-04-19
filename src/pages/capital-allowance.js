@@ -347,7 +347,7 @@ export default function RnDTaxCreditsPage({ pageData }) {
                 
               </Box>
             ))}
-          <Button 
+          {/* <Button 
             variant={'outline'}
             bgColor={'#00DEE3'}
             borderColor={'#00DEE3'}
@@ -359,7 +359,10 @@ export default function RnDTaxCreditsPage({ pageData }) {
             mr={'2rem'}
           >
             Speak to an Expert
-            </Button>
+            </Button> */}
+            <Box mb={'1.5rem'} mr={'2rem'}>
+              <ContactModal buttonText='Speak to an Expert' inNav={false} />
+          </Box>
           </Box>
         </Flex>
       </Box>

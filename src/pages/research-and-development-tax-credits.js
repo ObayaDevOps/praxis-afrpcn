@@ -19,6 +19,7 @@ import {
   import Navbar from '../components/Navbar';
   import Footer from '../components/Footer';
   import VerticalStepperNav from '../components/VerticalStepperNav';
+  import ContactModal from '../components/ContactModal';
 
 // GROQ query to fetch R&D Tax Credits page data
 export async function getStaticProps() {
@@ -347,19 +348,9 @@ export default function RnDTaxCreditsPage({ pageData }) {
                 
               </Box>
             ))}
-          <Button 
-            variant={'outline'}
-            bgColor={'#00DEE3'}
-            borderColor={'#00DEE3'}
-            _hover={{ bg: 'rgba(0, 222, 227, 0.1)', color: '#00DEE3' }}
-            fontFamily="Poppins"
-            fontWeight={500} 
-            
-            mb={'1.5rem'}
-            mr={'2rem'}
-          >
-            Speak to an Expert
-            </Button>
+          <Box mb={'1.5rem'} mr={'2rem'}>
+            <ContactModal buttonText='Speak to an Expert' inNav={false}/>
+          </Box>
           </Box>
         </Flex>
       </Box>

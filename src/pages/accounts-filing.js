@@ -360,6 +360,10 @@ export default function RnDTaxCreditsPage({ pageData }) {
           >
             Speak to an Expert
             </Button>
+
+            <Box mb={'1.5rem'} mr={'2rem'}>
+              <ContactModal buttonText='Speak to an Expert' inNav={false} />
+          </Box>
           </Box>
         </Flex>
       </Box>

@@ -50,7 +50,6 @@ const Footer = () => {
               </Link>
               <Button
                 size="xs"
-                href='https://www.dralegawebops.com/'
                 variant="outline"
                 colorScheme="whiteAlpha"
                 borderColor="gray.600"
@@ -58,9 +57,9 @@ const Footer = () => {
                 _hover={{ bg: 'gray.700' }}
                 ml={2} // Add margin to space it from icons
               >
-              {/* <Link href='https://www.dralegawebops.com/' isExternal aria-label="Developer Portfolio/Website" color='white'> */}
+              <Link href='https://www.dralegawebops.com/' isExternal aria-label="Developer Portfolio/Website" color='white'>
                 Built by DWO
-              {/* </Link> */}
+              </Link>
                 
               </Button>
             </HStack>
