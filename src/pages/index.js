@@ -80,7 +80,22 @@ export default function Home({ landingPageData }) {
       minH={'100vh'}
       display="flex"
       flexDirection="column"
+      position="relative"
+      overflow="hidden"
     >
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        width="100%"
+        height="45%"
+        backgroundImage="url('https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744124528/Graphic-2-Transparent_xw68uq.svg')"
+        backgroundSize="cover"
+        backgroundPosition="right"
+        backgroundRepeat="no-repeat"
+        opacity={0.2}
+        zIndex={0}
+      />
 
       <Head>
         {/* Use data from Sanity */}

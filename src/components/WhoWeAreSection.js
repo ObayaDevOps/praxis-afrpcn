@@ -94,46 +94,76 @@ const WhoWeAreSection = ({ sectionData }) => {
               bgGradient="to-r"
               gradientFrom='#00DEE3'
               gradientTo='#5700C4'
+              position="relative"
+              overflow="hidden"
             >
-              {ifaAccredited.logo && (
-                <NextImage
-                  src={urlForImage(ifaAccredited.logo).width(218).height(132).url()}
-                  alt="IFA Logo"
-                  width={218}
-                  height={131.678}
-                  style={{ marginBottom: '20px' }}
-                />
-              )}
-              <Heading
-                fontSize={'1.25rem'}
-                mb={2}
-                fontFamily="Poppins"
-                fontWeight={500}
-                lineHeight={'normal'}
-                letterSpacing={'0.025rem'}
-              >
-                {ifaAccredited.title || 'IFA Accredited'}
-              </Heading>
-              <Text
-                fontSize={'1rem'}
-                fontFamily="Poppins"
-                fontWeight={400}
-                lineHeight={'1.875rem'}
-                letterSpacing={'0.025rem'}
-                mb={6}
-              >
-                {ifaAccredited.description1}
-              </Text>
-              <Text
-                fontSize={'1rem'}
-                fontFamily="Poppins"
-                fontWeight={400}
-                lineHeight={'1.875rem'}
-                letterSpacing={'0.025rem'}
-              >
-                {ifaAccredited.description2}
-              </Text>
-              <Spacer />
+              {/* Added Second Gradient Overlay */}
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                bgGradient="to-b"
+                gradientFrom='rgba(0, 8, 25, 0)'
+                gradientTo='rgba(0, 8, 25, 0.6717)'
+                zIndex={1} // Above image overlay, below content
+              />
+              {/* Image Overlay */}
+              <Box
+                position="absolute"
+                top="0"
+                right="0"
+                width="100%"
+                height="120%"
+                backgroundImage="url('https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1745050251/Graphic-1-Transparent_1_y95aqf.svg')"
+                backgroundSize="contain"
+                backgroundPosition="right center"
+                backgroundRepeat="no-repeat"
+                opacity={0.3}
+                zIndex={0}
+              />
+              <Box position="relative" zIndex={2} display="flex" flexDirection="column" flexGrow={1}>
+                {ifaAccredited.logo && (
+                  <NextImage
+                    src={urlForImage(ifaAccredited.logo).width(218).height(132).url()}
+                    alt="IFA Logo"
+                    width={218}
+                    height={131.678}
+                    style={{ marginBottom: '20px' }}
+                  />
+                )}
+                <Heading
+                  fontSize={'1.25rem'}
+                  mb={2}
+                  fontFamily="Poppins"
+                  fontWeight={500}
+                  lineHeight={'normal'}
+                  letterSpacing={'0.025rem'}
+                >
+                  {ifaAccredited.title || 'IFA Accredited'}
+                </Heading>
+                <Text
+                  fontSize={'1rem'}
+                  fontFamily="Poppins"
+                  fontWeight={400}
+                  lineHeight={'1.875rem'}
+                  letterSpacing={'0.025rem'}
+                  mb={6}
+                >
+                  {ifaAccredited.description1}
+                </Text>
+                <Text
+                  fontSize={'1rem'}
+                  fontFamily="Poppins"
+                  fontWeight={400}
+                  lineHeight={'1.875rem'}
+                  letterSpacing={'0.025rem'}
+                >
+                  {ifaAccredited.description2}
+                </Text>
+                <Spacer />
+              </Box>
             </Box>
           )}
 
