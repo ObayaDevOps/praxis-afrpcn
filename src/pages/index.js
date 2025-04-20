@@ -4,6 +4,8 @@ import styles from "@/styles/Home.module.css";
 import { geistSans, geistMono, spaceMono, poppins } from "@/styles/theme";
 import { motion } from "framer-motion";
 
+import 'focus-visible/dist/focus-visible';
+
 // 1. Import Sanity client (adjust path if needed)
 import sanityClient  from '../../sanity/lib/client'; 
 // 2. Import urlFor helper (adjust path if needed)
@@ -99,7 +101,7 @@ export default function Home({ landingPageData }) {
 
       <Head>
         {/* Use data from Sanity */}
-        <title>{pageTitle || 'Ashton & Carrington'}</title>
+        <title>{'Ashton & Carrington'}</title>
         <meta name="description" content={metaDescription || 'Empowering Innovation and Financial Growth Through Expertise'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -119,14 +121,15 @@ export default function Home({ landingPageData }) {
               <Center>
                     <Image
                       // Use Sanity image builder
-                      src={urlForImage(hero.logo).width(611).height(250).url()}
-                      alt={hero.heading || 'Ashton & Carrington Logo'} // Use heading as alt text fallback
+                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'}
+                      //https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg
+                      alt={'Ashton & Carrington Logo'} // Use heading as alt text fallback
                       width={611}
                       height={250}
                       priority
                       placeholder="blur"
                       // Generate blurDataURL if metadata exists
-                      blurDataURL={hero.logo.asset?.metadata?.lqip || urlForImage(hero.logo).width(20).height(10).url()} 
+                      blurDataURL={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744125894/Type_Default_Colour_Gradient_on_Blue_lgi2ha.svg'} 
                     />
               </Center>
             )}
