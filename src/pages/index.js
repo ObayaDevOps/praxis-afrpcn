@@ -87,13 +87,13 @@ export default function Home({ landingPageData }) {
         position="absolute"
         top="0"
         left="0"
-        width={{base:"100%", md: "100%", lg: "100%"}}
+        width={{base:"110%", md: "100%", lg: "100%"}}
         height={{base:"10%", md: "20%", lg: "45%"}}
         backgroundImage="url('https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744124528/Graphic-2-Transparent_xw68uq.svg')"
         backgroundSize="cover"
         backgroundPosition="right"
         backgroundRepeat="no-repeat"
-        opacity={0.2}
+        opacity={0.1}
         zIndex={0}
       />
 
