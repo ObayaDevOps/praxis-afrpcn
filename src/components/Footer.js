@@ -49,7 +49,7 @@ const Footer = () => {
                 <Icon as={FiCode} boxSize={6} color="white" bg="#202020" p={1} borderRadius="md" />
               </Link>
               <Button
-                size="xs"
+                size="sm"
                 variant="outline"
                 colorScheme="whiteAlpha"
                 borderColor="gray.600"
