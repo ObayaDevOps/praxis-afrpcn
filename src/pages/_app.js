@@ -5,6 +5,7 @@ import theme from '../styles/theme'
 
 import { Global, css } from '@emotion/react'
 
+//https://medium.com/@keeganfamouss/accessibility-on-demand-with-chakra-ui-and-focus-visible-19413b1bc6f9
 const GlobalStyles = css`
   /*
     This will hide the focus indicator if the element receives focus    via the mouse,

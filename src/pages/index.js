@@ -104,7 +104,7 @@ export default function Home({ landingPageData }) {
         <title>{'Ashton & Carrington'}</title>
         <meta name="description" content={metaDescription || 'Empowering Innovation and Financial Growth Through Expertise'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Vector.svg" />
       </Head>
 
       <Navbar bg={{base: 'transparent', lg: 'none'}} />
