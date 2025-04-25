@@ -32,27 +32,21 @@ import {
   
   export default function MobileDrawer({ isOpen, onClose, navItems, getInTouchText = "Get in Touch" }) {
     return (
-      <Drawer.Root isOpen={isOpen} onClose={onClose} placement="left" size="full">
-        <Drawer.Trigger asChild>
-          <Menu 
-          color='#00C6CB'
-        //    size={{base: '20px', md: '0.05rem'}}
-           size={'2rem'}
 
-            mr={-10} />
-        </Drawer.Trigger>
-  
-        <Portal>
-          <Drawer.Backdrop />
-          <Drawer.Positioner>
-            <Drawer.Content bg='#1A2130' color="#00DEE3">
-              <Drawer.CloseTrigger>
-                <Box m={6}>
-                  <X color="#00E2E5" size={'2.75rem'} />
-                </Box>
-              </Drawer.CloseTrigger>
-              <Drawer.Body>
-                <VStack spacing={12} align="stretch" pt={'6rem'}>
+      <Drawer.Root size={'full'} placement="start">
+      <Drawer.Trigger asChild>
+         <Menu 
+          color='#00C6CB'
+           size={'2rem'}
+            mr={-10}
+          />
+      </Drawer.Trigger>
+      <Portal>
+        <Drawer.Backdrop />
+        <Drawer.Positioner>
+          <Drawer.Content bg='#1A2130' color="#00DEE3">
+            <Drawer.Body>
+            <VStack spacing={12} align="stretch" pt={'6rem'}>
                   {navItems.map((item) => (
                     <NavLink key={item.label} href={item.href}>
                       <Text
@@ -100,11 +94,19 @@ import {
                   </Button>
                   </NavLink>
                 </VStack>
-              </Drawer.Body>
-            </Drawer.Content>
-          </Drawer.Positioner>
-        </Portal>
-      </Drawer.Root>
+            </Drawer.Body>
+
+            <Drawer.CloseTrigger asChild>
+              <Box m={6}>
+                <X color="#00E2E5" size={'2.75rem'} />
+              </Box>
+            </Drawer.CloseTrigger>
+          </Drawer.Content>
+        </Drawer.Positioner>
+      </Portal>
+    </Drawer.Root>
+  
+
     );
   }
   

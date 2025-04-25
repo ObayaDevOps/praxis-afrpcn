@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import Head from "next/head";
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import client from '../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
@@ -84,8 +84,15 @@ const BlockTextComponents = {
 };
 
 const AccordionComponent = ({ items = [] }) => {
+  const [expandedItem, setExpandedItem] = useState(null); // Track the expanded item
+
+  const handleToggle = (title) => {
+    setExpandedItem(expandedItem === title ? null : title); // Toggle the expanded item
+  };
+
+
   return (
-    <Accordion.Root multiple defaultValue={[items[0]?.title]}>
+    <Accordion.Root multiple >
       {items.map((item, index) => (
         <Accordion.Item key={index} value={item.title}
           my={'0.75rem'}
@@ -97,9 +104,9 @@ const AccordionComponent = ({ items = [] }) => {
           gradientTo='#1A2130'
           boxShadow={`0px 3px 3px 0px rgba(0,8,25,0.4)`}
         >
-          <Accordion.ItemTrigger p={'0.5rem'}>
-            <ChevronDown/>
-            <Span flex="1">
+          <Accordion.ItemTrigger p={'0.5rem'} onClick={() => handleToggle(item.title)} >
+          {expandedItem === item.title ? <ChevronUp /> : <ChevronDown />} {/* Conditional rendering */}
+          <Span flex="1">
               <Text               
                 fontFamily='Poppins'
                 fontSize='1rem' // 30px

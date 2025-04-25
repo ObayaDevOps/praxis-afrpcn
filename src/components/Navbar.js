@@ -44,7 +44,7 @@ export default function Navbar(props) {
   const navItems = [
     { label: 'Home', href: '/'},
     { label: 'R&D Tax Credits', href: '/research-and-development-tax-credits' },
-    { label: 'Capital Allowance', href: '/capital-allowance' },
+    { label: 'Capital Allowances', href: '/capital-allowance' },
     { label: 'Accounts & Filling', href: '/accounts-filing' },
   ];
 
@@ -100,7 +100,7 @@ export default function Navbar(props) {
 
       {/* Mobile Drawer */}
       <Box>
-      <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="space-between">
+      <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="flex-start">
           <MobileDrawer
             isOpen={isOpen}
             onClose={onClose}
