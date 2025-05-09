@@ -13,9 +13,7 @@ import {
   Portal,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import Form from '@/components/Form'
 import MobileDrawer from './MobileDrawer'; // Import the new component
-import ContactModal from './ContactModal'; // Import the ContactModal component
 
 const NavLink = ({ children, href }) => (
   <Link
@@ -43,9 +41,9 @@ export default function Navbar(props) {
 
   const navItems = [
     { label: 'Home', href: '/'},
-    { label: 'R&D Tax Credits', href: '/research-and-development-tax-credits' },
-    { label: 'Capital Allowances', href: '/capital-allowance' },
-    { label: 'Accounts & Filling', href: '/accounts-filing' },
+    { label: 'About', href: '/' },
+    { label: 'Socials', href: '/' },
+    { label: 'Calendar', href: '/' },
   ];
 
   return (
@@ -71,8 +69,8 @@ export default function Navbar(props) {
         {/* Logo - Using Image component like in index.js */}
         <Link href="/" _hover={{ textDecoration: 'none' }}>
              <Image
-                src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744279814/Vector_rdxjfp.svg'}
-                alt="Ashton & Carrington Logo"
+                src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
+                alt="AFRPCN Afropocene Logo"
                 height={'40px'} // Adjust height as needed
                 width={'auto'} // Maintain aspect ratio
                 // ml={'64px'}
@@ -89,9 +87,6 @@ export default function Navbar(props) {
                 ))}
               </HStack>
 
-              <Box ml={4}>
-                <ContactModal />
-              </Box>
 
             </HStack>
           </Flex>
@@ -111,8 +106,8 @@ export default function Navbar(props) {
         <Box pl={4} >
           <Link href="/" _hover={{ textDecoration: 'none' }}>
                 <Image
-                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1744279814/Vector_rdxjfp.svg'}
-                    alt="Ashton & Carrington Logo"
+                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
+                    alt="AFRPCN Afropocene Logo"
                     height={'40px'} // Adjust height as needed
                     width={'auto'} // Maintain aspect ratio
                     // ml={'64px'}
