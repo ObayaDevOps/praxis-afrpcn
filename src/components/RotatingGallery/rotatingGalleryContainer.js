@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import '../../styles/rotatingGalleryStyles.css'
+// import '../../styles/rotatingGalleryStyles.css'
 import { Logo } from '@pmndrs/branding'
 import { App } from './rotatingGallery'
 
@@ -36,7 +36,7 @@ export function Root() {
           scroll up/down ...
         </a>
       </div>{' '} */}
-    < /Box>
+    </Box>
   )
 }
 
