@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+/* @import url('https://rsms.me/inter/inter.css');
 
 * {
   box-sizing: border-box;
@@ -11,7 +11,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* To prevent accidental scrollbars on the page itself */
+  overflow: hidden; 
 
 }
 
@@ -49,4 +49,4 @@ canvas {
   opacity: 0;
   touch-action: none;
   animation: fade-in 5s ease 1s forwards;
-}
+} */

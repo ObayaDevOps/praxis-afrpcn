@@ -1,16 +1,37 @@
 // import { extendTheme } from '@chakra-ui/react'
 import { createSystem, defaultConfig } from "@chakra-ui/react"
-import { Space_Mono, Noto_Sans_Coptic, Noto_Sans_Egyptian_Hieroglyphs,
+import { Poppins ,Space_Mono, Noto_Sans_Coptic, Noto_Sans_Egyptian_Hieroglyphs,
    Noto_Sans_Bamum, Noto_Sans_Meroitic, Noto_Sans_Ethiopic, Noto_Sans_NKo_Unjoined,
-   Noto_Sans_NKo
+   Noto_Sans_NKo, Press_Start_2P, Pixelify_Sans, Silkscreen
      } from 'next/font/google'
-import { textStyles } from './textStyles'
+// import { textStyles } from './textStyles'
 
 
+export const pressStart2p = Press_Start_2P({
+  variable: "--font-press-start-2p",
+  weight: ["400"],
+  subsets: ["latin"],
+})
 
 
-// Font configurations
+export const pixelifySans = Pixelify_Sans({
+  variable: "--font-pixelify-sans",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+})
 
+export const silkscreen = Silkscreen({
+  variable: "--font-silkscreen",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+})
+
+
+export const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+})
 
 export const spaceMono = Space_Mono({
   variable: "--font-space-mono",
@@ -64,7 +85,8 @@ const system = createSystem(defaultConfig, {
   theme: {
     tokens: {
       fonts: {
-        spaceMono: { value: `var(--font-space-mono)` },
+        logoFont: pressStart2p.style.fontFamily,
+        logoFont2: { value: `var(--font-space-mono)` },
         notoSansCoptic: { value: `var(--font-noto-sans-coptic)` },
         notoSansEgyptianHieroglyphs: { value: `var(--font-noto-sans-egyptian-hieroglyphs)` },
         notoSansBamum: { value: `var(--font-noto-sans-bamum)` },
@@ -74,7 +96,7 @@ const system = createSystem(defaultConfig, {
         notoSansNko: { value: `var(--font-noto-sans-nko)` },
       },
     },
-    textStyles,
+    // textStyles,
   },
 })
 

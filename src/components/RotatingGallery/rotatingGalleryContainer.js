@@ -22,7 +22,7 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 
 export function Root() {
   return (
-    <Box minH='100vh' bg='red'>
+    <Box minH='100vh' bg='#37C6FF'>
       <App />
       {/* <div style={{ position: 'absolute', pointerEvents: 'none', top: 0, left: 0, width: '100vw', height: '100vh' }}>
         <a href="https://pmnd.rs/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>

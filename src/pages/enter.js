@@ -1,6 +1,3 @@
-
-import {TypewriterText} from '../components/typewriter'
-
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
@@ -19,14 +16,13 @@ import {
   VStack,
   Button,
   Container,
-  Link
 } from '@chakra-ui/react';
 
 
 import Navbar from '../components/Navbar';
 
 
-export default function Home({  }) {
+export default function Enter({  }) {
 
   return (
     <Box
@@ -47,18 +43,9 @@ export default function Home({  }) {
       {/* <Navbar bg={{base: 'transparent', lg: 'none'}} /> */}
 
 
-      <Box p={6}>
-        <TypewriterText />
+      <Box >
+        <RotatingGallery />
       </Box>
-
-      <Link a='a' href='/enter'>
-        <Text
-        color='white'
-        fontFamily='Poppins'
-        >
-          Click to Enter
-        </Text>
-      </Link>
 
 
     </Box>

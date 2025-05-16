@@ -1,6 +1,3 @@
-
-import {TypewriterText} from '../components/typewriter'
-
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
@@ -9,7 +6,9 @@ import { motion } from "framer-motion";
 
 import 'focus-visible/dist/focus-visible';
 
-import { Root as RotatingGallery } from '../components/RotatingGallery/rotatingGalleryContainer'
+// import { Root as RotatingGallery } from '../components/RotatingGallery/rotatingGalleryContainer'
+
+import { Glass } from '../components/glass'
 
 import {
   Box,
@@ -19,7 +18,6 @@ import {
   VStack,
   Button,
   Container,
-  Link
 } from '@chakra-ui/react';
 
 
@@ -44,21 +42,10 @@ export default function Home({  }) {
         <link rel="icon" href="/AFRPCN.svg" />
       </Head>
 
-      {/* <Navbar bg={{base: 'transparent', lg: 'none'}} /> */}
 
-
-      <Box p={6}>
-        <TypewriterText />
-      </Box>
-
-      <Link a='a' href='/enter'>
-        <Text
-        color='white'
-        fontFamily='Poppins'
-        >
-          Click to Enter
-        </Text>
-      </Link>
+     <Box>
+      <Glass />
+     </Box>
 
 
     </Box>
