@@ -1,6 +1,4 @@
 
-import {TypewriterText} from '../components/typewriter'
-
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
@@ -46,10 +44,6 @@ export default function Home({  }) {
 
       {/* <Navbar bg={{base: 'transparent', lg: 'none'}} /> */}
 
-
-      <Box p={6}>
-        <TypewriterText />
-      </Box>
 
       <Link a='a' href='/enter'>
         <Text
