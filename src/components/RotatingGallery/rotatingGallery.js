@@ -1,14 +1,17 @@
 // https://cydstumpel.nl/
 
 import * as THREE from 'three'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Image, Environment, ScrollControls, useScroll, useTexture,
-  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl
+  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html
  } from '@react-three/drei'
 import { easing } from 'maath'
 import './rotatingGalleryUtil'
-
+import {Demo} from '../modal'
+import { Dialog, Button, CloseButton, Portal, Box , ChakraProvider, Image as ChakraImage } from '@chakra-ui/react'
+import { system } from "@chakra-ui/react/preset";
+import React from 'react';
 
 
 export const App = () => (
@@ -66,9 +69,7 @@ const speed =  { value: 0.1, min: 0, max: 1, step: 0.01 };
           bounds={[x, y, z]} 
           speed={0.1}
           opacity={0.5}
-          
           color={'#FF0000'}
-
           // color={'#eed0d0'}
            />
           <Cloud 
@@ -93,16 +94,70 @@ const speed =  { value: 0.1, min: 0, max: 1, step: 0.01 };
 function Rig(props) {
   const ref = useRef()
   const scroll = useScroll()
+  const [cardRefs, setCardRefs] = useState([]);
+  const [handleCardClick, setHandleCardClick] = useState(null);
+
   useFrame((state, delta) => {
     ref.current.rotation.y = -scroll.offset * (Math.PI * 2) // Rotate contents
-    state.events.update() // Raycasts every frame rather than on pointer-move
+    // state.events.update() // Raycasts every frame rather than on pointer-move - We will handle raycasting manually on click
     easing.damp3(state.camera.position, [-state.pointer.x * 2, state.pointer.y + 1.5, 10], 0.3, delta) // Move camera
     state.camera.lookAt(0, 0, 0) // Look at center
   })
-  return <group ref={ref} {...props} />
+
+  const onPointerDown = (e) => {
+    // e.stopPropagation(); // Stop propagation if needed, but manual raycast is usually sufficient
+
+    const intersections = e.intersections;
+
+    const closestCardIntersection = intersections.find(intersection =>
+      cardRefs.some(cardRef => cardRef.current === intersection.object)
+    );
+
+    if (closestCardIntersection && handleCardClick) {
+      const clickedCardRef = cardRefs.find(cardRef => cardRef.current === closestCardIntersection.object);
+      if (clickedCardRef) {
+        handleCardClick(clickedCardRef);
+      }
+    }
+  };
+
+  return (
+    <group ref={ref} {...props} onPointerDown={onPointerDown}>
+      <Carousel setCardRefs={setCardRefs} setHandleCardClick={setHandleCardClick} />
+    </group>
+  );
 }
 
-function Carousel({ radius = 1.4, count = 8 }) {
+function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) {
+  const [activeCardRef, setActiveCardRef] = useState(null);
+  const cardRefs = useRef([]);
+
+  const handleCardClick = (clickedCardRef) => {
+    const clickedZ = clickedCardRef.current.position.z;
+
+    if (!activeCardRef) {
+      setActiveCardRef(clickedCardRef);
+    } else {
+      const activeZ = activeCardRef.current.position.z;
+
+      if (clickedZ < activeZ) {
+        setActiveCardRef(clickedCardRef);
+      } else if (clickedCardRef === activeCardRef) {
+        setActiveCardRef(null);
+      }
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setActiveCardRef(null);
+  };
+
+  useEffect(() => {
+    setCardRefs(cardRefs.current);
+    setHandleCardClick(() => handleCardClick);
+  }, [cardRefs, setCardRefs, setHandleCardClick, handleCardClick]);
+
+
   const imageUrls = [
     // Replace these with actual image URLs
     'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747364/P9254990-500x375_yzrpda.jpg',
@@ -112,30 +167,119 @@ function Carousel({ radius = 1.4, count = 8 }) {
     'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747952/pexels-ryutaro-5473228_sll1wz.jpg',
 
   ];
-  return Array.from({ length: count }, (_, i) => (
-    <Card
-      key={i}
-      url={imageUrls[i % imageUrls.length]} // Use the new array and cycle through it
-      position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
-      rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
-    />
-  ))
+  return Array.from({ length: count }, (_, i) => {
+    const cardRef = useRef();
+    cardRefs.current[i] = cardRef;
+
+    const isDialogOpen = activeCardRef === cardRef;
+
+    return (
+      <Card
+        key={i}
+        url={imageUrls[i % imageUrls.length]}
+        position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
+        rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
+        ref={cardRef}
+        isDialogOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+      />
+    );
+  });
 }
 
-function Card({ url, ...props }) {
-  const ref = useRef()
+const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) => {
   const [hovered, hover] = useState(false)
+
   const pointerOver = (e) => (e.stopPropagation(), hover(true))
   const pointerOut = () => hover(false)
   useFrame((state, delta) => {
-    easing.damp3(ref.current.scale, hovered ? 1.15 : 1, 0.1, delta)
-    easing.damp(ref.current.material, 'radius', hovered ? 0.25 : 0.1, 0.2, delta)
-    easing.damp(ref.current.material, 'zoom', hovered ? 1 : 1.5, 0.2, delta)
+    if (ref.current && !isDialogOpen) {
+      easing.damp3(ref.current.scale, hovered ? 1.15 : 1, 0.1, delta)
+      easing.damp(ref.current.material, 'radius', hovered ? 0.25 : 0.1, 0.2, delta)
+      easing.damp(ref.current.material, 'zoom', hovered ? 1 : 1.5, 0.2, delta)
+    } else if (ref.current) {
+       easing.damp3(ref.current.scale, 1, 0.1, delta)
+       easing.damp(ref.current.material, 'radius', 0.1, 0.2, delta)
+       easing.damp(ref.current.material, 'zoom', 1.5, 0.2, delta)
+    }
   })
+
   return (
-    <Image ref={ref} url={url} transparent side={THREE.DoubleSide} onPointerOver={pointerOver} onPointerOut={pointerOut} {...props}>
-      <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
-    </Image>
+    <>
+      <Image
+        ref={ref}
+        url={url}
+        transparent
+        side={THREE.DoubleSide}
+        onPointerOver={pointerOver}
+        onPointerOut={pointerOut}
+        {...props}
+      >
+        <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
+      </Image>
+
+      {isDialogOpen && (
+        <Html center>
+          <PopUp imageClickedUrl={url} onClose={onClose} />
+        </Html>
+      )}
+    </>
+  )
+});
+
+
+const PopUp = ({imageClickedUrl, onClose}) => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <ChakraProvider value={system}>
+      <Box
+      onWheel={(e) => e.stopPropagation()}
+      >
+        <Dialog.Root open={open} onOpenChange={(isOpen) => {
+           setOpen(isOpen);
+           if (!isOpen) {
+            onClose();
+           }
+          }}>
+      {/* <Dialog.Trigger asChild>
+        <Button variant="outline" size="sm">
+          Open Dialog
+        </Button>
+      </Dialog.Trigger> */}
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>Dialog Title</Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+
+              <ChakraImage src={imageClickedUrl} />
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Dialog.ActionTrigger asChild>
+                <Button variant="outline" onClick={onClose}
+                >Cancel</Button>
+              </Dialog.ActionTrigger>
+              <Button>Save</Button>
+            </Dialog.Footer>
+            <Dialog.CloseTrigger asChild>
+              <CloseButton size="sm" onClick={onClose} />
+            </Dialog.CloseTrigger>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
+
+
+      </Box>
+    </ChakraProvider>
   )
 }
 
