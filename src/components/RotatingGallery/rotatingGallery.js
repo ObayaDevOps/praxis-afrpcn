@@ -1,10 +1,10 @@
 // https://cydstumpel.nl/
 
 import * as THREE from 'three'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Image, Environment, ScrollControls, useScroll, useTexture,
-  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html
+  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html, Loader
  } from '@react-three/drei'
 import { easing } from 'maath'
 import './rotatingGalleryUtil'
@@ -14,19 +14,41 @@ import { system } from "@chakra-ui/react/preset";
 import React from 'react';
 
 
-export const App = () => (
+export const App = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const fov = isMobile ? 35 : 20;
+
+  return (
+  <>
   <Canvas
-    camera={{ position: [0, 0, 100], fov: 15 }}
+    camera={{ position: [0, 0, 100], fov: fov }}
     style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
   >
     <Sky />
 
     <fog attach="fog" args={['#37C6FF', 8.5, 12]} />
     <ScrollControls pages={4} infinite>
+    <Suspense fallback={null}>
       <Rig rotation={[0, 0, 0.15]}>
         <Carousel />
       </Rig>
       <Banner position={[0, -0.15, 0]} />
+      {/* <Preload all /> */}
+      </Suspense>
+
     </ScrollControls>
     <Environment 
     preset='dawn'
@@ -34,7 +56,9 @@ export const App = () => (
      backgroundBlurriness={0.5} 
      blur={1} />
   </Canvas>
-)
+  <Loader />
+  </>
+)};
 
 
 function Sky() {
@@ -61,7 +85,7 @@ const speed =  { value: 0.1, min: 0, max: 1, step: 0.01 };
     <>
       <SkyImpl />
       <group ref={ref}>
-        <Clouds material={THREE.MeshLambertMaterial} limit={400} 
+        <Clouds material={THREE.MeshLambertMaterial} limit={8000} 
         // range={range}
         >
           <Cloud ref={cloud0} 
