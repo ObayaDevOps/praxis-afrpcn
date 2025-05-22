@@ -99,7 +99,7 @@ export const App = () => {
     <Sky />
 
     <fog attach="fog" args={['#37C6FF', 8.5, 12]} />
-    <ScrollControls pages={4} infinite>
+    <ScrollControls pages={4} infinite horizontal>
     {/* <Suspense fallback={null}> */}
       <Rig rotation={[0, 0, 0.15]}>
         <Carousel />

@@ -30,7 +30,9 @@ export default function Home({  }) {
 
   return (
     <Box
-      bg={'#37C6FF'}
+      //bg={'#37C6FF'}
+      bg={'#00ABF0'}
+
       minH={'100vh'}
       // p={20}
       // display="flex"
@@ -91,7 +93,7 @@ export default function Home({  }) {
         <Text
         color='white'
         fontFamily='Space Mono' 
-        fontSize={{ base: '2xl', sm: '2xl', lg: '2xl' }}
+        fontSize={{ base: 'xl', sm: '2xl', lg: '2xl' }}
         textDecoration='underline'>
           Click to Enter
         </Text>
