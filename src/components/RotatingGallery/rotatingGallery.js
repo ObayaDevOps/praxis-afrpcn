@@ -339,10 +339,10 @@ const PopUp = ({imageClickedUrl, onClose}) => {
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content p={6}>
+          <Dialog.Content p={6} shadow='3xl' >
             <Dialog.Header>
               <Dialog.Title>
-                <Box p={{base: 2, md: 0}}>
+                <Box >
                 <Heading
                 lineHeight={1.1}
                 fontWeight={600}
@@ -367,7 +367,7 @@ const PopUp = ({imageClickedUrl, onClose}) => {
               </Box>
 
               <Box>
-                <Heading pt={6} fontFamily='Space Mono' 
+                <Heading pt={{base: 16, md: 20}} fontFamily='Space Mono' 
                 fontSize={{ base: '2xl', lg: '3xl' }}
                 lineHeight={1.1}
                 fontWeight={600}
@@ -446,14 +446,14 @@ const PopUp = ({imageClickedUrl, onClose}) => {
                 <Button variant="outline" onClick={onClose}
                 size={'xl'}
                 >
-                  <Text fontFamily='Space Mono' fontSize={{base: '1.25rem', md: '1.25rem'}}>
+                  <Text fontFamily='Space Mono' fontSize={{base: '0.9rem', md: '1.25rem'}}>
                     Close
                   </Text>
                   </Button>
               </Dialog.ActionTrigger>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="2xl" mt={6} mr={6} onClick={onClose} />
+              <CloseButton size={{base: 'md', md: "2xl"}} mt={{base: 2, md: 6}} mr={{base: 2, md: 6}} onClick={onClose} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

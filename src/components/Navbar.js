@@ -20,14 +20,14 @@ const NavLink = ({ children, href }) => (
     px={3}
     py={1}
     rounded={'md'}
-    color={'#00DEE3'} // Cyan color from image
+    color={'white'} // Cyan color from image
     _hover={{
       textDecoration: 'none',
       // Add a subtle hover effect if desired
       // bg: useColorModeValue('gray.200', 'gray.700'),
     }}
     href={href}
-    fontFamily="Poppins" // Assuming Poppins based on index.js heading
+    fontFamily="Space Mono" // Assuming Poppins based on index.js heading
     fontWeight={500} // Match heading weight
   >
     {children}
@@ -53,7 +53,9 @@ export default function Navbar(props) {
     position="sticky" 
     top={0} 
     zIndex="sticky"
-    bg={props.bg}
+    // bg={props.bg}
+    // bg={'red'}
+    // borderBottom={'1px solid white'}
     // bgGradient={{base:"to-b", lg: 'none'}}
     // gradientFrom={{base: props.bg ,lg: 'none'}}
     // gradientTo={{base:'transparent', lg: 'none'}}
@@ -65,13 +67,17 @@ export default function Navbar(props) {
       maxW="container.xl" 
       mx="auto"
       display={{base: 'none', lg: 'flex'}}
+      border='1px'
+
       >
         {/* Logo - Using Image component like in index.js */}
         <Link href="/" _hover={{ textDecoration: 'none' }}>
              <Image
+             mt={20}
+             
                 src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
                 alt="AFRPCN Afropocene Logo"
-                height={'40px'} // Adjust height as needed
+                height={'100px'} // Adjust height as needed
                 width={'auto'} // Maintain aspect ratio
                 // ml={'64px'}
              />
@@ -80,12 +86,12 @@ export default function Navbar(props) {
 
           <Flex display={{base: 'none', lg: 'flex'}}>
             {/* Desktop Navigation Links */}
-            <HStack spacing={'1.5rem'} alignItems={'left'}>
-              <HStack as={'nav'} spacing={'1.5rem'}>
+            <HStack spacing={'1.5rem'} alignItems={'center'}>
+              {/* <HStack as={'nav'} spacing={'1.5rem'}>
                 {navItems.map((item) => (
                   <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
                 ))}
-              </HStack>
+              </HStack> */}
 
 
             </HStack>
@@ -96,19 +102,14 @@ export default function Navbar(props) {
       {/* Mobile Drawer */}
       <Box>
       <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="flex-start">
-          <MobileDrawer
-            isOpen={isOpen}
-            onClose={onClose}
-            navItems={navItems}
-            getInTouchText="Get in Touch"
-          />
 
         <Box pl={4} >
           <Link href="/" _hover={{ textDecoration: 'none' }}>
                 <Image
+                mt={2}
                     src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
                     alt="AFRPCN Afropocene Logo"
-                    height={'40px'} // Adjust height as needed
+                    height={'70px'} // Adjust height as needed
                     width={'auto'} // Maintain aspect ratio
                     // ml={'64px'}
                 />
