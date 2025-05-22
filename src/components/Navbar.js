@@ -103,7 +103,7 @@ export default function Navbar(props) {
       <Box>
       <Flex display={{base: 'flex', lg: 'none'}} alignItems="center" justifyContent="flex-start">
 
-        <Box pl={4} >
+        <Box pl={0} >
           <Link href="/" _hover={{ textDecoration: 'none' }}>
                 <Image
                 mt={2}

@@ -339,7 +339,7 @@ const PopUp = ({imageClickedUrl, onClose}) => {
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content p={6} shadow='3xl' >
+          <Dialog.Content p={{base: 2, md: 6}} shadow='3xl' >
             <Dialog.Header>
               <Dialog.Title>
                 <Box >

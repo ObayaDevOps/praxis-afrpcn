@@ -47,14 +47,15 @@ export default function Home({  }) {
 
       <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
-      <Box p={{base: 16, md: 24}}>
+      <Box p={{base: 12, md: 24}}>
         <Heading
+        pb={4}
                 lineHeight={1.1}
                 fontWeight={600}
                 fontFamily='Space Mono' 
                 color='white'
                 fontSize={{ base: '3xl', sm: '4xl', lg: '7xl' }}>
-          World building Through Art -
+          World building Through Art: 
           </Heading>
 
         <Heading
@@ -72,7 +73,7 @@ export default function Home({  }) {
                 fontWeight={400}
                 fontFamily='Space Mono' 
                 color='white'
-                fontSize={{ base: '2xl', sm: '4xl', lg: '4xl' }}>
+                fontSize={{ base: 'xl', lg: '3xl' }}>
            Tracian Meikle
         </Text>
         {/* <Text
