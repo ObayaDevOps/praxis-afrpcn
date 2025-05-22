@@ -1,17 +1,76 @@
 // https://cydstumpel.nl/
 
 import * as THREE from 'three'
-import { useRef, useState, useEffect, Suspense } from 'react'
+import { useRef, useState, useEffect, Suspense, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Image, Environment, ScrollControls, useScroll, useTexture,
   Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html, Loader
  } from '@react-three/drei'
 import { easing } from 'maath'
 import './rotatingGalleryUtil'
-import {Demo} from '../modal'
-import { Dialog, Button, CloseButton, Portal, Box , ChakraProvider, Image as ChakraImage } from '@chakra-ui/react'
+import { Dialog, Button, CloseButton, Portal, Box , ChakraProvider, Image as ChakraImage, Text, Heading } from '@chakra-ui/react'
 import { system } from "@chakra-ui/react/preset";
 import React from 'react';
+// import { Visualizer } from '../../components/SoundVisualisation/soundVisualiser'
+import  MyComponent from '../../components/SoundVisualisation/p5sketch'
+import ImageGridPhotoGallery from '../ImageGrid/imageGridPhotoGallery'
+import dynamic from 'next/dynamic';
+
+
+const imageGridImages =[
+
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236519/WhatsApp_Image_2024-06-24_at_16.37.47_spjob2.jpg",
+      width: 1527,
+      height: 1080,
+      caption: "Henry Robinson Lela Pit",
+  },
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_3_h2dfyi.jpg",
+      width: 1527,
+      height: 1080,
+      caption: "Henry Robinson Lela Pit",
+  },
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_1_iydamo.jpg",
+      width: 1527,
+      height: 1080,
+      caption: "Henry Robinson Lela Pit",
+  },
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236509/WhatsApp_Image_2024-06-24_at_16.37.48_oepx0a.jpg",
+      width: 854,
+      height: 1280,
+      caption: "Henry Robinson Lela Pit",
+  },
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.49_2_hap7cd.jpg",
+      width: 1280,
+      height: 1024,
+      caption: "Henry Robinson Lela Pit",
+  },
+  {   
+      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236510/WhatsApp_Image_2024-06-24_at_16.37.49_pdadpr.jpg",
+      width: 1024,
+      height: 1280,
+      caption: "Henry Robinson Lela Pit",
+  },
+
+{   
+  src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.27_f1iavz.jpg",
+  width: 1080,
+  height: 608,
+  caption: "Henry Robinson Lela Pit",
+  },
+// {   
+//   src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.29_hbpm28.jpg",
+//   width: 1080,
+//   height: 608,
+//   caption: "Henry Robinson Lela Pit",
+//   },
+
+] 
+
 
 
 export const App = () => {
@@ -41,13 +100,13 @@ export const App = () => {
 
     <fog attach="fog" args={['#37C6FF', 8.5, 12]} />
     <ScrollControls pages={4} infinite>
-    <Suspense fallback={null}>
+    {/* <Suspense fallback={null}> */}
       <Rig rotation={[0, 0, 0.15]}>
         <Carousel />
       </Rig>
       <Banner position={[0, -0.15, 0]} />
       {/* <Preload all /> */}
-      </Suspense>
+      {/* </Suspense> */}
 
     </ScrollControls>
     <Environment 
@@ -156,7 +215,7 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
   const [activeCardRef, setActiveCardRef] = useState(null);
   const cardRefs = useRef([]);
 
-  const handleCardClick = (clickedCardRef) => {
+  const handleCardClick = useCallback((clickedCardRef) => {
     const clickedZ = clickedCardRef.current.position.z;
 
     if (!activeCardRef) {
@@ -170,7 +229,7 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
         setActiveCardRef(null);
       }
     }
-  };
+  }, [activeCardRef, setActiveCardRef]);
 
   const handleCloseDialog = () => {
     setActiveCardRef(null);
@@ -184,11 +243,13 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
 
   const imageUrls = [
     // Replace these with actual image URLs
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747364/P9254990-500x375_yzrpda.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747383/Picture5-2_gwe6xz.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747383/Picture5-2_gwe6xz.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747987/pexels-markus-winkler-1430818-3708747_jpg0ea.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1738747952/pexels-ryutaro-5473228_sll1wz.jpg',
+    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236519/WhatsApp_Image_2024-06-24_at_16.37.47_spjob2.jpg",
+    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_3_h2dfyi.jpg',
+    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_1_iydamo.jpg',
+    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236509/WhatsApp_Image_2024-06-24_at_16.37.48_oepx0a.jpg',
+    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.49_2_hap7cd.jpg',
+    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236510/WhatsApp_Image_2024-06-24_at_16.37.49_pdadpr.jpg",
+    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.27_f1iavz.jpg",
 
   ];
   return Array.from({ length: count }, (_, i) => {
@@ -251,6 +312,10 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) =>
   )
 });
 
+const DynamicP5Sketch = dynamic(() => import('../../components/SoundVisualisation/p5sketch'), {
+  ssr: false, // This is important: disable server-side rendering
+  loading: () => <p>Loading sketch...</p> // Optional: show a loading message
+});
 
 const PopUp = ({imageClickedUrl, onClose}) => {
   const [open, setOpen] = useState(true);
@@ -259,42 +324,136 @@ const PopUp = ({imageClickedUrl, onClose}) => {
     <ChakraProvider value={system}>
       <Box
       onWheel={(e) => e.stopPropagation()}
+      // w={'100vw'}
       >
-        <Dialog.Root open={open} onOpenChange={(isOpen) => {
+        <Dialog.Root
+        size={{base: 'sm', md: 'xl'}}
+
+        open={open} onOpenChange={(isOpen) => {
            setOpen(isOpen);
            if (!isOpen) {
             onClose();
            }
-          }}>
-      {/* <Dialog.Trigger asChild>
-        <Button variant="outline" size="sm">
-          Open Dialog
-        </Button>
-      </Dialog.Trigger> */}
+        }}>
+
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content>
+          <Dialog.Content p={6}>
             <Dialog.Header>
-              <Dialog.Title>Dialog Title</Dialog.Title>
+              <Dialog.Title>
+                <Box p={{base: 2, md: 0}}>
+                <Heading
+                lineHeight={1.1}
+                fontWeight={600}
+                fontFamily='Space Mono' 
+                fontSize={{ base: '2xl', sm: '4xl', lg: '4xl' }}>
+                  Artist Title: Art Project Name
+                </Heading>
+                <Text
+                color={'gray.600'}
+                fontWeight={300}
+                pt={2}
+                fontSize={{base:'lg',md:'xl'}}
+                fontFamily={'Space Mono'} 
+                >                  Artist subtitle
+                </Text>
+                </Box>
+                </Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              <Box  display="flex" justifyContent="center" alignItems="center" >
+                <ChakraImage src={imageClickedUrl} />
+              </Box>
 
-              <ChakraImage src={imageClickedUrl} />
+              <Box>
+                <Heading pt={6} fontFamily='Space Mono' 
+                fontSize={{ base: '2xl', lg: '3xl' }}
+                lineHeight={1.1}
+                fontWeight={600}
+                >
+                    About
+                </Heading>
+
+                <Text pt={6} pb={4} fontFamily='Space Mono'
+                  fontSize={'lg'}
+                >
+                  Paragraph 1: High Level description of the Project.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+              </Box>
+
+              <Box>
+                <Heading pt={6} fontFamily='Space Mono' 
+                fontSize={{ base: '2xl', lg: '3xl' }}
+                lineHeight={1.1}
+                fontWeight={600}
+                >
+                    Voice Note
+                </Heading>
+
+                <DynamicP5Sketch />
+                <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
+                  Audio Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+              </Box>
+
+              <Box>
+              <Text pt={6} pb={4} fontFamily='Space Mono'
+                  fontSize={'lg'}
+                >                  Paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+
+                <Text pt={6} pb={4} fontFamily='Space Mono'
+                  fontSize={'lg'}
+                >                Paragraph 2: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+
+                <Text pt={6} pb={4} fontFamily='Space Mono'
+                  fontSize={'lg'}
+                >                Paragraph 3: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+              </Box>
+
+              <Box>
+                  <Heading pt={6} fontFamily='Space Mono' 
+                fontSize={{ base: '2xl', lg: '3xl' }}
+                lineHeight={1.1}
+                fontWeight={600}
+                >
+                    Gallery
+                </Heading>
+                <Box py={{base: 10, lg: 12}}>
+                  <ImageGridPhotoGallery photos={imageGridImages} />
+                </Box>
+              </Box>
+
+
+
+
             </Dialog.Body>
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>
                 <Button variant="outline" onClick={onClose}
-                >Cancel</Button>
+                size={'xl'}
+                >
+                  <Text fontFamily='Space Mono' fontSize={{base: '1.25rem', md: '1.25rem'}}>
+                    Close
+                  </Text>
+                  </Button>
               </Dialog.ActionTrigger>
-              <Button>Save</Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" onClick={onClose} />
+              <CloseButton size="2xl" mt={6} mr={6} onClick={onClose} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>
