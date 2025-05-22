@@ -26,7 +26,7 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 
 export function Root() {
   return (
-    <Box minH='80vh' bg='#37C6FF'>
+    <Box minH='100vh' bg='#37C6FF'>
 
 <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
