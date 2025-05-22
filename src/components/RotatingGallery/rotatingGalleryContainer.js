@@ -26,7 +26,7 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 
 export function Root() {
   return (
-    <Box minH='100vh' bg='#37C6FF'>
+    <Box minH='80vh' bg='#37C6FF'>
 
 <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
@@ -50,7 +50,7 @@ export function Root() {
         </a>
         <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} /> */}
 
-      <Box position="absolute" bottom={{base:"10", md: "0"}} right={{base:"0", md: "0"}} p={{base: 0, md: 20}}>
+      <Box position="absolute" bottom={{base:"20", md: "0"}} right={{base:"0", md: "0"}} p={{base: 0, md: 20}}>
 
       <HStack spacing={8}>
       <ChakraImage

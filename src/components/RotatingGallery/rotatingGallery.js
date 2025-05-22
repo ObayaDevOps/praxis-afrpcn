@@ -342,7 +342,7 @@ const PopUp = ({imageClickedUrl, onClose}) => {
           <Dialog.Content p={{base: 2, md: 6}} shadow='3xl' >
             <Dialog.Header>
               <Dialog.Title>
-                <Box >
+                <Box pt={4}>
                 <Heading
                 lineHeight={1.1}
                 fontWeight={600}
