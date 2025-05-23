@@ -1,6 +1,3 @@
-import { createRoot } from 'react-dom/client'
-// import '../../styles/rotatingGalleryStyles.css'
-import { Logo } from '@pmndrs/branding'
 import { App } from './rotatingGallery'
 import Navbar from '../Navbar';
 
@@ -25,6 +22,7 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 */
 
 export function Root() {
+  
   return (
     <Box minH='100vh' bg='#37C6FF'>
 
@@ -59,7 +57,7 @@ export function Root() {
 
                       src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png'}
                       alt="Doen Logo"
-                      height={{base: '40px', md: '40px'}} // Adjust height as needed
+                      height={{base: '30px', md: '40px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
                       // ml={'64px'}
                   />
@@ -68,7 +66,7 @@ export function Root() {
                   mr={8}
                       src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png'}
                       alt="British Council Logo"
-                      height={{base: '40px', md: '40px'}} // Adjust height as needed
+                      height={{base: '20px', md: '40px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
                       // ml={'64px'}
                   />
@@ -78,17 +76,32 @@ export function Root() {
 
                       src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png'}
                       alt="Doen Logo"
-                      height={{base: '40px', md: '40px'}} // Adjust height as needed
+                      height={{base: '30px', md: '40px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
                       // ml={'64px'}
                   />
 
       </HStack>
       </Box>
+      <Box 
+      display={{base: 'flex', lg: 'none'}}
+      style={{ position: 'absolute', top: 30, right: 40, fontSize: '13px' }}
+      maxW='80px'
+      >
+        <Text fontFamily='Space Mono' fontSize='10px'>
+          Scroll right-to-left above carousel to move
+          </Text>
+        {/* <Text fontFamily='Space Mono' fontSize='xs'>
+          Click on carousel to open
+        </Text> */}
+      </Box>
 
-        <a style={{ position: 'absolute', top: 40, right: 40, fontSize: '13px' }} href="#">
-          scroll up/down ...
-        </a>
+        {/* <a style={{ position: 'absolute', top: 40, right: 40, fontSize: '13px' }} href="#">
+          Scroll to move carousel
+        </a> */}
+        {/* <a style={{ position: 'absolute', top: 40, right: 40, fontSize: '13px' }} href="#">
+          click to open
+        </a> */}
       </div>{' '}
     </Box>
   )
