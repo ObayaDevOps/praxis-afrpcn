@@ -90,11 +90,17 @@ export function Root() {
 
 
       <VStack>
-        <Text fontFamily='Space Mono' fontSize='6px' textAlign='right'>
+        <Text fontFamily='Space Mono'
+          color='black'
+
+        fontSize='6px' textAlign='right'>
         Scroll Right-to-Left Above Carousel
         </Text>
         <Box ml='7'>
-        <Text fontFamily='Space Mono' fontSize='6px' textAlign='left' >
+        <Text fontFamily='Space Mono'
+          color='black'
+
+        fontSize='6px' textAlign='left' >
           Click to Open
         </Text>
         </Box>
@@ -107,10 +113,14 @@ export function Root() {
       maxW='180px'
       >
         <VStack>
-        <Text fontFamily='Space Mono' fontSize='12px'>
+        <Text fontFamily='Space Mono'
+          color='black'
+          fontSize='12px'>
           Scroll to Move Carousel
           </Text>
-        <Text fontFamily='Space Mono' fontSize='12px' >
+        <Text fontFamily='Space Mono'
+         color='black'
+         fontSize='12px' >
           Click on Image to Open
         </Text>
         </VStack>

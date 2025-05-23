@@ -11,10 +11,10 @@ import './rotatingGalleryUtil'
 import { Dialog, Button, CloseButton, Portal, Box , ChakraProvider, Image as ChakraImage, Text, Heading } from '@chakra-ui/react'
 import { system } from "@chakra-ui/react/preset";
 import React from 'react';
-// import { Visualizer } from '../../components/SoundVisualisation/soundVisualiser'
-import  MyComponent from '../../components/SoundVisualisation/p5sketch'
 import ImageGridPhotoGallery from '../ImageGrid/imageGridPhotoGallery'
 import dynamic from 'next/dynamic';
+
+import WavesurferPlayer from '../wavesurfer/WavesurferPlayer'
 
 
 const imageGridImages =[
@@ -312,10 +312,6 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) =>
   )
 });
 
-const DynamicP5Sketch = dynamic(() => import('../../components/SoundVisualisation/p5sketch'), {
-  ssr: false, // This is important: disable server-side rendering
-  loading: () => <p>Loading sketch...</p> // Optional: show a loading message
-});
 
 const PopUp = ({imageClickedUrl, onClose}) => {
   const [open, setOpen] = useState(true);
@@ -375,6 +371,7 @@ const PopUp = ({imageClickedUrl, onClose}) => {
                     About
                 </Heading>
 
+
                 <Text pt={6} pb={4} fontFamily='Space Mono'
                   fontSize={'lg'}
                 >
@@ -397,8 +394,9 @@ const PopUp = ({imageClickedUrl, onClose}) => {
                     Voice Note
                 </Heading>
 
-                <DynamicP5Sketch />
-                <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
+                <Box py={4}>
+                <WavesurferPlayer audioUrl={'https://howlerjs.com/assets/howler.js/examples/player/audio/80s_vibe.webm'} /> 
+                </Box>                <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
                   Audio Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                   eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Text>

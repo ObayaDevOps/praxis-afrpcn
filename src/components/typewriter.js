@@ -35,6 +35,7 @@ export const TypewriterText = () => (
                 .pauseFor(300)
                 // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
                 // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
+                .changeCursor('  ')
 
                 .start();
         }}
@@ -58,6 +59,7 @@ export const TypewriterTextMobile = () => (
             .pauseFor(300)
             // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
             // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
+            .changeCursor('  ')
 
             .start();
     }}

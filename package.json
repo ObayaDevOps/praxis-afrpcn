@@ -28,7 +28,6 @@
     "next": "15.2.4",
     "next-themes": "^0.4.6",
     "nodemailer": "^6.10.0",
-    "p5": "^2.0.2",
     "postprocessing": "6.36.0",
     "random-words": "2.0.0",
     "react": "^19.0.0",
@@ -40,6 +39,7 @@
     "react-scripts": "5.0.1",
     "three": "0.159.0",
     "typewriter-effect": "^2.22.0",
+    "wavesurfer.js": "^7.9.5",
     "yet-another-react-lightbox": "^3.23.2"
   }
 }
