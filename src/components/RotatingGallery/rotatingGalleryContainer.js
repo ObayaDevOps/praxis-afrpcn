@@ -88,12 +88,31 @@ export function Root() {
       style={{ position: 'absolute', top: 30, right: 40, fontSize: '13px' }}
       maxW='80px'
       >
-        <Text fontFamily='Space Mono' fontSize='10px'>
-          Scroll right-to-left above carousel to move
+
+
+      <VStack>
+        <Text fontFamily='Space Mono' fontSize='6px'>
+        Scroll right-to-left above carousel to move
+        </Text>
+        <Text fontFamily='Space Mono' fontSize='6px'>
+          Click on Image to Open
+        </Text>
+        </VStack>
+      </Box>
+
+      <Box 
+      display={{base: 'none', lg: 'flex'}}
+      style={{ position: 'absolute', top: 40, right: 40 }}
+      maxW='180px'
+      >
+        <VStack>
+        <Text fontFamily='Space Mono' fontSize='12px'>
+          Scroll to Move Carousel
           </Text>
-        {/* <Text fontFamily='Space Mono' fontSize='xs'>
-          Click on carousel to open
-        </Text> */}
+        <Text fontFamily='Space Mono' fontSize='12px'>
+          Click on Image to Open
+        </Text>
+        </VStack>
       </Box>
 
         {/* <a style={{ position: 'absolute', top: 40, right: 40, fontSize: '13px' }} href="#">
