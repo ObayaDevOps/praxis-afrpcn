@@ -49,54 +49,55 @@ export function Root() {
         <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} /> */}
 
       <Box position="absolute" bottom={{base:"20", md: "0"}} right={{base:"0", md: "0"}} p={{base: 0, md: 20}}>
+        <HStack spacing={8}>
+          <ChakraImage
+                      mt={2}
+                      mr={8}
 
-      <HStack spacing={8}>
-      <ChakraImage
-                  mt={2}
-                  mr={8}
+                          src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png'}
+                          alt="Doen Logo"
+                          height={{base: '30px', md: '40px'}} // Adjust height as needed
+                          width={'auto'} // Maintain aspect ratio
+                          // ml={'64px'}
+                      />
+            <ChakraImage
+                      mt={2}
+                      mr={8}
+                          src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png'}
+                          alt="British Council Logo"
+                          height={{base: '20px', md: '40px'}} // Adjust height as needed
+                          width={'auto'} // Maintain aspect ratio
+                          // ml={'64px'}
+                      />
+          <ChakraImage
+                      mt={2}
+                      mr={8}
 
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png'}
-                      alt="Doen Logo"
-                      height={{base: '30px', md: '40px'}} // Adjust height as needed
-                      width={'auto'} // Maintain aspect ratio
-                      // ml={'64px'}
-                  />
-        <ChakraImage
-                  mt={2}
-                  mr={8}
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png'}
-                      alt="British Council Logo"
-                      height={{base: '20px', md: '40px'}} // Adjust height as needed
-                      width={'auto'} // Maintain aspect ratio
-                      // ml={'64px'}
-                  />
-      <ChakraImage
-                  mt={2}
-                  mr={8}
+                          src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png'}
+                          alt="Doen Logo"
+                          height={{base: '30px', md: '40px'}} // Adjust height as needed
+                          width={'auto'} // Maintain aspect ratio
+                          // ml={'64px'}
+                      />
 
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png'}
-                      alt="Doen Logo"
-                      height={{base: '30px', md: '40px'}} // Adjust height as needed
-                      width={'auto'} // Maintain aspect ratio
-                      // ml={'64px'}
-                  />
-
-      </HStack>
+        </HStack>
       </Box>
       <Box 
       display={{base: 'flex', lg: 'none'}}
-      style={{ position: 'absolute', top: 30, right: 40, fontSize: '13px' }}
+      style={{ position: 'absolute', top: 30, right: 40 }}
       maxW='80px'
       >
 
 
       <VStack>
-        <Text fontFamily='Space Mono' fontSize='6px'>
-        Scroll right-to-left above carousel to move
+        <Text fontFamily='Space Mono' fontSize='6px' textAlign='right'>
+        Scroll Right-to-Left Above Carousel
         </Text>
-        <Text fontFamily='Space Mono' fontSize='6px'>
+        <Box ml='7'>
+        <Text fontFamily='Space Mono' fontSize='6px' textAlign='left' >
           Click to Open
         </Text>
+        </Box>
         </VStack>
       </Box>
 
@@ -109,7 +110,7 @@ export function Root() {
         <Text fontFamily='Space Mono' fontSize='12px'>
           Scroll to Move Carousel
           </Text>
-        <Text fontFamily='Space Mono' fontSize='12px'>
+        <Text fontFamily='Space Mono' fontSize='12px' >
           Click on Image to Open
         </Text>
         </VStack>

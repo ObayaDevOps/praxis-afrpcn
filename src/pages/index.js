@@ -1,13 +1,13 @@
-
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
-import { geistSans, geistMono, spaceMono, poppins } from "@/styles/theme";
 import { motion } from "framer-motion";
 
 import 'focus-visible/dist/focus-visible';
 
-import { Root as RotatingGallery } from '../components/RotatingGallery/rotatingGalleryContainer'
+
+import {TypewriterText, TypewriterTextMobile } from '../components/typewriter'
+
 
 import {
   Box,
@@ -31,7 +31,7 @@ export default function Home({  }) {
   return (
     <Box
       //bg={'#37C6FF'}
-      bg={'#00ABF0'}
+      bg={'#00ABF0'}      
 
       minH={'100vh'}
       // p={20}
@@ -49,8 +49,17 @@ export default function Home({  }) {
 
       <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
-      <Box p={{base: 12, md: 24}}>
-        <Heading
+      <Box p={{base: 10, md: 24}} mt={-6}>
+
+      <Box display={{base: 'none', lg: 'flex'}}>
+        <TypewriterText />
+      </Box>
+
+      <Box display={{base: 'flex', lg: 'none'}}>
+        <TypewriterTextMobile />
+      </Box>
+
+        {/* <Heading
         pb={4}
                 lineHeight={1.1}
                 fontWeight={600}
@@ -67,9 +76,9 @@ export default function Home({  }) {
                 color='white'
                 fontSize={{ base: '3xl', sm: '4xl', lg: '7xl' }}>
           Imagining Futures of Liberation
-        </Heading>
+        </Heading> */}
 
-        <Text
+        {/* <Text
         pt={6}
         lineHeight={1.1}
                 fontWeight={400}
@@ -77,7 +86,7 @@ export default function Home({  }) {
                 color='white'
                 fontSize={{ base: 'xl', lg: '3xl' }}>
            Tracian Meikle
-        </Text>
+        </Text> */}
         {/* <Text
         pt={2}
         lineHeight={1.1}
@@ -89,16 +98,27 @@ export default function Home({  }) {
         </Text> */}
 
 
-      <Link a='a' href='/enter' pt={20}>
+      <Link a='a' href='/enter' pt={20}
+      position='absolute'
+      bottom={{base: 50, lg: 10}}
+      left='50%'
+      transform='translateX(-50%)'
+      pb={10}
+      >
         <Text
         color='white'
-        fontFamily='Space Mono' 
+        fontFamily='Space Mono'
         fontSize={{ base: 'xl', sm: '2xl', lg: '2xl' }}
-        textDecoration='underline'>
+        textDecoration='underline'
+        // style={{ position: 'absolute', bottom: 100, left: 100 }}
+
+        >
           Click to Enter
         </Text>
       </Link>
       </Box>
+
+      
 
       {/* <Box position="absolute" bottom={{base:"40", md: "0"}} right={{base:"10", md: "0"}} p={{base: 0, md: 20}}>
 
