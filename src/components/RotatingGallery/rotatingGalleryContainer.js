@@ -95,7 +95,7 @@ export function Root() {
         Scroll right-to-left above carousel to move
         </Text>
         <Text fontFamily='Space Mono' fontSize='6px'>
-          Click on Image to Open
+          Click to Open
         </Text>
         </VStack>
       </Box>
