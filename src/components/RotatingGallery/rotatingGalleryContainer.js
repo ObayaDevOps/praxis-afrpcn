@@ -93,14 +93,14 @@ export function Root() {
         <Text fontFamily='Space Mono'
           color='black'
 
-        fontSize='6px' textAlign='right'>
+        fontSize='10px' textAlign='right'>
         Scroll Right-to-Left Above Carousel
         </Text>
         <Box ml='7'>
         <Text fontFamily='Space Mono'
           color='black'
 
-        fontSize='6px' textAlign='left' >
+        fontSize='10px' textAlign='left' >
           Click to Open
         </Text>
         </Box>
