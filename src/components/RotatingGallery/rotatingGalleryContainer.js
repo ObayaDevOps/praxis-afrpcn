@@ -94,7 +94,7 @@ export function Root() {
           color='black'
 
         fontSize='10px' textAlign='right'>
-        Scroll Right-to-Left Above Carousel
+        Scroll Above Carousel
         </Text>
         <Box ml='7'>
         <Text fontFamily='Space Mono'

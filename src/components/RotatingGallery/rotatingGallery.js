@@ -13,68 +13,21 @@ import { system } from "@chakra-ui/react/preset";
 import React from 'react';
 import ImageGridPhotoGallery from '../ImageGrid/imageGridPhotoGallery'
 import dynamic from 'next/dynamic';
+import { PortableText } from '@portabletext/react'
+import  client  from '../../../sanity/lib/client';
+import NextImage from 'next/image'; // Import Next.js Image component
 
 import WavesurferPlayer from '../wavesurfer/WavesurferPlayer'
 
-
-const imageGridImages =[
-
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236519/WhatsApp_Image_2024-06-24_at_16.37.47_spjob2.jpg",
-      width: 1527,
-      height: 1080,
-      caption: "Henry Robinson Lela Pit",
-  },
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_3_h2dfyi.jpg",
-      width: 1527,
-      height: 1080,
-      caption: "Henry Robinson Lela Pit",
-  },
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_1_iydamo.jpg",
-      width: 1527,
-      height: 1080,
-      caption: "Henry Robinson Lela Pit",
-  },
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236509/WhatsApp_Image_2024-06-24_at_16.37.48_oepx0a.jpg",
-      width: 854,
-      height: 1280,
-      caption: "Henry Robinson Lela Pit",
-  },
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.49_2_hap7cd.jpg",
-      width: 1280,
-      height: 1024,
-      caption: "Henry Robinson Lela Pit",
-  },
-  {   
-      src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236510/WhatsApp_Image_2024-06-24_at_16.37.49_pdadpr.jpg",
-      width: 1024,
-      height: 1280,
-      caption: "Henry Robinson Lela Pit",
-  },
-
-{   
-  src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.27_f1iavz.jpg",
-  width: 1080,
-  height: 608,
-  caption: "Henry Robinson Lela Pit",
-  },
-// {   
-//   src: "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.29_hbpm28.jpg",
-//   width: 1080,
-//   height: 608,
-//   caption: "Henry Robinson Lela Pit",
-//   },
-
-] 
 
 
 
 export const App = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [artistProfiles, setArtistProfiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -88,7 +41,46 @@ export const App = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const fetchArtistProfiles = async () => {
+      try {
+        const query = `*[_type == "artistProfile"]{
+          _id,
+          artistTitle,
+          artistSubtitle,
+          about,
+          "carouselImageUrl": carouselImage.asset->url,
+          "carouselImageWidth": carouselImage.asset->metadata.dimensions.width, // Fetch carousel image width
+          "carouselImageHeight": carouselImage.asset->metadata.dimensions.height, // Fetch carousel image height
+          "voiceNoteUrl": voiceNote.asset->url,
+          voiceNoteDescription,
+          additionalContent,
+          "galleryImages": gallery[]{
+            caption,
+            "src": asset->url,
+            "width": asset->metadata.dimensions.width,
+            "height": asset->metadata.dimensions.height
+          }
+        }`;
+        const data = await client.fetch(query);
+        setArtistProfiles(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchArtistProfiles();
+  }, []);
+
+
   const fov = isMobile ? 35 : 20;
+
+  if (loading) return <Loader />;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!artistProfiles.length) return <div>No artist profiles found.</div>;
+
 
   return (
   <>
@@ -99,10 +91,10 @@ export const App = () => {
     <Sky />
 
     <fog attach="fog" args={['#37C6FF', 8.5, 12]} />
-    <ScrollControls pages={4} infinite horizontal>
+    <ScrollControls pages={artistProfiles.length} infinite horizontal>
     {/* <Suspense fallback={null}> */}
-      <Rig rotation={[0, 0, 0.15]}>
-        <Carousel />
+      <Rig rotation={[0, 0, 0.15]} artistProfiles={artistProfiles}>
+        <Carousel artistProfiles={artistProfiles} />
       </Rig>
       <Banner position={[0, -0.15, 0]} />
       {/* <Preload all /> */}
@@ -181,7 +173,7 @@ function Rig(props) {
   const [handleCardClick, setHandleCardClick] = useState(null);
 
   useFrame((state, delta) => {
-    ref.current.rotation.y = -scroll.offset * (Math.PI * 2) // Rotate contents
+    ref.current.rotation.y = scroll.offset * (Math.PI * 2) // Rotate contents in the opposite direction
     // state.events.update() // Raycasts every frame rather than on pointer-move - We will handle raycasting manually on click
     easing.damp3(state.camera.position, [-state.pointer.x * 2, state.pointer.y + 1.5, 10], 0.3, delta) // Move camera
     state.camera.lookAt(0, 0, 0) // Look at center
@@ -206,14 +198,15 @@ function Rig(props) {
 
   return (
     <group ref={ref} {...props} onPointerDown={onPointerDown}>
-      <Carousel setCardRefs={setCardRefs} setHandleCardClick={setHandleCardClick} />
+      <Carousel setCardRefs={setCardRefs} setHandleCardClick={setHandleCardClick} artistProfiles={props.artistProfiles} />
     </group>
   );
 }
 
-function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) {
+function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick, artistProfiles }) {
   const [activeCardRef, setActiveCardRef] = useState(null);
   const cardRefs = useRef([]);
+  count = artistProfiles.length; // Set count based on number of artist profiles
 
   const handleCardClick = useCallback((clickedCardRef) => {
     const clickedZ = clickedCardRef.current.position.z;
@@ -241,18 +234,7 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
   }, [cardRefs, setCardRefs, setHandleCardClick, handleCardClick]);
 
 
-  const imageUrls = [
-    // Replace these with actual image URLs
-    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236519/WhatsApp_Image_2024-06-24_at_16.37.47_spjob2.jpg",
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_3_h2dfyi.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.48_1_iydamo.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236509/WhatsApp_Image_2024-06-24_at_16.37.48_oepx0a.jpg',
-    'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236508/WhatsApp_Image_2024-06-24_at_16.37.49_2_hap7cd.jpg',
-    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719236510/WhatsApp_Image_2024-06-24_at_16.37.49_pdadpr.jpg",
-    "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1719235391/WhatsApp_Image_2024-06-24_at_15.23.27_f1iavz.jpg",
-
-  ];
-  return Array.from({ length: count }, (_, i) => {
+  return artistProfiles.map((profile, i) => {
     const cardRef = useRef();
     cardRefs.current[i] = cardRef;
 
@@ -260,8 +242,11 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
 
     return (
       <Card
-        key={i}
-        url={imageUrls[i % imageUrls.length]}
+        key={profile._id} // Use unique ID from Sanity
+        artistProfile={profile} // Pass the entire artist profile
+        url={profile.carouselImageUrl} // Use carousel image URL from profile
+        carouselImageWidth={profile.carouselImageWidth} // Pass carousel image width
+        carouselImageHeight={profile.carouselImageHeight} // Pass carousel image height
         position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
         rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
         ref={cardRef}
@@ -272,7 +257,7 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick }) 
   });
 }
 
-const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) => {
+const Card = React.forwardRef(({ url, isDialogOpen, onClose, artistProfile, carouselImageWidth, carouselImageHeight, ...props }, ref) => {
   const [hovered, hover] = useState(false)
 
   const pointerOver = (e) => (e.stopPropagation(), hover(true))
@@ -305,7 +290,13 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) =>
 
       {isDialogOpen && (
         <Html center>
-          <PopUp imageClickedUrl={url} onClose={onClose} />
+          <PopUp
+            imageClickedUrl={url}
+            onClose={onClose}
+            artistProfile={artistProfile}
+            carouselImageWidth={carouselImageWidth}
+            carouselImageHeight={carouselImageHeight}
+          />
         </Html>
       )}
     </>
@@ -313,8 +304,26 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, ...props }, ref) =>
 });
 
 
-const PopUp = ({imageClickedUrl, onClose}) => {
+const PopUp = ({imageClickedUrl, onClose, artistProfile, carouselImageWidth, carouselImageHeight}) => {
   const [open, setOpen] = useState(true);
+
+  // Define custom PortableText components for paragraph spacing
+  const portableTextComponents = {
+    block: {
+      normal: ({ children }) => (
+        // Use a Chakra Text component to render paragraphs, and add bottom margin for spacing
+        <Text mb={{base:10, lg: 6}}  >
+          {children}
+        </Text>
+      ),
+    },
+    // You can add custom components for other block types (h1, h2, etc.) if needed
+  };
+
+  const IMAGE_WIDTH = 600;
+  const imageHeight = carouselImageWidth && carouselImageHeight
+    ? (carouselImageHeight / carouselImageWidth) * IMAGE_WIDTH
+    : undefined;
 
   return (
     <ChakraProvider value={system}>
@@ -338,32 +347,42 @@ const PopUp = ({imageClickedUrl, onClose}) => {
           <Dialog.Content p={{base: 2, md: 6}} shadow='3xl' >
             <Dialog.Header>
               <Dialog.Title>
-                <Box pt={4}>
+                <Box pt={2}>
                 <Heading
                 lineHeight={1.1}
                 fontWeight={600}
-                fontFamily='Space Mono' 
+                fontFamily='Space Mono'
                 fontSize={{ base: '2xl', sm: '4xl', lg: '4xl' }}>
-                  Artist Title: Art Project Name
+                  {artistProfile.artistTitle || 'Artist Title Not Set'}
                 </Heading>
                 <Text
                 color={'gray.600'}
                 fontWeight={300}
                 pt={2}
                 fontSize={{base:'lg',md:'xl'}}
-                fontFamily={'Space Mono'} 
-                >                  Artist subtitle
+                fontFamily={'Space Mono'}
+                >   {artistProfile.artistSubtitle }
                 </Text>
                 </Box>
                 </Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
               <Box  display="flex" justifyContent="center" alignItems="center" >
-                <ChakraImage src={imageClickedUrl} />
+                {imageClickedUrl && ( // Conditionally render the Next.js Image component
+                  <NextImage
+                    src={imageClickedUrl}
+                    width={IMAGE_WIDTH}
+                    height={imageHeight} // Use calculated height
+                    blurDataURL={imageClickedUrl} // Use src as blurDataURL
+                    placeholder="blur"
+                    alt={artistProfile.artistTitle ? `${artistProfile.artistTitle} artwork` : 'Artist artwork'} // Descriptive alt text
+                    style={{ maxWidth: '100%', height: 'auto' }} // Ensure responsiveness within its container
+                  />
+                )}
               </Box>
 
               <Box>
-                <Heading pt={{base: 16, md: 20}} fontFamily='Space Mono' 
+                <Heading pt={{base: 16, md: 20}} fontFamily='Space Mono'
                 fontSize={{ base: '2xl', lg: '3xl' }}
                 lineHeight={1.1}
                 fontWeight={600}
@@ -372,67 +391,57 @@ const PopUp = ({imageClickedUrl, onClose}) => {
                 </Heading>
 
 
-                <Text pt={6} pb={4} fontFamily='Space Mono'
+                <Box pt={6} pb={4} fontFamily='Space Mono'
                   fontSize={'lg'}
                 >
-                  Paragraph 1: High Level description of the Project.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </Box>
-
-              <Box>
-                <Heading pt={6} fontFamily='Space Mono' 
-                fontSize={{ base: '2xl', lg: '3xl' }}
-                lineHeight={1.1}
-                fontWeight={600}
-                >
-                    Voice Note
-                </Heading>
-
-                <Box py={4}>
-                <WavesurferPlayer audioUrl={'https://howlerjs.com/assets/howler.js/examples/player/audio/80s_vibe.webm'} /> 
-                </Box>                <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
-                  Audio Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </Box>
-
-              <Box>
-              <Text pt={6} pb={4} fontFamily='Space Mono'
-                  fontSize={'lg'}
-                >                  Paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-
-                <Text pt={6} pb={4} fontFamily='Space Mono'
-                  fontSize={'lg'}
-                >                Paragraph 2: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-
-                <Text pt={6} pb={4} fontFamily='Space Mono'
-                  fontSize={'lg'}
-                >                Paragraph 3: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </Box>
-
-              <Box>
-                  <Heading pt={6} fontFamily='Space Mono' 
-                fontSize={{ base: '2xl', lg: '3xl' }}
-                lineHeight={1.1}
-                fontWeight={600}
-                >
-                    Gallery
-                </Heading>
-                <Box py={{base: 10, lg: 12}}>
-                  <ImageGridPhotoGallery photos={imageGridImages} />
+                  {artistProfile.about ? <PortableText value={artistProfile.about} components={portableTextComponents} /> : 'No about section provided.'}
                 </Box>
+              </Box>
+
+              <Box>
+                {artistProfile.voiceNoteUrl && (
+                  <>
+                    <Heading pt={6} fontFamily='Space Mono'
+                    fontSize={{ base: '2xl', lg: '3xl' }}
+                    lineHeight={1.1}
+                    fontWeight={600}
+                    >
+                        Voice Note
+                    </Heading>
+
+                    <Box py={4}>
+                      <WavesurferPlayer audioUrl={artistProfile.voiceNoteUrl} />
+                    </Box>
+                    <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
+                      {artistProfile.voiceNoteDescription || 'No audio description provided.'}
+                    </Text>
+                  </>
+                )}
+              </Box>
+
+              <Box>
+                {artistProfile.additionalContent && artistProfile.additionalContent.length > 0 && (
+                  <Box pt={6} pb={4} fontFamily='Space Mono' fontSize={'lg'}>
+                    <PortableText value={artistProfile.additionalContent} components={portableTextComponents} />
+                  </Box>
+                )}
+              </Box>
+
+              <Box>
+                  {artistProfile.galleryImages && artistProfile.galleryImages.length > 0 && (
+                    <>
+                      <Heading pt={6} fontFamily='Space Mono'
+                    fontSize={{ base: '2xl', lg: '3xl' }}
+                    lineHeight={1.1}
+                    fontWeight={600}
+                    >
+                        Gallery
+                    </Heading>
+                    <Box py={{base: 10, lg: 12}}>
+                        <ImageGridPhotoGallery photos={artistProfile.galleryImages} />
+                    </Box>
+                    </>
+                  )}
               </Box>
 
 
