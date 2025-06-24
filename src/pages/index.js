@@ -8,7 +8,6 @@ import 'focus-visible/dist/focus-visible';
 
 import {TypewriterText, TypewriterTextMobile } from '../components/typewriter'
 
-
 import {
   Box,
   Center,
@@ -49,7 +48,11 @@ export default function Home({  }) {
 
       <Navbar bg={{base: 'transparent', lg: 'none'}} />
 
+
+
+
       <Box p={{base: 10, md: 24}} mt={-6}>
+
 
       <Box display={{base: 'none', lg: 'flex'}}>
         <TypewriterText />
@@ -58,6 +61,17 @@ export default function Home({  }) {
       <Box display={{base: 'flex', lg: 'none'}}>
         <TypewriterTextMobile />
       </Box>
+
+      {/* <Box>
+        <Text color=" #ffffff" fontFamily={"Space Mono"} fontSize ={"1.5rem"} fontWeight={600}
+        >
+      Our Praxis Lab at Afropocene StudioLab is in motion—a space where artists and thinkers gather to imagine and create liberated futures.
+
+      Rooted in African ancestral knowledge and Black liberation theories, we’re exploring artistic purpose, radical imagination, and art as a tool for transformation.
+
+      Facilitated by Tracian Meikle with guest mentors, this lab is a collective journey toward freedom.
+      </Text>
+      </Box> */}
 
         {/* <Heading
         pb={4}

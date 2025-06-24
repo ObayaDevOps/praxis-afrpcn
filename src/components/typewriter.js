@@ -22,7 +22,6 @@ export const TypewriterText = () => (
         <Typewriter
         options={{
             delay: 20,
-            cursor: 'none'
         }}
         onInit={(typewriter) => {
             typewriter
@@ -33,6 +32,8 @@ export const TypewriterText = () => (
                 .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:4rem; font-weight:600">Imagining Futures of Liberation </p>')
                 
                 .pauseFor(300)
+                .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600; padding-top:20px">Our Praxis Lab at Afropocene StudioLab is in motion — a space where artists and thinkers gather to imagine and create liberated futures. Rooted in African ancestral knowledge and Black liberation theories, we’re exploring artistic purpose, radical imagination, and art as a tool for transformation. Facilitated by Tracian Meikle with guest mentors, this lab is a collective journey toward freedom.</p>')
+
                 // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
                 // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
                 .changeCursor('  ')
@@ -54,15 +55,16 @@ export const TypewriterTextMobile = () => (
 
             .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:600">World-building Through Art: </p>')
             .pauseFor(600)
-            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of Liberation </p>')
+            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of Liberation! </p>')
+            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of LiberationXX </p>')
+            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Our Praxis Lab at Afropocene StudioLab is in motion — a space where artists and thinkers gather to imagine and create liberated futures. Rooted in African ancestral knowledge and Black liberation theories, we’re exploring artistic purpose, radical imagination, and art as a tool for transformation. Facilitated by Tracian Meikle with guest mentors, this lab is a collective journey toward freedom.</p>')
+
             
-            .pauseFor(300)
-            // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
-            // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
             .changeCursor('  ')
 
             .start();
     }}
     />
 )
+
 

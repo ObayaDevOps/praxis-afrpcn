@@ -83,19 +83,34 @@ export default function Navbar(props) {
              />
         </Link>
 
+        <Box mt={20}>
+        <Link href="https://www.afropocene.com/" _hover={{ textDecoration: 'none' }}>
 
-          <Flex display={{base: 'none', lg: 'flex'}}>
-            {/* Desktop Navigation Links */}
+             <Text
+             color=" #ffffff"
+             fontFamily={"Space Mono"}
+             fontSize ={"1rem"}
+             fontWeight={500}
+             >
+             Back to main site
+             </Text>
+
+        </Link>
+        </Box>
+
+
+          {/* <Flex display={{base: 'none', lg: 'flex'}}>
+            Desktop Navigation Links
             <HStack spacing={'1.5rem'} alignItems={'center'}>
-              {/* <HStack as={'nav'} spacing={'1.5rem'}>
+              <HStack as={'nav'} spacing={'1.5rem'}>
                 {navItems.map((item) => (
                   <NavLink key={item.label} href={item.href}>{item.label}</NavLink>
                 ))}
-              </HStack> */}
+              </HStack>
 
 
             </HStack>
-          </Flex>
+          </Flex> */}
 
       </Flex>
 
