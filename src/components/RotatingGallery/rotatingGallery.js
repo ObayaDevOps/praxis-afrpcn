@@ -88,9 +88,10 @@ export const App = () => {
     camera={{ position: [0, 0, 100], fov: fov }}
     style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
   >
+    <StatsGl />
     <Sky />
 
-    <fog attach="fog" args={['#37C6FF', 8.5, 12]} />
+    <fog attach="fog" args={['#FFFFFF', 8.5, 12]} />
     <ScrollControls pages={artistProfiles.length} infinite horizontal>
     {/* <Suspense fallback={null}> */}
       <Rig rotation={[0, 0, 0.15]} artistProfiles={artistProfiles}>
@@ -101,11 +102,11 @@ export const App = () => {
       {/* </Suspense> */}
 
     </ScrollControls>
-    <Environment 
+    {/* <Environment 
     preset='dawn'
      background={false}
      backgroundBlurriness={0.5} 
-     blur={1} />
+     blur={1} /> */}
   </Canvas>
   <Loader />
   </>
@@ -128,37 +129,22 @@ const speed =  { value: 0.1, min: 0, max: 1, step: 0.01 };
 
 
   useFrame((state, delta) => {
-    ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 10) / 2
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 10) / 2
-    cloud0.current.rotation.y -= delta
+    // This will cause a continuous, slow rotation around Y and X axes.
+    // Adjust the `0.01` value to control the speed of rotation.
+    ref.current.rotation.y += delta * 0.03;
+    ref.current.rotation.x += delta * 0.03;
   })
   return (
     <>
-      <SkyImpl />
+      {/* <SkyImpl /> */}
       <group ref={ref}>
-        <Clouds material={THREE.MeshLambertMaterial} limit={8000} 
-        // range={range}
-        >
-          <Cloud ref={cloud0} 
-          // {...config} 
-          bounds={[x, y, z]} 
-          speed={0.1}
-          opacity={0.5}
-          color={'#FF0000'}
-          // color={'#eed0d0'}
-           />
-          <Cloud 
-          // {...config}
-           bounds={[x, y, z]} speed={0.1} color="#FF0000" seed={2} position={[15, 0, 0]} />
-          {/* <Cloud {...config} bounds={[x, y, z]} color="#d0e0d0" seed={3} position={[-15, 0, 0]} />
-          <Cloud {...config} bounds={[x, y, z]} color="#a0b0d0" seed={4} position={[0, 0, -12]} />
-          <Cloud {...config} bounds={[x, y, z]} color="#c0c0dd" seed={5} position={[0, 0, 12]} />
-          
-           */}
-          <Cloud concentrate="outside" growth={100} color="#FF0000" opacity={0.5} seed={0.3} bounds={200} volume={200} />
-        
-          {/* <Cloud concentrate="outside" growth={100} color="#ffccdd" opacity={1.25} seed={0.3} bounds={200} volume={200} /> */}
-
+        <Clouds material={THREE.MeshBasicMaterial} limit={30} >
+          <Cloud concentrate="outside" growth={100} 
+          // color="#FF0000" 
+          opacity={0.8} 
+          seed={0.3} 
+          bounds={150} volume={20} 
+          />
         </Clouds>
       </group>
     </>
