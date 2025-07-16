@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 import 'focus-visible/dist/focus-visible';
 
+import client from '../../sanity/lib/client';
 
 import {TypewriterText, TypewriterTextMobile } from '../components/typewriter'
 
@@ -25,7 +26,7 @@ import {
 import Navbar from '../components/Navbar';
 
 
-export default function Home({  }) {
+export default function Home({ mainHeading, subHeading, description, clickToEnterText }) {
 
   return (
     <Box
@@ -55,11 +56,19 @@ export default function Home({  }) {
 
 
       <Box display={{base: 'none', lg: 'flex'}}>
-        <TypewriterText />
+        <TypewriterText 
+          mainHeading={mainHeading}
+          subHeading={subHeading}
+          description={description}
+        />
       </Box>
 
       <Box display={{base: 'flex', lg: 'none'}}>
-        <TypewriterTextMobile />
+        <TypewriterTextMobile 
+          mainHeading={mainHeading}
+          subHeading={subHeading}
+          description={description}
+        />
       </Box>
 
       {/* <Box>
@@ -127,7 +136,7 @@ export default function Home({  }) {
         // style={{ position: 'absolute', bottom: 100, left: 100 }}
 
         >
-          Click to Enter
+          {clickToEnterText}
         </Text>
       </Link>
       </Box>
@@ -173,4 +182,23 @@ export default function Home({  }) {
 
     </Box>
   );
+}
+
+export async function getServerSideProps() {
+  const query = `*[_type == "pageContent"][0]{
+    mainHeading,
+    subHeading,
+    description,
+    clickToEnterText
+  }`;
+  const data = await client.fetch(query);
+
+  return {
+    props: {
+      mainHeading: data?.mainHeading || '',
+      subHeading: data?.subHeading || '',
+      description: data?.description || '',
+      clickToEnterText: data?.clickToEnterText || 'Click to Enter', // Provide a default
+    },
+  };
 }

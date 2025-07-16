@@ -8,7 +8,14 @@ import { Image, Environment, ScrollControls, useScroll, useTexture,
  } from '@react-three/drei'
 import { easing } from 'maath'
 import './rotatingGalleryUtil'
-import { Dialog, Button, CloseButton, Portal, Box , ChakraProvider, Image as ChakraImage, Text, Heading } from '@chakra-ui/react'
+import {
+  Dialog,
+  Box,
+  Heading,
+  Text,
+   ChakraProvider, Image as ChakraImage, Button, CloseButton, Portal,
+  Grid, // Add Grid to imports
+} from '@chakra-ui/react';
 import { system } from "@chakra-ui/react/preset";
 import React from 'react';
 import ImageGridPhotoGallery from '../ImageGrid/imageGridPhotoGallery'
@@ -90,7 +97,7 @@ export const App = () => {
   >
   <Suspense fallback={<LoaderFunc />}>
 
-    <StatsGl />
+    {/* <StatsGl /> */}
     <Sky />
 
     <fog attach="fog" args={['#FFFFFF', 8.5, 12]} />
@@ -266,7 +273,7 @@ function Carousel({ radius = 1.4, count = 8, setCardRefs, setHandleCardClick, ar
   });
 }
 
-const Card = React.forwardRef(({ url, isDialogOpen, onClose, artistProfile, carouselImageWidth, carouselImageHeight, ...props }, ref) => {
+const Card = React.forwardRef(({ url, isDialogOpen, onClose, artistProfile, carouselImageWidth, carouselImageHeight, isMobile, ...props }, ref) => {
   const [hovered, hover] = useState(false)
 
   const pointerOver = (e) => (e.stopPropagation(), hover(true))
@@ -305,6 +312,7 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, artistProfile, caro
             artistProfile={artistProfile}
             carouselImageWidth={carouselImageWidth}
             carouselImageHeight={carouselImageHeight}
+            isMobile={isMobile} // Pass isMobile prop here
           />
         </Html>
       )}
@@ -313,7 +321,7 @@ const Card = React.forwardRef(({ url, isDialogOpen, onClose, artistProfile, caro
 });
 
 
-const PopUp = ({imageClickedUrl, onClose, artistProfile, carouselImageWidth, carouselImageHeight}) => {
+const PopUp = ({imageClickedUrl, onClose, artistProfile, carouselImageWidth, carouselImageHeight, isMobile}) => {
   const [open, setOpen] = useState(true);
 
   // Define custom PortableText components for paragraph spacing
@@ -341,7 +349,8 @@ const PopUp = ({imageClickedUrl, onClose, artistProfile, carouselImageWidth, car
       // w={'100vw'}
       >
         <Dialog.Root
-        size={{base: 'sm', md: 'xl'}}
+        // size={{base: 'sm', md: 'cover'}}
+        size="cover" placement="center" motionPreset="slide-in-bottom"
 
         open={open} onOpenChange={(isOpen) => {
            setOpen(isOpen);
@@ -353,109 +362,137 @@ const PopUp = ({imageClickedUrl, onClose, artistProfile, carouselImageWidth, car
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content p={{base: 2, md: 6}} shadow='3xl' >
+          <Dialog.Content p={{base: 1, md: 6}} 
+          rounded={'2xl'}
+          shadow='3xl'
+          maxH={{ base: '90vh', md: '90vh' }}
+          // overflowY="auto"
+          >
             <Dialog.Header>
               <Dialog.Title>
-                <Box pt={2}>
-                <Heading
-                lineHeight={1.1}
-                fontWeight={600}
-                fontFamily='Space Mono'
-                fontSize={{ base: '2xl', sm: '4xl', lg: '4xl' }}>
-                  {artistProfile.artistTitle || 'Artist Title Not Set'}
-                </Heading>
-                <Text
-                color={'gray.600'}
-                fontWeight={300}
-                pt={2}
-                fontSize={{base:'lg',md:'xl'}}
-                fontFamily={'Space Mono'}
-                >   {artistProfile.artistSubtitle }
-                </Text>
+                <Box pt={2} ml={{base:-1, md: 0}}>
+                  <Heading
+                  lineHeight={1.1}
+                  fontWeight={600}
+                  fontFamily='Space Mono'
+                  fontSize={{ base: '2xl', sm: '4xl', lg: '4xl' }}>
+                    {artistProfile.artistTitle || 'Artist Title Not Set'}
+                  </Heading>
+                  <Text
+                  color={'gray.600'}
+                  fontWeight={300}
+                  pt={{base: 1, md: 2}}
+                  fontSize={{base:'sm',md:'xl'}}
+                  fontFamily={'Space Mono'}
+                  >   {artistProfile.artistSubtitle }
+                  </Text>
                 </Box>
                 </Dialog.Title>
             </Dialog.Header>
-            <Dialog.Body>
-              <Box  display="flex" justifyContent="center" alignItems="center" >
-                {imageClickedUrl && ( // Conditionally render the Next.js Image component
-                  <NextImage
-                    src={imageClickedUrl}
-                    width={IMAGE_WIDTH}
-                    height={imageHeight} // Use calculated height
-                    blurDataURL={imageClickedUrl} // Use src as blurDataURL
-                    placeholder="blur"
-                    alt={artistProfile.artistTitle ? `${artistProfile.artistTitle} artwork` : 'Artist artwork'} // Descriptive alt text
-                    style={{ maxWidth: '100%', height: 'auto' }} // Ensure responsiveness within its container
-                  />
-                )}
-              </Box>
-
-              <Box>
-                <Heading pt={{base: 16, md: 20}} fontFamily='Space Mono'
-                fontSize={{ base: '2xl', lg: '3xl' }}
-                lineHeight={1.1}
-                fontWeight={600}
+            <Dialog.Body
+              overflowY="auto" // Allow Dialog.Body to scroll
+              p={0} // Remove default padding from Dialog.Body
+              display="flex" // Make Dialog.Body a flex container
+              flexDirection="column" // Stack children vertically
+              maxH="90vh" // Set a maximum height for the dialog body
+              // height="100%" // REMOVE this line
+            >
+              <Grid
+                templateColumns={{ base: "1fr", md: "1fr 2fr" }} // Stacks on mobile, 1/3 and 2/3 on desktop
+                gap={{ base: 4, md: 10 }} // Responsive gap between columns
+                flex="1" // Grid takes all available vertical space within Dialog.Body
+                p={{ base: 4, md: 8 }} // Apply padding to the grid container
+                // height="100%" // REMOVE this line
+              >
+                {/* Left Column: Image */}
+                <Box
+                  display={isMobile ? "block" : "flex"} // Change to block on mobile
+                  justifyContent={isMobile ? "unset" : "center"} // Remove centering on mobile
+                  alignItems={isMobile ? "unset" : "center"} // Remove centering on mobile
                 >
-                    About
-                </Heading>
-
-
-                <Box pt={6} pb={4} fontFamily='Space Mono'
-                  fontSize={'lg'}
-                >
-                  {artistProfile.about ? <PortableText value={artistProfile.about} components={portableTextComponents} /> : 'No about section provided.'}
-                </Box>
-              </Box>
-
-              <Box>
-                {artistProfile.voiceNoteUrl && (
-                  <>
-                    <Heading pt={6} fontFamily='Space Mono'
-                    fontSize={{ base: '2xl', lg: '3xl' }}
-                    lineHeight={1.1}
-                    fontWeight={600}
-                    >
-                        Voice Note
-                    </Heading>
-
-                    <Box py={4}>
-                      <WavesurferPlayer audioUrl={artistProfile.voiceNoteUrl} />
-                    </Box>
-                    <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
-                      {artistProfile.voiceNoteDescription || 'No audio description provided.'}
-                    </Text>
-                  </>
-                )}
-              </Box>
-
-              <Box>
-                {artistProfile.additionalContent && artistProfile.additionalContent.length > 0 && (
-                  <Box pt={6} pb={4} fontFamily='Space Mono' fontSize={'lg'}>
-                    <PortableText value={artistProfile.additionalContent} components={portableTextComponents} />
-                  </Box>
-                )}
-              </Box>
-
-              <Box>
-                  {artistProfile.galleryImages && artistProfile.galleryImages.length > 0 && (
-                    <>
-                      <Heading pt={6} fontFamily='Space Mono'
-                    fontSize={{ base: '2xl', lg: '3xl' }}
-                    lineHeight={1.1}
-                    fontWeight={600}
-                    >
-                        Gallery
-                    </Heading>
-                    <Box py={{base: 10, lg: 12}}>
-                        <ImageGridPhotoGallery photos={artistProfile.galleryImages} />
-                    </Box>
-                    </>
+                  {imageClickedUrl && ( // Conditionally render the Next.js Image component
+                    <NextImage
+                      src={imageClickedUrl}
+                      width={IMAGE_WIDTH}
+                      height={imageHeight} // Use calculated height
+                      blurDataURL={imageClickedUrl} // Use src as blurDataURL
+                      placeholder="blur"
+                      alt={artistProfile.artistTitle ? `${artistProfile.artistTitle} artwork` : 'Artist artwork'} // Descriptive alt text
+                      style={{ maxWidth: '100%', height: 'auto' }} // Ensure responsiveness within its container
+                    />
                   )}
-              </Box>
+                </Box>
+
+                {/* Right Column: Scrollable Content */}
+                <Box
+                  overflowY="auto" // This box will handle its own vertical scrolling
+                  height="100%" // Take full height of its grid cell for scrolling
+                >
+                  <Box>
+                    <Heading pt={{base: 4, md: 0}} fontFamily='Space Mono'
+                    fontSize={{ base: '2xl', lg: '3xl' }}
+                    lineHeight={1.1}
+                    fontWeight={600}
+                    >
+                        About
+                    </Heading>
 
 
+                    <Box pt={6} pb={{base: 0, md: 4}} fontFamily='Space Mono'
+                      fontSize={{base: 'md', md:'lg'}}
+                    >
+                      {artistProfile.about ? <PortableText value={artistProfile.about} components={portableTextComponents} /> : 'No about section provided.'}
+                    </Box>
+                  </Box>
 
+                  <Box>
+                    {artistProfile.voiceNoteUrl && (
+                      <>
+                        <Heading pt={{base: 0, md: 6}} fontFamily='Space Mono'
+                        fontSize={{ base: '2xl', lg: '3xl' }}
+                        lineHeight={1.1}
+                        fontWeight={600}
+                        >
+                            Voice Note
+                        </Heading>
 
+                        <Box py={4}>
+                          <WavesurferPlayer audioUrl={artistProfile.voiceNoteUrl} />
+                        </Box>
+                        <Text pt={0} pb={4} fontFamily='Space Mono' fontSize={{base: '0.75rem', md: '0.75rem'}}>
+                          {artistProfile.voiceNoteDescription || 'No audio description provided.'}
+                        </Text>
+                      </>
+                    )}
+                  </Box>
+
+                  <Box>
+                    {artistProfile.additionalContent && artistProfile.additionalContent.length > 0 && (
+                      <Box pt={6} pb={4} fontFamily='Space Mono' fontSize={{base: 'md', md:'lg'}}
+>
+                        <PortableText value={artistProfile.additionalContent} components={portableTextComponents} />
+                      </Box>
+                    )}
+                  </Box>
+
+                  <Box>
+                      {artistProfile.galleryImages && artistProfile.galleryImages.length > 0 && (
+                        <>
+                          <Heading pt={6} fontFamily='Space Mono'
+                        fontSize={{ base: '2xl', lg: '3xl' }}
+                        lineHeight={1.1}
+                        fontWeight={600}
+                        >
+                            Gallery
+                        </Heading>
+                        <Box py={{base: 10, lg: 12}}>
+                            <ImageGridPhotoGallery photos={artistProfile.galleryImages} />
+                        </Box>
+                        </>
+                      )}
+                  </Box>
+                </Box>
+              </Grid>
             </Dialog.Body>
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import PhotoAlbum from "react-photo-album";
+import PhotoAlbum, { RowsPhotoAlbum } from "react-photo-album";
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -20,7 +20,9 @@ export default function ImageGridPhotoGallery(props) {
 
   return (
     <>
-      <PhotoAlbum photos={props.photos} spacing={4} layout="masonry" onClick={({ index }) => setIndex(index)} />
+      {/* <PhotoAlbum photos={props.photos} spacing={4} layout="columns" onClick={({ index }) => setIndex(index)} /> */}
+      <RowsPhotoAlbum photos={props.photos} spacing={2} onClick={({ index }) => setIndex(index)} />
+
 
       {/* <Lightbox
         slides={props.photos}

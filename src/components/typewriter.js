@@ -18,7 +18,7 @@ Imagining Futures of Liberation
 <p style="color: #27ae60;" >Worldbuilding Through Art: </p> */}
 
 
-export const TypewriterText = () => (
+export const TypewriterText = ({ mainHeading, subHeading, description }) => (
         <Typewriter
         options={{
             delay: 20,
@@ -27,12 +27,12 @@ export const TypewriterText = () => (
             typewriter
                 .changeCursor('<p style="color: #ffffff; font-family:Space Mono; font-size:4rem; font-weight:600">|</p>')
 
-                .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:5rem; font-weight:600">World-building Through Art: </p>')
+                .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:5rem; font-weight:600">${mainHeading}</p>`)
                 .pauseFor(600)
-                .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:4rem; font-weight:600">Imagining Futures of Liberation </p>')
+                .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:4rem; font-weight:600">${subHeading}</p>`)
                 
                 .pauseFor(300)
-                .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600; padding-top:20px">Our Praxis Lab at Afropocene StudioLab is in motion — a space where artists and thinkers gather to imagine and create liberated futures. Rooted in African ancestral knowledge and Black liberation theories, we’re exploring artistic purpose, radical imagination, and art as a tool for transformation. Facilitated by Tracian Meikle with guest mentors, this lab is a collective journey toward freedom.</p>')
+                .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600; padding-top:20px">${description}</p>`)
 
                 // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
                 // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
@@ -44,7 +44,7 @@ export const TypewriterText = () => (
 )
 
 
-export const TypewriterTextMobile = () => (
+export const TypewriterTextMobile = ({ mainHeading, subHeading, description }) => (
     <Typewriter
     options={{
         delay: 10
@@ -53,11 +53,12 @@ export const TypewriterTextMobile = () => (
         typewriter
         .changeCursor('<p style="color: #ffffff; font-family:Space Mono; font-size:1.5rem; font-weight:600">|</p>')
 
-            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:600">World-building Through Art: </p>')
+            .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">${mainHeading}</p>`)
             .pauseFor(600)
-            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of Liberation! </p>')
-            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of LiberationXX </p>')
-            .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Our Praxis Lab at Afropocene StudioLab is in motion — a space where artists and thinkers gather to imagine and create liberated futures. Rooted in African ancestral knowledge and Black liberation theories, we’re exploring artistic purpose, radical imagination, and art as a tool for transformation. Facilitated by Tracian Meikle with guest mentors, this lab is a collective journey toward freedom.</p>')
+            .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.5rem; font-weight:600">${subHeading}</p>`)
+            // The next line seems to be a duplicate and an extra line, removed it to match the TypewriterText logic.
+            // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of LiberationXX </p>') 
+            .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:0.75rem; font-weight:600; padding-top:10px">${description}</p>`)
 
             
             .changeCursor('  ')
