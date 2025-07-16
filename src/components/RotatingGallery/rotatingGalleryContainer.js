@@ -30,14 +30,14 @@ export function Root() {
 
       <Center h={{base: '65vh', md: "80vh"}}>
         <VStack spacing={8}>
-          <Heading
+          {/* <Heading
                     lineHeight={1.1}
                     fontWeight={600}
                     fontFamily='Space Mono'
                     color='white'
                     fontSize={{ base: 'xl', sm: '4xl', lg: '4xl' }}>
               Loading Possible Futures ...
-            </Heading>
+            </Heading> */}
           <App />
         </VStack>
       </Center>
@@ -48,9 +48,39 @@ export function Root() {
         </a>
         <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} /> */}
 
+      <Box position="absolute" bottom={{base:"20", md: "0"}} left={{base:"0", md: "0"}} p={{base: 0, md: 20}} ml={{base: 8}} >
+
+      <Box mt={2}>
+        <Link href="https://www.afropocene.com/" _hover={{ textDecoration: 'none' }}>
+
+             <Text
+             color={{base:" #000000", md: '#FFFFFF'}}
+             fontFamily={"Space Mono"}
+             fontSize={{base:'10px', md: '1rem'}}
+             textAlign='right'
+             fontWeight={500}
+             >
+             Back to main site
+             </Text>
+
+        </Link>
+        </Box>
+      </Box>
+
       <Box position="absolute" bottom={{base:"20", md: "0"}} right={{base:"0", md: "0"}} p={{base: 0, md: 20}}>
         <HStack spacing={8}>
-          <ChakraImage
+
+        <ChakraImage
+                      mt={2}
+                      mr={8}
+
+                          src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1752656800/africanArtsTrust_e3pybb.jpg'}
+                          alt="Doen Logo"
+                          height={{base: '30px', md: '40px'}} // Adjust height as needed
+                          width={'auto'} // Maintain aspect ratio
+                          // ml={'64px'}
+                      />
+          {/* <ChakraImage
                       mt={2}
                       mr={8}
 
@@ -59,8 +89,8 @@ export function Root() {
                           height={{base: '30px', md: '40px'}} // Adjust height as needed
                           width={'auto'} // Maintain aspect ratio
                           // ml={'64px'}
-                      />
-            <ChakraImage
+                      /> */}
+            {/* <ChakraImage
                       mt={2}
                       mr={8}
                           src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png'}
@@ -68,7 +98,7 @@ export function Root() {
                           height={{base: '20px', md: '40px'}} // Adjust height as needed
                           width={'auto'} // Maintain aspect ratio
                           // ml={'64px'}
-                      />
+                      /> */}
           <ChakraImage
                       mt={2}
                       mr={8}
@@ -85,11 +115,12 @@ export function Root() {
       <Box 
       display={{base: 'flex', lg: 'none'}}
       style={{ position: 'absolute', top: 30, right: 40 }}
-      maxW='80px'
+      maxW='120px'
       >
 
 
       <VStack>
+
         <Text fontFamily='Space Mono'
           color='black'
 
@@ -113,6 +144,21 @@ export function Root() {
       maxW='180px'
       >
         <VStack>
+        {/* <Box mt={2}>
+        <Link href="https://www.afropocene.com/" _hover={{ textDecoration: 'none' }}>
+
+             <Text
+             color=" #ffffff"
+             fontFamily={"Space Mono"}
+             fontSize ={"1rem"}
+             fontWeight={500}
+             >
+             Back to main site
+             </Text>
+
+        </Link>
+        </Box> */}
+
         <Text fontFamily='Space Mono'
           color='black'
           fontSize='12px'>

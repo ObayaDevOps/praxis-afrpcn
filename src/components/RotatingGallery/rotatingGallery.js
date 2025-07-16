@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { useRef, useState, useEffect, Suspense, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Image, Environment, ScrollControls, useScroll, useTexture,
-  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html, Loader
+  Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl, Html, Loader, useProgress
  } from '@react-three/drei'
 import { easing } from 'maath'
 import './rotatingGalleryUtil'
@@ -88,18 +88,18 @@ export const App = () => {
     camera={{ position: [0, 0, 100], fov: fov }}
     style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
   >
+  <Suspense fallback={<LoaderFunc />}>
+
     <StatsGl />
     <Sky />
 
     <fog attach="fog" args={['#FFFFFF', 8.5, 12]} />
     <ScrollControls pages={artistProfiles.length} infinite horizontal>
-    {/* <Suspense fallback={null}> */}
       <Rig rotation={[0, 0, 0.15]} artistProfiles={artistProfiles}>
         <Carousel artistProfiles={artistProfiles} />
       </Rig>
       <Banner position={[0, -0.15, 0]} />
       {/* <Preload all /> */}
-      {/* </Suspense> */}
 
     </ScrollControls>
     {/* <Environment 
@@ -107,10 +107,33 @@ export const App = () => {
      background={false}
      backgroundBlurriness={0.5} 
      blur={1} /> */}
+
+</Suspense>
+
   </Canvas>
-  <Loader />
+  {/* <Loader /> */}
   </>
 )};
+
+function LoaderFunc() {
+  const { active, progress, errors, item, loaded, total } = useProgress()
+
+  return <Html center>
+
+            <h2 style={{
+              lineHeight: '1.1',
+              fontWeight: '600',
+              fontFamily: "'Space Mono', monospace",
+              color: 'white',
+              fontSize: '2.25rem',
+              // width: '800px'
+            }}>
+              Loading Possible Futures
+            </h2> 
+  
+
+  </Html>
+}
 
 
 function Sky() {
@@ -138,11 +161,11 @@ const speed =  { value: 0.1, min: 0, max: 1, step: 0.01 };
     <>
       {/* <SkyImpl /> */}
       <group ref={ref}>
-        <Clouds material={THREE.MeshBasicMaterial} limit={30} >
+        <Clouds material={THREE.MeshBasicMaterial} limit={50} >
           <Cloud concentrate="outside" growth={100} 
           // color="#FF0000" 
           opacity={0.8} 
-          seed={0.3} 
+          seed={0.8} 
           bounds={150} volume={20} 
           />
         </Clouds>

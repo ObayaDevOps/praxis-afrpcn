@@ -83,7 +83,7 @@ export default function Navbar(props) {
              />
         </Link>
 
-        <Box mt={20}>
+        {/* <Box mt={20}>
         <Link href="https://www.afropocene.com/" _hover={{ textDecoration: 'none' }}>
 
              <Text
@@ -96,7 +96,7 @@ export default function Navbar(props) {
              </Text>
 
         </Link>
-        </Box>
+        </Box> */}
 
 
           {/* <Flex display={{base: 'none', lg: 'flex'}}>

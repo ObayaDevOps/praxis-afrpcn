@@ -47,7 +47,7 @@ export const TypewriterText = () => (
 export const TypewriterTextMobile = () => (
     <Typewriter
     options={{
-        delay: 20
+        delay: 10
     }}
     onInit={(typewriter) => {
         typewriter
