@@ -63,7 +63,7 @@ export default function Home({ mainHeading, subHeading, description, clickToEnte
         />
       </Box>
 
-      <Box display={{base: 'flex', lg: 'none'}}>
+      <Box display={{base: 'flex', lg: 'none'}} mt={8}>
         <TypewriterTextMobile 
           mainHeading={mainHeading}
           subHeading={subHeading}

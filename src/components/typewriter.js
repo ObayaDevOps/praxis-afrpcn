@@ -32,7 +32,7 @@ export const TypewriterText = ({ mainHeading, subHeading, description }) => (
                 .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:4rem; font-weight:600">${subHeading}</p>`)
                 
                 .pauseFor(300)
-                .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600; padding-top:20px">${description}</p>`)
+                .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600; padding-top:2rem">${description}</p>`)
 
                 // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500">Tracian Meikle</p>')
                 // .typeString('<a href="/enter" style="color: #ffffff; font-family:Space Mono; font-size:2rem; font-weight:500 text-decoration:underline">Click here to Enter</a>')
@@ -58,7 +58,7 @@ export const TypewriterTextMobile = ({ mainHeading, subHeading, description }) =
             .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:1.5rem; font-weight:600">${subHeading}</p>`)
             // The next line seems to be a duplicate and an extra line, removed it to match the TypewriterText logic.
             // .typeString('<p style="color: #ffffff; font-family:Space Mono; font-size:1.75rem; font-weight:600">Imagining Futures of LiberationXX </p>') 
-            .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:0.75rem; font-weight:600; padding-top:10px">${description}</p>`)
+            .typeString(`<p style="color: #ffffff; font-family:Space Mono; font-size:0.75rem; font-weight:600; padding-top:2rem">${description}</p>`)
 
             
             .changeCursor('  ')

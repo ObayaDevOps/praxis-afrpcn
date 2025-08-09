@@ -16,6 +16,18 @@ export default {
       description: 'A brief introductory paragraph for the page.',
     },
     {
+      name: 'secondTitle',
+      title: 'Second Title',
+      type: 'string',
+      description: 'The main title for the info page (e.g., "Welcome to the Info Page!")',
+    },
+        {
+      name: 'secondIntroText',
+      title: 'Second Introduction Text',
+      type: 'text',
+      description: 'A brief introductory paragraph for the team.',
+    },
+    {
       name: 'contentBlocks',
       title: 'Content Blocks',
       type: 'array',
@@ -35,6 +47,19 @@ export default {
               type: 'array',
               of: [{ type: 'block' }],
               description: 'The paragraph text for this content section.',
+            },
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+              description: 'Optional image for this content block.',
+            },
+            {
+              name: 'altText',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Accessible description for the image (recommended when image is provided).',
             },
           ],
           preview: {
