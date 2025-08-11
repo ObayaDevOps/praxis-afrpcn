@@ -45,7 +45,7 @@ const InfoPage = ({ pageData }) => {
             )}
 
             {secondTitle && (
-            <Text fontSize={{base: '2xl', md: '3xl'}} mb={0} mt={12}
+            <Text fontSize={{base: 'xl', md: '2xl'}} mb={0} mt={12}
             fontWeight={600}
             color='white' fontFamily={'Space Mono'}>
 

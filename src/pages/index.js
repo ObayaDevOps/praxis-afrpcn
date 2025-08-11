@@ -41,7 +41,7 @@ export default function Home({ mainHeading, subHeading, description, clickToEnte
       // overflow="hidden"
     >
       <Head>
-        <title>AFRPCN - PRAXIS</title>
+        <title>AFRPCN - World Building Through Art</title>
         <meta name="description" content={'Worldbuilding Through Art - Imagining Futures of Liberation'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/AFRPCN.svg" />
