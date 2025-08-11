@@ -66,6 +66,7 @@ export function Root() {
              </Text>
         </NextLink>
         </Box>
+
         <Box mt={2}>
         <NextLink href="https://www.afropocene.com/" passHref>
              <Text
@@ -79,6 +80,22 @@ export function Root() {
 
              >
              Back to Main Site
+             </Text>
+        </NextLink>
+        </Box>
+
+        <Box mt={2}>
+        <NextLink href="https://store.pesapal.com/afropocene" passHref> {/* Use NextLink */}
+             <Text
+             color={{base:" #FFFFFF", md: '#FFFFFF'}}
+             fontFamily={"Space Mono"}
+             fontSize={{base:'10px', md: '1rem'}}
+             textAlign='right'
+             fontWeight={600}
+             textDecoration='underline'
+             _hover={{ textDecoration: 'none' }} // Apply hover style directly to Text
+             >
+             Donate
              </Text>
         </NextLink>
         </Box>
