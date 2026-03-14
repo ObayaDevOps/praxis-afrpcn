@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-03-14T11:04:50.893Z",
+  "repoRoot": "/home/obi/dev/praxis-afrpcn",
+  "bulkDir": "/media/obi/Seagate/Cloudinary_Bulk_Download_March_4_2026",
+  "summary": {
+    "repoFilesScanned": 42,
+    "cloudinaryReferencesFound": 9,
+    "uniqueCloudinaryUrls": 5,
+    "exactSingleMatches": 9,
+    "exactMultipleMatches": 0,
+    "fuzzySingleMatches": 0,
+    "fuzzyMultipleMatches": 0,
+    "unmatched": 0,
+    "bulkFilesIndexed": 509
+  },
+  "rows": [
+    {
+      "repo_file": "src/components/Navbar.js",
+      "repo_line": 78,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "cloudinary_filename": "Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "cloudinary_public_id": "Black_White_Minimalist_Business_Logo_btc6jv",
+      "cloudinary_extension": "svg",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "bulk_match_paths": "Black_White_Minimalist_Business_Logo_btc6jv.svg"
+    },
+    {
+      "repo_file": "src/components/Navbar.js",
+      "repo_line": 136,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "cloudinary_filename": "Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "cloudinary_public_id": "Black_White_Minimalist_Business_Logo_btc6jv",
+      "cloudinary_extension": "svg",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "Black_White_Minimalist_Business_Logo_btc6jv.svg",
+      "bulk_match_paths": "Black_White_Minimalist_Business_Logo_btc6jv.svg"
+    },
+    {
+      "repo_file": "src/components/RotatingGallery/rotatingGalleryContainer.js",
+      "repo_line": 111,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1752656800/africanArtsTrust_e3pybb.jpg",
+      "cloudinary_filename": "africanArtsTrust_e3pybb.jpg",
+      "cloudinary_public_id": "africanArtsTrust_e3pybb",
+      "cloudinary_extension": "jpg",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "africanArtsTrust_e3pybb.jpg",
+      "bulk_match_paths": "africanArtsTrust_e3pybb.jpg"
+    },
+    {
+      "repo_file": "src/components/RotatingGallery/rotatingGalleryContainer.js",
+      "repo_line": 121,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png",
+      "cloudinary_filename": "praxis-labs-logo_olljaf.png",
+      "cloudinary_public_id": "praxis-labs-logo_olljaf",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "praxis-labs-logo_olljaf.png",
+      "bulk_match_paths": "praxis-labs-logo_olljaf.png"
+    },
+    {
+      "repo_file": "src/components/RotatingGallery/rotatingGalleryContainer.js",
+      "repo_line": 130,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png",
+      "cloudinary_filename": "BritishCouncil_baddf4.png",
+      "cloudinary_public_id": "BritishCouncil_baddf4",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "BritishCouncil_baddf4.png",
+      "bulk_match_paths": "BritishCouncil_baddf4.png"
+    },
+    {
+      "repo_file": "src/components/RotatingGallery/rotatingGalleryContainer.js",
+      "repo_line": 140,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png",
+      "cloudinary_filename": "Doen-Logo_nn8ua7.png",
+      "cloudinary_public_id": "Doen-Logo_nn8ua7",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "Doen-Logo_nn8ua7.png",
+      "bulk_match_paths": "Doen-Logo_nn8ua7.png"
+    },
+    {
+      "repo_file": "src/pages/index.js",
+      "repo_line": 153,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png",
+      "cloudinary_filename": "praxis-labs-logo_olljaf.png",
+      "cloudinary_public_id": "praxis-labs-logo_olljaf",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "praxis-labs-logo_olljaf.png",
+      "bulk_match_paths": "praxis-labs-logo_olljaf.png"
+    },
+    {
+      "repo_file": "src/pages/index.js",
+      "repo_line": 162,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png",
+      "cloudinary_filename": "BritishCouncil_baddf4.png",
+      "cloudinary_public_id": "BritishCouncil_baddf4",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "BritishCouncil_baddf4.png",
+      "bulk_match_paths": "BritishCouncil_baddf4.png"
+    },
+    {
+      "repo_file": "src/pages/index.js",
+      "repo_line": 172,
+      "cloudinary_url": "https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png",
+      "cloudinary_filename": "Doen-Logo_nn8ua7.png",
+      "cloudinary_public_id": "Doen-Logo_nn8ua7",
+      "cloudinary_extension": "png",
+      "bulk_match_strategy": "exact_single",
+      "bulk_match_count": 1,
+      "bulk_primary_path": "Doen-Logo_nn8ua7.png",
+      "bulk_match_paths": "Doen-Logo_nn8ua7.png"
+    }
+  ]
+}

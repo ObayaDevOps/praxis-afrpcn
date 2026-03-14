@@ -75,13 +75,24 @@ export default function Navbar(props) {
              <Image
              mt={20}
              
-                src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
+                src={'https://cdn.sanity.io/images/6c1aac3a/production/fd9f2fc191932aa0bc59b820ad99931a1fdcc37f-500x500.svg'}
                 alt="AFRPCN Afropocene Logo"
                 height={'100px'} // Adjust height as needed
                 width={'auto'} // Maintain aspect ratio
                 // ml={'64px'}
              />
         </Link>
+
+        {/* <Link href="/" _hover={{ textDecoration: 'none' }}>
+             <Text
+             pt={12}
+             color='white'
+             fontFamily='Space Mono'
+             fontSize={{ base: 'xl', sm: '2xl', lg: '2xl' }}
+             textDecoration='underline'>
+              Back
+             </Text>
+        </Link> */}
 
         {/* <Box mt={20}>
         <Link href="https://www.afropocene.com/" _hover={{ textDecoration: 'none' }}>
@@ -122,7 +133,7 @@ export default function Navbar(props) {
           <Link href="/" _hover={{ textDecoration: 'none' }}>
                 <Image
                 mt={2}
-                    src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1746789460/Black_White_Minimalist_Business_Logo_btc6jv.svg'}
+                    src={'https://cdn.sanity.io/images/6c1aac3a/production/fd9f2fc191932aa0bc59b820ad99931a1fdcc37f-500x500.svg'}
                     alt="AFRPCN Afropocene Logo"
                     height={'70px'} // Adjust height as needed
                     width={'auto'} // Maintain aspect ratio

@@ -150,7 +150,7 @@ export default function Home({ mainHeading, subHeading, description, clickToEnte
                   mt={2}
                   mr={8}
 
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747920205/praxis-labs-logo_olljaf.png'}
+                      src={'https://cdn.sanity.io/images/6c1aac3a/production/f8311d5467a8daa5e57b7ccba1192bb5b9be39a8-1200x1200.png'}
                       alt="Doen Logo"
                       height={{base: '40px', md: '80px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
@@ -159,7 +159,7 @@ export default function Home({ mainHeading, subHeading, description, clickToEnte
         <ChakraImage
                   mt={2}
                   mr={8}
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919860/BritishCouncil_baddf4.png'}
+                      src={'https://cdn.sanity.io/images/6c1aac3a/production/422f1d9371c893ff19ed6ce244b034adf5f67f0b-1280x368.png'}
                       alt="British Council Logo"
                       height={{base: '40px', md: '80px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
@@ -169,7 +169,7 @@ export default function Home({ mainHeading, subHeading, description, clickToEnte
                   mt={2}
                   mr={8}
 
-                      src={'https://res.cloudinary.com/medoptics-image-cloud/image/upload/v1747919874/Doen-Logo_nn8ua7.png'}
+                      src={'https://cdn.sanity.io/images/6c1aac3a/production/b01e23522fd2ef33c1e1226e3b828342176e7082-551x480.png'}
                       alt="Doen Logo"
                       height={{base: '40px', md: '80px'}} // Adjust height as needed
                       width={'auto'} // Maintain aspect ratio
